@@ -1,11 +1,2862 @@
-<!-- Automatically redirects or renders the primary Job Vacancy Dashboard -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=job_vacancies.html">
-    <title>Redirecting to Job Vacancy Dashboard...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Vacancy Intelligence Dashboard</title>
+    <!-- Modern Clean Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Palette: Navy Blue, White, and Teal */
+            --navy-primary: #0F2744;
+            --navy-secondary: #1B365D;
+            --navy-dark: #0A192F;
+            --teal-primary: #0D9488;
+            --teal-dark: #0F766E;
+            --teal-light: #CCFBF1;
+            --teal-border: #99F6E4;
+            
+            /* Backgrounds & Neutrals */
+            --bg-page: #F4F6F9;
+            --bg-card: #FFFFFF;
+            --bg-table-header: #E9ECEF;
+            --bg-table-header-hover: #DFE3E8;
+            --bg-table-zebra: #F8FAFC;
+            --bg-table-hover: #F0FDF4;
+            --bg-table-selected: #E6FFFA;
+            
+            /* Borders & Gridlines */
+            --grid-border: #CBD5E1;
+            --grid-border-subtle: #E2E8F0;
+            --card-border: #E2E8F0;
+            
+            /* Text Colors */
+            --text-heading: #0F2744;
+            --text-body: #1E293B;
+            --text-muted: #64748B;
+            --text-white: #FFFFFF;
+            
+            /* Functional Accents */
+            --btn-blue: #2563EB;
+            --btn-blue-hover: #1D4ED8;
+            --btn-blue-active: #1E40AF;
+            --badge-green-bg: #DCFCE7;
+            --badge-green-text: #15803D;
+            --badge-green-border: #86EFAC;
+            --badge-amber-bg: #FEF3C7;
+            --badge-amber-text: #B45309;
+            --badge-amber-border: #FCD34D;
+            
+            /* Shadows & Transitions */
+            --shadow-subtle: 0 1px 3px rgba(15, 39, 68, 0.08);
+            --shadow-card: 0 2px 5px rgba(15, 39, 68, 0.06), 0 1px 2px rgba(15, 39, 68, 0.04);
+            --shadow-popover: 0 10px 25px -5px rgba(15, 39, 68, 0.25), 0 8px 10px -6px rgba(15, 39, 68, 0.15);
+            --transition-quick: 0.15s ease-in-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            line-height: 1.5;
+            font-size: 13px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header Navigation */
+        .app-navbar {
+            background-color: var(--navy-primary);
+            color: var(--text-white);
+            border-bottom: 2px solid var(--teal-primary);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(15, 39, 68, 0.15);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            background-color: var(--teal-primary);
+            color: var(--text-white);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-info h1 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-white);
+            line-height: 1.2;
+        }
+
+        .brand-info span {
+            font-size: 11px;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(13, 148, 136, 0.2);
+            color: #5EEAD4;
+            border: 1px solid rgba(94, 234, 212, 0.4);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #2DD4BF;
+        }
+
+        /* Container Layout */
+        .dashboard-container {
+            max-width: 1560px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 24px;
+            flex: 1;
+        }
+
+        /* Candidate & Scope Card */
+        .candidate-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-left: 4px solid var(--teal-primary);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow-card);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .candidate-title {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .candidate-title h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy-primary);
+        }
+
+        .candidate-role-pill {
+            background-color: #EFF6FF;
+            color: var(--navy-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #BFDBFE;
+        }
+
+        .candidate-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .candidate-chip {
+            font-size: 11px;
+            padding: 2px 7px;
+            background-color: #F1F5F9;
+            color: var(--text-body);
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .candidate-chip.highlight {
+            background-color: var(--teal-light);
+            color: var(--teal-dark);
+            border-color: var(--teal-border);
+            font-weight: 600;
+        }
+
+        .candidate-meta-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .candidate-meta-item strong {
+            color: var(--text-body);
+        }
+
+        .candidate-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        /* Metric Summary Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 14px 18px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--navy-primary);
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+
+        .metric-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Excel-Style Toolbar & Filters */
+        .excel-toolbar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+        }
+
+        .excel-ribbon-bar {
+            background-color: #F8FAFC;
+            border-bottom: 1px solid var(--card-border);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ribbon-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--navy-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ribbon-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toolbar-btn {
+            background: #FFFFFF;
+            border: 1px solid var(--grid-border);
+            color: var(--text-body);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition-quick);
+            font-family: inherit;
+        }
+
+        .toolbar-btn:hover {
+            background: #F1F5F9;
+            border-color: #94A3B8;
+        }
+
+        .toolbar-btn.primary {
+            background-color: var(--btn-blue);
+            color: var(--text-white);
+            border-color: var(--btn-blue);
+        }
+
+        .toolbar-btn.primary:hover {
+            background-color: var(--btn-blue-hover);
+            border-color: var(--btn-blue-hover);
+        }
+
+        /* Active Filter Chips Bar (Excel Filters summary) */
+        .active-filters-chips-bar {
+            background-color: #EFF6FF;
+            border-bottom: 1px solid #BFDBFE;
+            padding: 6px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 11.5px;
+        }
+
+        .chips-label {
+            font-weight: 700;
+            color: var(--navy-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .filter-chip {
+            background: #FFFFFF;
+            border: 1px solid #93C5FD;
+            color: var(--navy-primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-chip-remove {
+            color: #EF4444;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .filter-chip-remove:hover {
+            color: #B91C1C;
+        }
+
+        .chips-clear-all {
+            background: transparent;
+            border: none;
+            color: #2563EB;
+            font-size: 11.5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0 4px;
+        }
+
+        .chips-clear-all:hover {
+            color: #1D4ED8;
+        }
+
+        /* Filter Controls Grid */
+        .filter-controls-container {
+            padding: 14px 16px;
+            display: grid;
+            grid-template-columns: 2fr 1.3fr 1.2fr 1.2fr 1.4fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 7px 10px 7px 32px;
+            font-size: 12.5px;
+            border: 1px solid var(--grid-border);
+            border-radius: 4px;
+            outline: none;
+            font-family: inherit;
+            color: var(--text-body);
+            background-color: #FFFFFF;
+            transition: border-color var(--transition-quick);
+        }
+
+        .search-input:focus {
+            border-color: var(--navy-secondary);
+            box-shadow: 0 0 0 2px rgba(27, 54, 93, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 7px 10px;
+            font-size: 12.5px;
+            border: 1px solid var(--grid-border);
+            border-radius: 4px;
+            outline: none;
+            background-color: #FFFFFF;
+            color: var(--text-body);
+            font-family: inherit;
+            cursor: pointer;
+            transition: border-color var(--transition-quick);
+        }
+
+        .filter-select:focus {
+            border-color: var(--navy-secondary);
+            box-shadow: 0 0 0 2px rgba(27, 54, 93, 0.15);
+        }
+
+        /* Status & Feedback Sub-bar */
+        .spreadsheet-status-bar {
+            background-color: #F8FAFC;
+            border-top: 1px solid var(--grid-border-subtle);
+            padding: 6px 16px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .status-indicators {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .color-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+        }
+
+        /* MAIN EXCEL SPREADSHEET TABLE */
+        .excel-table-container {
+            background: #FFFFFF;
+            border: 1px solid var(--grid-border);
+            border-radius: 6px;
+            box-shadow: var(--shadow-card);
+            overflow: visible;
+            position: relative;
+        }
+
+        .table-scroll-wrapper {
+            width: 100%;
+            max-height: 650px;
+            overflow: auto;
+        }
+
+        table.excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: left;
+            table-layout: auto;
+            border-spacing: 0;
+        }
+
+        /* Excel Headers with Column Filter Triggers */
+        table.excel-table th {
+            background-color: var(--bg-table-header);
+            color: var(--navy-primary);
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 6px 8px;
+            border: 1px solid var(--grid-border);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            white-space: nowrap;
+            user-select: none;
+            transition: background var(--transition-quick);
+        }
+
+        table.excel-table th:hover {
+            background-color: var(--bg-table-header-hover);
+        }
+
+        table.excel-table th.th-has-filter {
+            background-color: #DBEAFE !important;
+            border-bottom: 2px solid var(--btn-blue);
+        }
+
+        .th-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .th-label-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .th-label-wrap:hover {
+            color: var(--btn-blue);
+        }
+
+        .sort-icon {
+            font-size: 10px;
+            color: var(--text-muted);
+            display: inline-block;
+            transition: color var(--transition-quick);
+        }
+
+        .sorted-asc .sort-icon,
+        .sorted-desc .sort-icon {
+            color: var(--navy-primary);
+            font-weight: 800;
+        }
+
+        /* Excel-Style AutoFilter Button on Header */
+        .excel-filter-trigger {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 3px;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #64748B;
+            padding: 0;
+            flex-shrink: 0;
+            transition: all var(--transition-quick);
+        }
+
+        .excel-filter-trigger:hover {
+            background-color: #F1F5F9;
+            color: var(--navy-primary);
+            border-color: #94A3B8;
+        }
+
+        .excel-filter-trigger.is-filtered {
+            background-color: var(--btn-blue);
+            color: #FFFFFF;
+            border-color: var(--btn-blue);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+        }
+
+        /* Excel Cells & Gridlines */
+        table.excel-table td {
+            border: 1px solid var(--grid-border);
+            padding: 7px 10px;
+            vertical-align: middle;
+            color: var(--text-body);
+            background-color: #FFFFFF;
+            line-height: 1.4;
+        }
+
+        /* Compact density mode */
+        table.excel-table.compact-mode td {
+            padding: 4.5px 8px;
+            font-size: 11.5px;
+        }
+
+        table.excel-table.compact-mode th {
+            padding: 5px 6px;
+            font-size: 11px;
+        }
+
+        /* Zebra Striping (Alternating row colors) */
+        table.excel-table tbody tr:nth-child(even) td {
+            background-color: var(--bg-table-zebra);
+        }
+
+        /* Row hover */
+        table.excel-table tbody tr:hover td {
+            background-color: #F1F5F9;
+        }
+
+        /* High Match Row Accent */
+        table.excel-table tbody tr.row-high-match td {
+            background-color: #F8FCF9;
+        }
+
+        table.excel-table tbody tr.row-high-match:nth-child(even) td {
+            background-color: #F0FBF3;
+        }
+
+        table.excel-table tbody tr.row-high-match:hover td {
+            background-color: #E6F8EB;
+        }
+
+        /* Active / Selected Row Highlight */
+        table.excel-table tbody tr.row-selected td {
+            background-color: var(--bg-table-selected) !important;
+            border-top: 1px solid var(--teal-primary);
+            border-bottom: 1px solid var(--teal-primary);
+        }
+
+        /* Excel Row Index Header Cell (Leftmost) */
+        .excel-row-num {
+            background-color: #F1F5F9 !important;
+            color: #64748B;
+            font-weight: 600;
+            text-align: center;
+            width: 44px;
+            min-width: 44px;
+            user-select: none;
+            font-size: 11px;
+        }
+
+        /* Specific Cell Alignments */
+        .cell-center { text-align: center; }
+        .cell-left { text-align: left; }
+        .cell-right { text-align: right; }
+
+        /* Typography inside Table */
+        .job-title-link {
+            font-weight: 600;
+            color: var(--navy-secondary);
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12.5px;
+        }
+
+        .job-title-link:hover {
+            color: var(--btn-blue);
+            text-decoration: underline;
+        }
+
+        .job-subtext {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .org-pill {
+            font-weight: 600;
+            color: var(--navy-primary);
+            display: block;
+        }
+
+        .org-advt {
+            font-size: 10.5px;
+            color: var(--text-muted);
+        }
+
+        .category-badge {
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid #CBD5E1;
+            background: #F8FAFC;
+            color: var(--navy-primary);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .category-badge.gov {
+            background-color: #EFF6FF;
+            color: #1E40AF;
+            border-color: #BFDBFE;
+        }
+
+        .category-badge.psu {
+            background-color: #F5F3FF;
+            color: #6D28D9;
+            border-color: #DDD6FE;
+        }
+
+        .category-badge.bank {
+            background-color: #F0FDF4;
+            color: #166534;
+            border-color: #BBF7D0;
+        }
+
+        /* Match Score Green Badges */
+        .match-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 11.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            min-width: 65px;
+        }
+
+        .badge-green {
+            background-color: var(--badge-green-bg);
+            color: var(--badge-green-text);
+            border: 1px solid var(--badge-green-border);
+        }
+
+        .badge-amber {
+            background-color: var(--badge-amber-bg);
+            color: var(--badge-amber-text);
+            border: 1px solid var(--badge-amber-border);
+        }
+
+        .badge-blue {
+            background-color: #EFF6FF;
+            color: #1E40AF;
+            border: 1px solid #BFDBFE;
+        }
+
+        /* Salary Text */
+        .salary-text {
+            font-weight: 600;
+            color: var(--navy-primary);
+            font-size: 11.5px;
+            white-space: nowrap;
+        }
+
+        /* Deadline Display */
+        .deadline-text {
+            white-space: nowrap;
+            font-size: 11.5px;
+            font-weight: 500;
+        }
+
+        /* Action Buttons: Blue Buttons as requested */
+        .action-cell {
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .action-group {
+            display: inline-flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .btn-apply {
+            background-color: var(--btn-blue);
+            color: var(--text-white);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            border: 1px solid var(--btn-blue);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: background-color var(--transition-quick);
+        }
+
+        .btn-apply:hover {
+            background-color: var(--btn-blue-hover);
+            border-color: var(--btn-blue-hover);
+        }
+
+        .btn-notice {
+            background-color: #FFFFFF;
+            color: var(--navy-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            border: 1px solid var(--grid-border);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all var(--transition-quick);
+        }
+
+        .btn-notice:hover {
+            background-color: #F1F5F9;
+            border-color: #94A3B8;
+        }
+
+        /* Spreadsheet Footer (Excel Status Bar) */
+        .excel-footer-bar {
+            background-color: #F8FAFC;
+            border-top: 1px solid var(--grid-border);
+            padding: 6px 14px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+
+        .footer-metrics {
+            display: flex;
+            gap: 20px;
+            font-weight: 500;
+        }
+
+        .footer-metrics span strong {
+            color: var(--navy-primary);
+        }
+
+        /* Empty State */
+        .empty-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .empty-results h3 {
+            font-size: 15px;
+            color: var(--navy-primary);
+            margin-bottom: 6px;
+        }
+
+        /* EXCEL AUTOFILTER POPOVER */
+        .excel-filter-popover {
+            position: absolute;
+            background: #FFFFFF;
+            border: 1px solid #94A3B8;
+            border-radius: 6px;
+            width: 250px;
+            box-shadow: var(--shadow-popover);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            font-size: 12px;
+            animation: fadeInPopover 0.12s ease-out;
+        }
+
+        @keyframes fadeInPopover {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .popover-header {
+            background-color: var(--navy-primary);
+            color: #FFFFFF;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 11.5px;
+        }
+
+        .popover-col-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .popover-close-btn {
+            background: transparent;
+            border: none;
+            color: #CBD5E1;
+            font-size: 15px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .popover-close-btn:hover {
+            color: #FFFFFF;
+        }
+
+        .popover-sort-section {
+            padding: 6px 8px;
+            border-bottom: 1px solid var(--grid-border-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background-color: #F8FAFC;
+        }
+
+        .popover-sort-btn {
+            background: transparent;
+            border: none;
+            text-align: left;
+            padding: 5px 8px;
+            font-size: 11.5px;
+            font-family: inherit;
+            color: var(--text-body);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background var(--transition-quick);
+        }
+
+        .popover-sort-btn:hover {
+            background-color: #E2E8F0;
+            color: var(--navy-primary);
+        }
+
+        .sort-icon-box {
+            font-weight: 700;
+            width: 14px;
+            color: var(--navy-secondary);
+        }
+
+        .popover-search-wrap {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--grid-border-subtle);
+        }
+
+        .popover-search-input {
+            width: 100%;
+            padding: 5px 8px;
+            font-size: 11.5px;
+            border: 1px solid var(--grid-border);
+            border-radius: 4px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .popover-search-input:focus {
+            border-color: var(--btn-blue);
+        }
+
+        .popover-select-all-bar {
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--grid-border-subtle);
+            background-color: #F8FAFC;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .popover-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .popover-text-btn {
+            background: transparent;
+            border: none;
+            color: var(--btn-blue);
+            font-size: 11px;
+            cursor: pointer;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        .popover-text-btn:hover {
+            text-decoration: underline;
+        }
+
+        .popover-list-wrap {
+            max-height: 170px;
+            overflow-y: auto;
+            padding: 4px 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .popover-item-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 4px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11.5px;
+            color: var(--text-body);
+            user-select: none;
+            transition: background var(--transition-quick);
+        }
+
+        .popover-item-label:hover {
+            background-color: #F1F5F9;
+        }
+
+        .popover-item-text {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .popover-item-count {
+            color: var(--text-muted);
+            font-size: 10.5px;
+            font-weight: 500;
+        }
+
+        .popover-footer {
+            padding: 8px 10px;
+            border-top: 1px solid var(--grid-border-subtle);
+            background-color: #F8FAFC;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .popover-footer .toolbar-btn {
+            padding: 4px 10px;
+            font-size: 11px;
+        }
+
+        /* Detail Modal / Drawer */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 39, 68, 0.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background: #FFFFFF;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            max-width: 680px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            background: var(--navy-primary);
+            color: #FFFFFF;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-header h3 {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: #CBD5E1;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .modal-close-btn:hover {
+            color: #FFFFFF;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .detail-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--grid-border-subtle);
+            font-size: 12.5px;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-key {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .detail-val {
+            color: var(--navy-primary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .filter-controls-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 12px;
+            }
+            .candidate-card {
+                grid-template-columns: 1fr;
+            }
+            .candidate-cta {
+                align-items: flex-start;
+            }
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            .filter-controls-container {
+                grid-template-columns: 1fr;
+            }
+            .excel-ribbon-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .ribbon-controls {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+            .excel-footer-bar {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Loading <a href="job_vacancies.html">Job Vacancy Intelligence Dashboard</a>...</p>
+
+    <!-- Top Navy & Teal Navigation Bar -->
+    <header class="app-navbar">
+        <div class="navbar-brand">
+            <div class="brand-badge">EXCEL-VIEW</div>
+            <div class="brand-info">
+                <h1>Job Vacancy Intelligence Dashboard</h1>
+                <span>Verified Recruitment & Candidate Matching Engine</span>
+            </div>
+        </div>
+        <div class="navbar-actions">
+            <div class="live-tag">
+                <span class="live-dot"></span>
+                <span>Active Job Openings &bull; October 2026 FreeJobAlert Verified Feed</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+
+        <!-- Candidate Profile Summary Card -->
+        <section class="candidate-card">
+            <div>
+                <div class="candidate-title">
+                    <h2>Achal Saxena</h2>
+                    <span class="candidate-role-pill">Technical Project Manager / eGovernance Lead</span>
+                </div>
+                <div class="candidate-badges">
+                    <span class="candidate-chip highlight">10+ Years Experience</span>
+                    <span class="candidate-chip highlight">M.Tech (CSE)</span>
+                    <span class="candidate-chip highlight">B.E. (CSE)</span>
+                    <span class="candidate-chip">NeGD MeitY Certified</span>
+                    <span class="candidate-chip">Anthropic AI Certified</span>
+                    <span class="candidate-chip">Govt of India Experience</span>
+                    <span class="candidate-chip">Home Location: Mumbai</span>
+                </div>
+                <div class="candidate-meta-grid">
+                    <div class="candidate-meta-item">Current Role: <strong>Tech PM (DGFT Mumbai)</strong></div>
+                    <div class="candidate-meta-item">Primary Skills: <strong>eGovernance, Full Stack, AI Solutions, SDLC, Cyber Security</strong></div>
+                    <div class="candidate-meta-item">Target Roles: <strong>Project Manager, Consultant, Young Professional (YP), IT Lead / CISO</strong></div>
+                </div>
+            </div>
+            <div class="candidate-cta">
+                <button class="toolbar-btn" id="candidateCvBtn" onclick="alert('Profile matched against 23 verified government, PSU, and banking vacancies.')">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    Profile Matched (23 Vacancies)
+                </button>
+            </div>
+        </section>
+
+        <!-- Metrics Overview Cards -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Total Openings Tracked</div>
+                <div class="metric-value" id="cardTotalJobs">23</div>
+                <div class="metric-desc">Curated drives representing 1,600+ positions</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">High-Match Roles (&ge;85%)</div>
+                <div class="metric-value" id="cardHighMatch">13</div>
+                <div class="metric-desc">Direct technical, degree &amp; domain alignment</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Confirmed Eligible</div>
+                <div class="metric-value" id="cardEligible">19</div>
+                <div class="metric-desc">Full criteria &amp; experience requirements met</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Peak Pay Band</div>
+                <div class="metric-value">&#8377;38.5 LPA</div>
+                <div class="metric-desc">NeGD / Digital India senior advisory &amp; CISO bands</div>
+            </div>
+        </section>
+
+        <!-- Excel Spreadsheet Controls Toolbar & Ribbon -->
+        <section class="excel-toolbar-card">
+            <!-- Ribbon Bar -->
+            <div class="excel-ribbon-bar">
+                <div class="ribbon-title">
+                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" clip-rule="evenodd"></path></svg>
+                    <span>Excel AutoFilter Enabled Sheet</span>
+                </div>
+                <div class="ribbon-controls">
+                    <button class="toolbar-btn" id="densityBtn" title="Toggle Compact / Standard row height">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        <span id="densityBtnText">Compact Rows</span>
+                    </button>
+                    <button class="toolbar-btn" id="exportCsvBtn" title="Download current filtered data as CSV file">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <span>Export CSV</span>
+                    </button>
+                    <button class="toolbar-btn" id="resetFiltersBtn" title="Clear all column filters and search terms">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        <span>Clear All Filters</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Filter Chips Bar (appears when any column filter is active) -->
+            <div class="active-filters-chips-bar" id="activeFiltersChipsBar" style="display: none;">
+                <span class="chips-label">
+                    <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                    Filtered by:
+                </span>
+                <div class="chips-container" id="chipsContainer"></div>
+                <button type="button" class="chips-clear-all" id="clearAllChipsBtn">Clear All Column Filters</button>
+            </div>
+
+            <!-- Global Search & Quick Category Controls -->
+            <div class="filter-controls-container">
+                <div class="input-group">
+                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Global search across all columns...">
+                </div>
+
+                <div>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="ALL">All Categories</option>
+                        <option value="Government">Government / Autonomous</option>
+                        <option value="PSU">PSU / Public Sector</option>
+                        <option value="Private / Banking">Banking / Financial Sector</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select id="locationFilter" class="filter-select">
+                        <option value="ALL">All Locations</option>
+                        <option value="Mumbai">Mumbai (Home Preference)</option>
+                        <option value="Delhi">Delhi NCR</option>
+                        <option value="Pan-India">Pan-India / Multiple</option>
+                        <option value="Other">Other States</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select id="matchFilter" class="filter-select">
+                        <option value="ALL">All Match Scores</option>
+                        <option value="HIGH">High Match (&ge;85% Green)</option>
+                        <option value="ELIGIBLE">Confirmed Eligible Only</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select id="sortSelect" class="filter-select">
+                        <option value="match_desc">Sort: Match Score (High &rarr; Low)</option>
+                        <option value="deadline_asc">Sort: Deadline (Earliest first)</option>
+                        <option value="title_asc">Sort: Job Title (A &rarr; Z)</option>
+                        <option value="org_asc">Sort: Organization (A &rarr; Z)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <span style="font-size: 11px; font-weight: 600; color: var(--navy-secondary); white-space: nowrap;">
+                        <span id="filteredRowsCount">23</span> of <span id="totalRowsCount">23</span> Rows
+                    </span>
+                </div>
+            </div>
+
+            <!-- Spreadsheet Status Sub-bar -->
+            <div class="spreadsheet-status-bar">
+                <div class="status-indicators">
+                    <span class="status-pill">
+                        <span class="color-dot" style="background-color: var(--badge-green-bg); border: 1px solid var(--badge-green-border);"></span>
+                        Green Badge: High Match (&ge;85%)
+                    </span>
+                    <span class="status-pill">
+                        <span class="color-dot" style="background-color: var(--btn-blue);"></span>
+                        Click Header Filter Icon (▼) to Filter by Any Heading
+                    </span>
+                </div>
+                <div>
+                    <span>Sheet: <strong>Verified_Vacancies_Oct2026</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXCEL SPREADSHEET TABLE -->
+        <section class="excel-table-container">
+            <div class="table-scroll-wrapper">
+                <table class="excel-table" id="excelJobTable">
+                    <thead>
+                        <tr>
+                            <th class="cell-center" style="width: 44px;" title="Row Number">#</th>
+                            
+                            <!-- Column 1: Job Title -->
+                            <th data-column="title" class="cell-left" style="min-width: 230px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('title')" title="Click to sort">
+                                        <span>Job Title / Designation</span>
+                                        <span class="sort-icon" id="sort-icon-title">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="title" title="Filter by Job Title" aria-label="Filter Job Title">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 2: Organization -->
+                            <th data-column="org" class="cell-left" style="min-width: 150px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('org')" title="Click to sort">
+                                        <span>Organization</span>
+                                        <span class="sort-icon" id="sort-icon-org">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="org" title="Filter by Organization" aria-label="Filter Organization">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 3: Category -->
+                            <th data-column="category" class="cell-center" style="width: 115px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('category')" title="Click to sort">
+                                        <span>Category</span>
+                                        <span class="sort-icon" id="sort-icon-category">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="category" title="Filter by Category" aria-label="Filter Category">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 4: Match Score -->
+                            <th data-column="match" class="cell-center" style="width: 120px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('match')" title="Click to sort">
+                                        <span>Match Score</span>
+                                        <span class="sort-icon" id="sort-icon-match">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="match" title="Filter by Match Score" aria-label="Filter Match Score">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 5: Qualification -->
+                            <th data-column="qualification" class="cell-left" style="min-width: 180px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('qualification')" title="Click to sort">
+                                        <span>Qualification &amp; Criteria</span>
+                                        <span class="sort-icon" id="sort-icon-qualification">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="qualification" title="Filter by Qualification" aria-label="Filter Qualification">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 6: Experience -->
+                            <th data-column="experience" class="cell-left" style="min-width: 150px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('experience')" title="Click to sort">
+                                        <span>Experience</span>
+                                        <span class="sort-icon" id="sort-icon-experience">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="experience" title="Filter by Experience" aria-label="Filter Experience">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 7: Location -->
+                            <th data-column="location" class="cell-left" style="min-width: 140px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('location')" title="Click to sort">
+                                        <span>Location</span>
+                                        <span class="sort-icon" id="sort-icon-location">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="location" title="Filter by Location" aria-label="Filter Location">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 8: Salary -->
+                            <th data-column="salary" class="cell-left" style="min-width: 160px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('salary')" title="Click to sort">
+                                        <span>Salary / Pay Band</span>
+                                        <span class="sort-icon" id="sort-icon-salary">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="salary" title="Filter by Salary" aria-label="Filter Salary">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 9: Deadline -->
+                            <th data-column="deadline" class="cell-center" style="width: 115px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('deadline')" title="Click to sort">
+                                        <span>Last Date</span>
+                                        <span class="sort-icon" id="sort-icon-deadline">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="deadline" title="Filter by Last Date" aria-label="Filter Last Date">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 10: Eligibility -->
+                            <th data-column="eligibility" class="cell-center" style="width: 120px;">
+                                <div class="th-content">
+                                    <div class="th-label-wrap" onclick="sortByHeaderColumn('eligibility')" title="Click to sort">
+                                        <span>Eligibility</span>
+                                        <span class="sort-icon" id="sort-icon-eligibility">↕</span>
+                                    </div>
+                                    <button class="excel-filter-trigger" data-col="eligibility" title="Filter by Eligibility" aria-label="Filter Eligibility">
+                                        <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 2.5h13l-5.5 6.5v5l-2-1v-4l-5.5-6.5z"/></svg>
+                                    </button>
+                                </div>
+                            </th>
+
+                            <!-- Column 11: Actions (No filter) -->
+                            <th class="cell-center" style="min-width: 160px; cursor: default;">Application Links</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated dynamically via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty Search State -->
+            <div class="empty-results" id="emptyResults">
+                <h3>No Job Vacancies Found</h3>
+                <p>No job postings match your active column filters or search criteria. Try clearing column filters.</p>
+                <div style="margin-top: 12px;">
+                    <button class="toolbar-btn primary" onclick="document.getElementById('resetFiltersBtn').click()">Clear All Filters</button>
+                </div>
+            </div>
+
+            <!-- Excel Bottom Status Bar -->
+            <div class="excel-footer-bar">
+                <div class="footer-metrics">
+                    <span>Status: <strong>Ready</strong></span>
+                    <span>Visible: <strong id="footerCount">23</strong> of 23 rows</span>
+                    <span>High Match: <strong id="footerHighMatchCount">13</strong></span>
+                    <span>Avg Match: <strong id="footerAvgMatch">86.7%</strong></span>
+                </div>
+                <div>
+                    <span>Excel AutoFilter Active &bull; Click (▼) on Any Header to Filter</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- EXCEL AUTOFILTER DROPDOWN POPOVER -->
+    <div class="excel-filter-popover" id="excelFilterPopover">
+        <div class="popover-header">
+            <span class="popover-col-name" id="popoverColName">Filter Column</span>
+            <button class="popover-close-btn" id="popoverCloseBtn">&times;</button>
+        </div>
+        
+        <!-- Quick Sort Options -->
+        <div class="popover-sort-section">
+            <button type="button" class="popover-sort-btn" id="popoverSortAsc">
+                <span class="sort-icon-box">↑</span>
+                <span id="popoverSortAscLabel">Sort A to Z</span>
+            </button>
+            <button type="button" class="popover-sort-btn" id="popoverSortDesc">
+                <span class="sort-icon-box">↓</span>
+                <span id="popoverSortDescLabel">Sort Z to A</span>
+            </button>
+        </div>
+
+        <!-- Search inside values -->
+        <div class="popover-search-wrap">
+            <input type="text" id="popoverSearchInput" class="popover-search-input" placeholder="Search values in column...">
+        </div>
+
+        <!-- Select All Bar -->
+        <div class="popover-select-all-bar">
+            <label class="popover-checkbox-label">
+                <input type="checkbox" id="popoverSelectAllCheckbox" checked>
+                <span>(Select All)</span>
+            </label>
+            <button type="button" class="popover-text-btn" id="popoverClearColBtn">Clear</button>
+        </div>
+
+        <!-- Checkbox List -->
+        <div class="popover-list-wrap" id="popoverCheckboxList">
+            <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="popover-footer">
+            <button type="button" class="toolbar-btn primary" id="popoverApplyBtn">OK</button>
+            <button type="button" class="toolbar-btn" id="popoverCancelBtn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Detail Inspector Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modalTitle">Job Vacancy Specification</h3>
+                <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="modalContent">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script with Full Data & Excel Grid Behaviors -->
+    <script>
+        // Verifiable Job Dataset extracted directly from official notifications & FreeJobAlert
+        const jobData = [
+            {
+                id: 1,
+                title: "Project Manager / Tech Lead / Project Engineer",
+                postCount: "844 Posts (Nationwide, ~20 in Mumbai)",
+                advtNo: "CORP/JIT/03/2026",
+                organization: "C-DAC",
+                orgFullName: "Centre for Development of Advanced Computing (MeitY)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech / M.E. / M.Tech in CSE, IT or MCA",
+                experience: "10+ Years for Project Manager / Tech Lead; 2-7 Years for Project Engineer",
+                skillsMatch: "Technical Project Management, SDLC, eGovernance, Architecture, Full-Stack",
+                matchScore: 98,
+                salary: "₹12.60 Lakh - ₹22.90 Lakh / Year (Project Manager band)",
+                location: "Mumbai, Maharashtra (Also Pune, Noida, Delhi)",
+                locationCategory: "Mumbai",
+                deadline: "2026-10-26",
+                deadlineDisplay: "26-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Fully satisfies M.Tech CSE qualification, 10+ years experience, and GoI eGovernance expertise.",
+                notificationUrl: "https://careers.cdac.in/",
+                applyUrl: "https://careers.cdac.in/",
+                verifiedBadge: "Verified MeitY Society"
+            },
+            {
+                id: 2,
+                title: "Chief Operating Officer (COO) - IT & Emerging Technologies",
+                postCount: "01 Post",
+                advtNo: "STPI/COO/TECH/2026/04",
+                organization: "STPI",
+                orgFullName: "Software Technology Parks of India (Autonomous Society, MeitY)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech / M.Tech in Computer Science / IT / Electronics",
+                experience: "8+ Years proven experience in IT operations, digital platform rollout, technology initiatives",
+                skillsMatch: "eGovernance, Enterprise Architecture, AI Fluency, MeitY Project Lifecycle",
+                matchScore: 97,
+                salary: "₹1,50,000 / Month Consolidated (₹18.00 Lakh/Year)",
+                location: "Pan-India (Centre of Excellence hubs)",
+                locationCategory: "Pan-India",
+                deadline: "2026-11-05",
+                deadlineDisplay: "05-11-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Candidate possesses multiple NeGD/MeitY certifications, M.Tech CSE, and 10+ years government IT project leadership.",
+                notificationUrl: "https://bhubaneswar.stpi.in/sites/default/files/career-documents/notice06102026.pdf",
+                applyUrl: "https://stpi.in/en/careers",
+                verifiedBadge: "Verified MeitY Apex Society"
+            },
+            {
+                id: 3,
+                title: "Full Stack Developer (AI/ML & Web Applications)",
+                postCount: "01 Post",
+                advtNo: "N-22/2/2021-NeGD-Part(1)",
+                organization: "NeGD / Digital India",
+                orgFullName: "National e-Governance Division (Digital India Corporation, MeitY)",
+                category: "Government",
+                qualification: "B.Tech / B.E. / M.Tech / MCA in Computer Science, IT or related",
+                experience: "4+ Years in Full-Stack Development; 2+ years deploying AI-powered features",
+                skillsMatch: "PHP/Laravel, JavaScript/React, MySQL, REST APIs, AI Fluency, Platform Delivery",
+                matchScore: 96,
+                salary: "Market Competitive / Senior Scale (Per NeGD MeitY guidelines)",
+                location: "New Delhi (With Project Deputations)",
+                locationCategory: "Delhi",
+                deadline: "2026-10-26",
+                deadlineDisplay: "26-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Candidate holds multiple NeGD certifications, M.Tech CSE, 10+ yrs full-stack & GoI platform experience.",
+                notificationUrl: "https://diccdnmedia.digitalindiacorporation.in/wp-content/uploads/2026/10/Myscheme-Advertisement-13.10.26.pdf",
+                applyUrl: "https://ora.digitalindiacorporation.in/",
+                verifiedBadge: "Verified NeGD Circular"
+            },
+            {
+                id: 4,
+                title: "Young Professional (IT & Project Management)",
+                postCount: "30 Posts",
+                advtNo: "Adm/YP/2026-27",
+                organization: "KVIC",
+                orgFullName: "Khadi and Village Industries Commission (Ministry of MSME, Govt of India)",
+                category: "Government",
+                qualification: "Master's Degree / M.Tech / B.E. / B.Tech / MBA / Post Graduate",
+                experience: "2-5 Years in IT systems, project monitoring, digitization, process optimization",
+                skillsMatch: "Digital Transformation, Project Lifecycle, Governance, System Modernization",
+                matchScore: 95,
+                salary: "₹50,000 - ₹60,000 / Month Consolidated",
+                location: "Mumbai (Head Office Vile Parle) & Pan-India",
+                locationCategory: "Mumbai",
+                deadline: "2026-10-30",
+                deadlineDisplay: "30-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Direct match with M.Tech CSE, central government eGovernance experience, and Mumbai home location preference.",
+                notificationUrl: "https://www.freejobalert.com/articles/kvic-young-professional-recruitment-2026-apply-online-for-30-posts-3071285",
+                applyUrl: "https://www.kvic.gov.in/",
+                verifiedBadge: "Verified MSME Body"
+            },
+            {
+                id: 5,
+                title: "State Programme Manager (Digital and ICT)",
+                postCount: "01 Post (Part of 106 Vacancy drive)",
+                advtNo: "JEPC/Samagra Shiksha/2026",
+                organization: "JEPC",
+                orgFullName: "Jharkhand Education Project Council, School Education & Literacy Dept.",
+                category: "Government",
+                qualification: "Degree in Computer Science, IT, B.Tech / B.E. / M.Tech in relevant discipline",
+                experience: "Minimum 5 Years experience in development & implementation of Digital Education / ICT solutions",
+                skillsMatch: "Digital Education Platforms, Admission & Exam Systems, Legacy Modernization, Stakeholder Coordination",
+                matchScore: 94,
+                salary: "₹63,523 / Month Consolidated (₹7.62 LPA)",
+                location: "Ranchi, Jharkhand",
+                locationCategory: "Other",
+                deadline: "2026-10-31",
+                deadlineDisplay: "31-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Exact domain match: Directed digital education platforms at NCERT PSSCIVE and Ministry of Education MSRVVP.",
+                notificationUrl: "https://jepc.jharkhand.gov.in/",
+                applyUrl: "https://jepc.jharkhand.gov.in/",
+                verifiedBadge: "Verified State Gov"
+            },
+            {
+                id: 6,
+                title: "AI Engineer & Senior Data Scientist",
+                postCount: "03 Posts (2 AI Engineers, 1 Sr. Data Scientist)",
+                advtNo: "N/9/2026-NeGD",
+                organization: "NeGD / MNRE Project",
+                orgFullName: "National e-Governance Division (Ministry of Electronics & IT)",
+                category: "Government",
+                qualification: "B.E. / B.Tech / M.Tech in Computer Science, IT, Software Engineering",
+                experience: "5-9 Years experience in application architecture & AI/LLM-enabled application delivery",
+                skillsMatch: "AI Fluency (Anthropic Foundations), System Architecture, REST APIs, eGovernance Scalability",
+                matchScore: 92,
+                salary: "Up to ₹38,50,008 / Year (~₹3.20 Lakh/Month)",
+                location: "New Delhi",
+                locationCategory: "Delhi",
+                deadline: "2026-10-15",
+                deadlineDisplay: "15-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Age ceiling is 55 years; candidate matches M.Tech CS, GoI workflows, and AI certifications.",
+                notificationUrl: "https://diccdnmedia.digitalindiacorporation.in/wp-content/uploads/2026/10/AI-Engineer-Senior-Data-Scientist-JD-MNRE.pdf",
+                applyUrl: "https://ora.digitalindiacorporation.in/",
+                verifiedBadge: "Verified NeGD Official"
+            },
+            {
+                id: 7,
+                title: "Individual Consultant (IT Systems & Technical Infrastructure)",
+                postCount: "04 Posts",
+                advtNo: "YP_20-R2/YP_61-R1/2026",
+                organization: "RITES",
+                orgFullName: "RITES Limited (Ministry of Railways Undertaking, Miniratna PSU)",
+                category: "PSU",
+                qualification: "Full-time Degree in Computer Science / Engineering / IT",
+                experience: "5-10 Years in IT infrastructure, railway/enterprise software, system integration",
+                skillsMatch: "Technical Project Management, SLA Targets, Secure System Architecture, Vendor Management",
+                matchScore: 91,
+                salary: "₹60,000 - ₹1,30,000 / Month (commensurate with experience)",
+                location: "Gurgaon / Delhi NCR & Project Sites",
+                locationCategory: "Delhi",
+                deadline: "2026-10-20",
+                deadlineDisplay: "20-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Age ceiling 62 years; matches 10+ years engineering & government project delivery.",
+                notificationUrl: "https://rites.com/Upload/Career/Original_YP_20-R2_to_22_R2_and__YP_61-R1_26__pdf-2026-Sep-25-16-13-4.pdf",
+                applyUrl: "https://recruit.rites.com/",
+                verifiedBadge: "Verified Rail Min PSU"
+            },
+            {
+                id: 8,
+                title: "Young Professional (Technical, Strategy & Systems)",
+                postCount: "11 Posts",
+                advtNo: "SAIL/CMO/YP/2026/01",
+                organization: "SAIL",
+                orgFullName: "Steel Authority of India Limited (Maharatna PSU, Ministry of Steel)",
+                category: "PSU",
+                qualification: "Degree in Engineering (B.E./B.Tech) / M.Tech in CS/IT / MBA",
+                experience: "3-5 Years in operations analysis, digital workflow automation, analytics",
+                skillsMatch: "Workflow Automation, Digital Transformation, SDLC, Performance Metrics",
+                matchScore: 89,
+                salary: "₹60,000 - ₹70,000 / Month Consolidated + Perks",
+                location: "Pan-India (Kolkata HQ / Regional Marketing Units)",
+                locationCategory: "Pan-India",
+                deadline: "2026-10-15",
+                deadlineDisplay: "15-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Fits engineering qualification, workflow modernization background, and system analytics.",
+                notificationUrl: "https://sailcareers.com/SAIL2026YPCMO/Adv_Eng.pdf",
+                applyUrl: "https://sailcareers.com/",
+                verifiedBadge: "Verified Maharatna PSU"
+            },
+            {
+                id: 9,
+                title: "Executive Engineer (Telecom / Electronics / IT) - Class I",
+                postCount: "01 Post (Part of 25 Class I & II Vacancies)",
+                advtNo: "Advt. No. DR-20",
+                organization: "Mumbai Port Authority",
+                orgFullName: "Mumbai Port Authority (MbPA), Ministry of Ports, Shipping & Waterways",
+                category: "PSU",
+                qualification: "Degree in Electronics / Telecommunication / Allied Engineering / Computing",
+                experience: "5 Years executive experience in Networking / Software Development in Govt / Commercial Undertaking",
+                skillsMatch: "Government IT Operations, Infrastructure Security, High-Volume Data Systems, 99.9% Uptime",
+                matchScore: 88,
+                salary: "₹50,000 - ₹1,60,000 (Gross approx ₹94,500/Month + HRA)",
+                location: "Mumbai, Maharashtra",
+                locationCategory: "Mumbai",
+                deadline: "2026-10-28",
+                deadlineDisplay: "28-10-2026",
+                eligibility: "Potentially Eligible",
+                eligibilityReason: "Local Mumbai posting! Matches 10+ yrs GoI executive experience. General age limit is 35 years (requires age check/relaxation).",
+                notificationUrl: "https://mumbaiport.gov.in/WriteReadData/RTF1984/1790582446.pdf",
+                applyUrl: "https://ibpsreg.ibps.in/mpajul26/",
+                verifiedBadge: "Verified Major Port"
+            },
+            {
+                id: 10,
+                title: "Consultant / Associate Consultant (IT & Digital Operations)",
+                postCount: "18 Posts",
+                advtNo: "AAI/CHQ/HR/CNS-IT/2026",
+                organization: "AAI",
+                orgFullName: "Airports Authority of India (Ministry of Civil Aviation, Miniratna PSU)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech / M.Tech in Computer Science / IT / Electronics",
+                experience: "5+ Years in enterprise IT platforms, network uptime, airport digitized workflows",
+                skillsMatch: "High-Volume Systems, 99.9% Uptime, Secure Architecture, Operations Oversight",
+                matchScore: 87,
+                salary: "₹75,000 - ₹1,00,000 / Month Consolidated",
+                location: "New Delhi / Regional Airports (incl. Mumbai Western Region)",
+                locationCategory: "Pan-India",
+                deadline: "2026-10-27",
+                deadlineDisplay: "27-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Satisfies engineering degree requirement and large-scale 99.9% uptime management.",
+                notificationUrl: "https://www.aai.aero/en/careers/recruitment",
+                applyUrl: "https://www.aai.aero/",
+                verifiedBadge: "Verified Civil Aviation PSU"
+            },
+            {
+                id: 11,
+                title: "SOC Analyst & Cyber Security Specialist (Contractual)",
+                postCount: "16 Posts",
+                advtNo: "04/Specialist/2026-27",
+                organization: "NABARD",
+                orgFullName: "National Bank for Agriculture and Rural Development",
+                category: "PSU",
+                qualification: "B.E. / B.Tech / MCA in Computer Science / IT / Cyber Security",
+                experience: "3-5 Years in SOC operations, incident management, cybersecurity policies",
+                skillsMatch: "Cyber Security Certification (IIPA/Karmayogi), Secure Infrastructure, Compliance",
+                matchScore: 86,
+                salary: "₹1,00,000 - ₹1,50,000 / Month (₹12 - ₹18 LPA)",
+                location: "Mumbai, Maharashtra (NABARD Head Office BKC)",
+                locationCategory: "Mumbai",
+                deadline: "2026-10-26",
+                deadlineDisplay: "26-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Home posting in Mumbai BKC! Directly aligns with IIPA Cyber Security certification and M.Tech CS.",
+                notificationUrl: "https://www.freejobalert.com/articles/nabard-recruitment-2026-apply-online-for-16-soc-analyst-cyber-security-analyst-and-more-posts-3072194",
+                applyUrl: "https://www.nabard.org/careers-notices.aspx",
+                verifiedBadge: "Verified Apex Financial Body"
+            },
+            {
+                id: 12,
+                title: "Sector Expert (Artificial Intelligence)",
+                postCount: "01 Post (Part of 5 Expert Posts)",
+                advtNo: "BEE/Rectt/2026/01",
+                organization: "Bureau of Energy Efficiency",
+                orgFullName: "Bureau of Energy Efficiency (BEE), Ministry of Power, Govt. of India",
+                category: "Government",
+                qualification: "Bachelor's Degree in Engg/CS + Master's/Postgraduate in CS/Engg/AI & ML",
+                experience: "Minimum 5 Years post-qualification domain experience in AI/Data Analytics applications",
+                skillsMatch: "AI Fluency, Process Optimization, M.Tech in CSE, High-Volume Gov Analytics",
+                matchScore: 85,
+                salary: "₹1,00,000 / Month Consolidated (₹12 LPA)",
+                location: "New Delhi",
+                locationCategory: "Delhi",
+                deadline: "2026-11-17",
+                deadlineDisplay: "17-11-2026",
+                eligibility: "Potentially Eligible",
+                eligibilityReason: "Direct M.Tech CS match and 10+ yrs experience. Upper age limit is 35 years (requires age verification).",
+                notificationUrl: "https://beeindia.gov.in/WriteReadData/RTF1984/RTF-PDF-0366d8e62c21e4da_1791196110.pdf",
+                applyUrl: "https://beeindia.gov.in",
+                verifiedBadge: "Verified Ministry of Power"
+            },
+            {
+                id: 13,
+                title: "Deputy Field Officer (Technical - Computer Science & IT)",
+                postCount: "250 Posts",
+                advtNo: "01/2026-CabSec(Tech)",
+                organization: "Cabinet Secretariat",
+                orgFullName: "Cabinet Secretariat (Government of India)",
+                category: "Government",
+                qualification: "Bachelor's / Master's Degree in Computer Science, IT, Electronics",
+                experience: "3-8 Years in technical infrastructure, secure platforms, communication systems",
+                skillsMatch: "System Architecture, Linux, Network Security, Government Data Integrity",
+                matchScore: 85,
+                salary: "Level-7 Pay Matrix (₹44,900 - ₹1,42,400 + Special Allowance, Gross ~₹92,000/Month)",
+                location: "Pan-India / New Delhi",
+                locationCategory: "Pan-India",
+                deadline: "2026-11-15",
+                deadlineDisplay: "15-11-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Meets M.Tech CSE, technical qualifications, and GoI operational track record.",
+                notificationUrl: "https://www.freejobalert.com/articles/cabinet-secretariat-dfo-technical-recruitment-2026-3073169",
+                applyUrl: "https://cabsec.gov.in/",
+                verifiedBadge: "Verified GoI Secretarial Cadre"
+            },
+            {
+                id: 14,
+                title: "Manager / Assistant General Manager (IT & Digital Systems)",
+                postCount: "06 Posts",
+                advtNo: "NHB/HR & REG/2026-27/01",
+                organization: "NHB",
+                orgFullName: "National Housing Bank (Wholly owned by RBI / Govt of India)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech in Computer Science / IT / MCA / M.Tech",
+                experience: "5-8 Years in banking/financial IT systems, database administration, software architecture",
+                skillsMatch: "Enterprise Applications, Database Reliability, API Integration, Project Lifecycle",
+                matchScore: 84,
+                salary: "Up to ₹11,35,020 - ₹24 LPA (Consolidated scale up to ₹3.50 Lakh/Month)",
+                location: "New Delhi / Regional Offices (incl. Mumbai)",
+                locationCategory: "Delhi",
+                deadline: "2026-10-18",
+                deadlineDisplay: "18-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Age limit 25 to 56 years; completely qualifies with 10+ years enterprise systems delivery.",
+                notificationUrl: "https://www.nhb.org.in/wp-content/uploads/2026/09/Advertisement-26-27-01.pdf",
+                applyUrl: "https://www.nhb.org.in/",
+                verifiedBadge: "Verified NHB Central Bank Unit"
+            },
+            {
+                id: 15,
+                title: "Assistant Manager (IT, Network & Cyber Security)",
+                postCount: "02 Posts",
+                advtNo: "Final_Adv_(6)/2026",
+                organization: "RITES",
+                orgFullName: "RITES Limited (Ministry of Railways Undertaking, Miniratna PSU)",
+                category: "PSU",
+                qualification: "Full-time B.E. / B.Tech in CS / IT / Electronics",
+                experience: "4+ Years in enterprise network infrastructure, firewall management, secure cloud",
+                skillsMatch: "Cyber Security, Linux, Network Operations, SLA Monitoring",
+                matchScore: 83,
+                salary: "₹40,000 - ₹1,40,000 (IDA Scale + Allowances, Gross ~₹82,000/Month)",
+                location: "Gurgaon / Delhi NCR & Pan-India",
+                locationCategory: "Delhi",
+                deadline: "2026-10-27",
+                deadlineDisplay: "27-10-2026",
+                eligibility: "Potentially Eligible",
+                eligibilityReason: "Meets engineering qualification and technical skills; upper age limit is 32 years (requires age relaxation review).",
+                notificationUrl: "https://rites.com/Upload/Career/Final_Adv_(6)_pdf-2026-Sep-28-16-23-40.pdf",
+                applyUrl: "https://recruit.rites.com/",
+                verifiedBadge: "Verified Rail PSU"
+            },
+            {
+                id: 16,
+                title: "Assistant Manager / Operations",
+                postCount: "02 Posts",
+                advtNo: "NCRTC/CO/HR/Rectt./36/2026",
+                organization: "NCRTC",
+                orgFullName: "National Capital Region Transport Corporation",
+                category: "PSU",
+                qualification: "Engineering Graduate (Full Time) in Electrical/Electronics/CS/Allied",
+                experience: "Minimum 5 Years experience in systems operations, development, digital systems, reliability",
+                skillsMatch: "Operations Management, High-Volume Transaction Delivery, 99.9% System Uptime, SLA Targets",
+                matchScore: 82,
+                salary: "₹50,000 - ₹1,60,000 (IDA Pay Scale)",
+                location: "New Delhi / NCR",
+                locationCategory: "Delhi",
+                deadline: "2026-10-23",
+                deadlineDisplay: "23-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Maximum age 40 years. Candidate meets full-time degree and 10+ yrs critical operations experience.",
+                notificationUrl: "https://www.ncrtc.co.in/hr-module/HR/uploads/2026_09_24_02_09_45362026AMOperationsDirect.pdf",
+                applyUrl: "https://www.ncrtc.co.in/",
+                verifiedBadge: "Verified Rail PSU"
+            },
+            {
+                id: 17,
+                title: "Chief Information Security Officer (CISO - DGM Grade)",
+                postCount: "01 Post",
+                advtNo: "NICL/CISO/2026/01",
+                organization: "NICL",
+                orgFullName: "National Insurance Company Limited (Central Public Sector Enterprise)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech / M.Tech in CS / IT, MCA with Cyber Security accreditation",
+                experience: "10+ Years in IT, with minimum 5 years in information security, risk governance",
+                skillsMatch: "Cyber Security Strategy (IIPA), Enterprise Risk, Compliance, Infrastructure Uptime",
+                matchScore: 82,
+                salary: "₹24.00 Lakh - ₹30.00 Lakh / Year Consolidated (DGM Grade)",
+                location: "Kolkata HQ (Pan-India oversight)",
+                locationCategory: "Pan-India",
+                deadline: "2026-11-06",
+                deadlineDisplay: "06-11-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Satisfies M.Tech CSE, 10+ years experience, and government cyber security credential.",
+                notificationUrl: "https://nationalinsurance.nic.co.in/",
+                applyUrl: "https://nationalinsurance.nic.co.in/",
+                verifiedBadge: "Verified General Insurance PSU"
+            },
+            {
+                id: 18,
+                title: "Specialist Officer (IT & Digital Banking - Scale II/III)",
+                postCount: "Multiple Posts",
+                advtNo: "TMB/SO-IT/Oct-2026",
+                organization: "TMB",
+                orgFullName: "Tamilnad Mercantile Bank (Scheduled Commercial Bank)",
+                category: "Private / Banking",
+                qualification: "B.E. / B.Tech / M.Tech in CS / IT / Electronics",
+                experience: "3-6 Years in core banking software, web applications, API security",
+                skillsMatch: "Full-Stack Solutions, MySQL, REST APIs, Security Compliance",
+                matchScore: 81,
+                salary: "₹48,170 - ₹89,890 + Perks (CTC approx ₹12.5 - ₹16 LPA)",
+                location: "Chennai / Regional Offices (Pan-India)",
+                locationCategory: "Pan-India",
+                deadline: "2026-10-25",
+                deadlineDisplay: "25-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Candidate meets M.Tech CSE and enterprise application development requirements.",
+                notificationUrl: "https://www.freejobalert.com/articles/tmb-so-recruitment-2026-apply-online-for-specialist-officer-posts-3072866",
+                applyUrl: "https://www.tmbnet.in/tmb_careers/",
+                verifiedBadge: "Verified Bank Recruiter"
+            },
+            {
+                id: 19,
+                title: "Project Engineer-I (Network & Cyber Security)",
+                postCount: "11 Posts",
+                advtNo: "383/HR/MILCOM & NWCS",
+                organization: "Bharat Electronics Limited",
+                orgFullName: "Bharat Electronics Limited (BEL), Ministry of Defence",
+                category: "PSU",
+                qualification: "BE / B.Tech in Computer Science / Electronics & Communication",
+                experience: "2 Years post-qualification industrial experience in networking/cyber security",
+                skillsMatch: "Cyber Security Certification (IIPA/Karmayogi Bharat), Secure Architecture, Linux, Git",
+                matchScore: 80,
+                salary: "₹50,000 / Month + ₹12,000 Annual Allowance + Yearly Increment",
+                location: "New Delhi / Bengaluru",
+                locationCategory: "Pan-India",
+                deadline: "2026-10-27",
+                deadlineDisplay: "27-10-2026",
+                eligibility: "Potentially Eligible",
+                eligibilityReason: "Matches B.E. CS and cyber security credentials; general age limit 32 years (subject to age criteria).",
+                notificationUrl: "https://bel-india.in/wp-content/uploads/2026/10/PE-Advt-NWCS-Final.pdf",
+                applyUrl: "https://bel-india.in",
+                verifiedBadge: "Verified Defence PSU"
+            },
+            {
+                id: 20,
+                title: "Administrative Officer (Scale I) - Information Technology Specialist",
+                postCount: "321 Posts (including IT Cadre)",
+                advtNo: "NICL/AO/01/2026",
+                organization: "NICL",
+                orgFullName: "National Insurance Company Limited (Central Public Sector Enterprise)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech / M.Tech in Computer Science / IT / MCA",
+                experience: "0-3 Years in IT operations / Software systems",
+                skillsMatch: "Database Management, SDLC, Operating Systems, Networking",
+                matchScore: 79,
+                salary: "Basic ₹50,925/Month + DA, HRA, Perks (Gross ~₹88,000/Month)",
+                location: "Pan-India (including Mumbai branches)",
+                locationCategory: "Pan-India",
+                deadline: "2026-10-28",
+                deadlineDisplay: "28-10-2026",
+                eligibility: "Potentially Eligible",
+                eligibilityReason: "Direct M.Tech CSE qualification match; general age limit is 30 years (requires category age check).",
+                notificationUrl: "https://www.freejobalert.com/articles/nicl-ao-recruitment-2026-apply-online-for-321-posts-3071380",
+                applyUrl: "https://nationalinsurance.nic.co.in/",
+                verifiedBadge: "Verified General Insurance PSU"
+            },
+            {
+                id: 21,
+                title: "Software Engineer (Java / Enterprise Solutions)",
+                postCount: "03 Posts (Part of 10 Vacancy drive)",
+                advtNo: "SDHM/06/2026",
+                organization: "SDHM Kerala / eHealth",
+                orgFullName: "State Digital Health Mission / eHealth Kerala, Health Services Dept.",
+                category: "Government",
+                qualification: "BE / B.Tech / M.Tech in CS/IT/ECE or MCA / M.Sc Computer Science",
+                experience: "Minimum 3 Years proven industry experience as Software Developer in enterprise web stacks",
+                skillsMatch: "Full Stack Development, Database Optimization, Public Citizen Health Applications, REST APIs",
+                matchScore: 78,
+                salary: "₹50,000 / Month Consolidated",
+                location: "Thiruvananthapuram, Kerala",
+                locationCategory: "Other",
+                deadline: "2026-10-15",
+                deadlineDisplay: "15-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Candidate satisfies M.Tech CSE, software architecture and citizen application track record.",
+                notificationUrl: "https://arogyakeralam.gov.in/wp-content/uploads/2026/09/Developer-Notification-26.pdf",
+                applyUrl: "https://arogyakeralam.gov.in",
+                verifiedBadge: "Verified Health Mission"
+            },
+            {
+                id: 22,
+                title: "Associate / Assistant Associate (IT & ERP Systems)",
+                postCount: "29 Posts",
+                advtNo: "BGCL/HR/2026/02",
+                organization: "BGCL",
+                orgFullName: "Bengal Gas Company Limited (GAIL & Greater Calcutta Gas JV)",
+                category: "PSU",
+                qualification: "Full-time B.E. / B.Tech in CS / IT / Electronics or MCA",
+                experience: "2-5 Years in enterprise IT systems, SAP/ERP workflows, network administration",
+                skillsMatch: "System Modernization, ERP Workflow, Database Operations, SLA Monitoring",
+                matchScore: 77,
+                salary: "₹40,000 - ₹80,000 / Month Consolidated",
+                location: "Kolkata / City Gas Distribution Project",
+                locationCategory: "Other",
+                deadline: "2026-10-27",
+                deadlineDisplay: "27-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Age up to 35 years; candidate holds full-time CS engineering degree and enterprise workflow track record.",
+                notificationUrl: "https://www.freejobalert.com/articles/bgcl-recruitment-2026-apply-online-for-29-assistant-associate-associate-and-more-posts-3072646",
+                applyUrl: "https://www.bgcl.co.in/careers",
+                verifiedBadge: "Verified GAIL JV"
+            },
+            {
+                id: 23,
+                title: "Manager / Section Engineer (IT & Digital Systems)",
+                postCount: "15 Posts",
+                advtNo: "GMRCL/HR/RECT/O&M/Oct-2026/27",
+                organization: "GMRC",
+                orgFullName: "Gujarat Metro Rail Corporation (Govt of India & Govt of Gujarat JV)",
+                category: "PSU",
+                qualification: "B.E. / B.Tech in Computer Science / IT / Electronics",
+                experience: "5-7 Years experience in enterprise IT systems, digital workflows, and network operations",
+                skillsMatch: "IT Project Lifecycle, SLA Target Monitoring, Database Reliability, Team Leadership",
+                matchScore: 76,
+                salary: "₹60,000 - ₹1,80,000 (Manager Level IDA Scale)",
+                location: "Gandhinagar / Ahmedabad, Gujarat",
+                locationCategory: "Other",
+                deadline: "2026-10-21",
+                deadlineDisplay: "21-10-2026",
+                eligibility: "Eligible",
+                eligibilityReason: "Age limit up to 38 years. Directly meets engineering degree and enterprise systems experience.",
+                notificationUrl: "https://www.gujaratmetrorail.com/careers/",
+                applyUrl: "https://www.gujaratmetrorail.com/careers/",
+                verifiedBadge: "Verified Metro JV"
+            }
+        ];
+
+        // Column Titles Metadata
+        const columnNames = {
+            title: "Job Title",
+            org: "Organization",
+            category: "Category",
+            match: "Match Score",
+            qualification: "Qualification",
+            experience: "Experience",
+            location: "Location",
+            salary: "Salary",
+            deadline: "Last Date",
+            eligibility: "Eligibility"
+        };
+
+        // State variables
+        let currentJobs = [...jobData];
+        let currentSortColumn = 'match';
+        let currentSortDirection = 'desc';
+        let selectedRowId = null;
+        let isCompactMode = false;
+
+        // AutoFilter State: { colKey: Set of selected string values }
+        let activeColumnFilters = {};
+        let activeFilterColumn = null; // Currently open popover column
+
+        // DOM References
+        const tableBody = document.getElementById('tableBody');
+        const emptyResults = document.getElementById('emptyResults');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const locationFilter = document.getElementById('locationFilter');
+        const matchFilter = document.getElementById('matchFilter');
+        const sortSelect = document.getElementById('sortSelect');
+        const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+        const densityBtn = document.getElementById('densityBtn');
+        const densityBtnText = document.getElementById('densityBtnText');
+        const exportCsvBtn = document.getElementById('exportCsvBtn');
+        const filteredRowsCount = document.getElementById('filteredRowsCount');
+        const totalRowsCount = document.getElementById('totalRowsCount');
+        const footerCount = document.getElementById('footerCount');
+        const footerHighMatchCount = document.getElementById('footerHighMatchCount');
+        const footerAvgMatch = document.getElementById('footerAvgMatch');
+        const excelJobTable = document.getElementById('excelJobTable');
+        const activeFiltersChipsBar = document.getElementById('activeFiltersChipsBar');
+        const chipsContainer = document.getElementById('chipsContainer');
+        const clearAllChipsBtn = document.getElementById('clearAllChipsBtn');
+
+        // Popover DOM Elements
+        const excelFilterPopover = document.getElementById('excelFilterPopover');
+        const popoverColName = document.getElementById('popoverColName');
+        const popoverCloseBtn = document.getElementById('popoverCloseBtn');
+        const popoverSortAsc = document.getElementById('popoverSortAsc');
+        const popoverSortDesc = document.getElementById('popoverSortDesc');
+        const popoverSortAscLabel = document.getElementById('popoverSortAscLabel');
+        const popoverSortDescLabel = document.getElementById('popoverSortDescLabel');
+        const popoverSearchInput = document.getElementById('popoverSearchInput');
+        const popoverSelectAllCheckbox = document.getElementById('popoverSelectAllCheckbox');
+        const popoverClearColBtn = document.getElementById('popoverClearColBtn');
+        const popoverCheckboxList = document.getElementById('popoverCheckboxList');
+        const popoverApplyBtn = document.getElementById('popoverApplyBtn');
+        const popoverCancelBtn = document.getElementById('popoverCancelBtn');
+
+        // Top Summary Cards DOM References
+        const cardTotalJobs = document.getElementById('cardTotalJobs');
+        const cardHighMatch = document.getElementById('cardHighMatch');
+        const cardEligible = document.getElementById('cardEligible');
+
+        // Modal DOM
+        const detailModal = document.getElementById('detailModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+        // Helper: Extract display value for a given column from a job item
+        function getJobColumnValue(job, colKey) {
+            switch(colKey) {
+                case 'title': return job.title;
+                case 'org': return job.organization;
+                case 'category': return job.category;
+                case 'match': return job.matchScore + '%';
+                case 'qualification': return job.qualification;
+                case 'experience': return job.experience;
+                case 'location': return job.location;
+                case 'salary': return job.salary;
+                case 'deadline': return job.deadlineDisplay;
+                case 'eligibility': return job.eligibility;
+                default: return '';
+            }
+        }
+
+        // Render Table Function
+        function renderTable(jobs) {
+            tableBody.innerHTML = '';
+            
+            if (jobs.length === 0) {
+                emptyResults.style.display = 'block';
+                document.querySelector('.table-scroll-wrapper').style.display = 'none';
+                filteredRowsCount.textContent = '0';
+                footerCount.textContent = '0';
+                footerHighMatchCount.textContent = '0';
+                footerAvgMatch.textContent = '0%';
+                return;
+            }
+
+            emptyResults.style.display = 'none';
+            document.querySelector('.table-scroll-wrapper').style.display = 'block';
+            filteredRowsCount.textContent = jobs.length;
+            footerCount.textContent = jobs.length;
+
+            let highMatchCount = 0;
+            let totalMatchSum = 0;
+
+            jobs.forEach((job, index) => {
+                totalMatchSum += job.matchScore;
+                const isHighMatch = job.matchScore >= 85;
+                if (isHighMatch) highMatchCount++;
+
+                const tr = document.createElement('tr');
+                tr.setAttribute('data-id', job.id);
+                if (isHighMatch) {
+                    tr.classList.add('row-high-match');
+                }
+                if (selectedRowId === job.id) {
+                    tr.classList.add('row-selected');
+                }
+
+                // Row click handler (Excel cell/row select)
+                tr.addEventListener('click', (e) => {
+                    if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.excel-filter-trigger')) return;
+                    document.querySelectorAll('#tableBody tr').forEach(r => r.classList.remove('row-selected'));
+                    tr.classList.add('row-selected');
+                    selectedRowId = job.id;
+                    openJobModal(job);
+                });
+
+                // Category class
+                let catBadgeClass = 'category-badge gov';
+                if (job.category === 'PSU') catBadgeClass = 'category-badge psu';
+                else if (job.category === 'Private / Banking') catBadgeClass = 'category-badge bank';
+
+                // Match badge
+                let matchBadgeHtml = '';
+                if (isHighMatch) {
+                    matchBadgeHtml = `<span class="match-badge badge-green">★ ${job.matchScore}% High</span>`;
+                } else if (job.matchScore >= 80) {
+                    matchBadgeHtml = `<span class="match-badge badge-blue">${job.matchScore}% Good</span>`;
+                } else {
+                    matchBadgeHtml = `<span class="match-badge badge-amber">${job.matchScore}% Match</span>`;
+                }
+
+                // Eligibility text
+                const eligBadge = job.eligibility === 'Eligible'
+                    ? `<span style="color: #15803D; font-weight: 600; font-size: 11.5px;">✓ Eligible</span>`
+                    : `<span style="color: #B45309; font-weight: 600; font-size: 11.5px;" title="${job.eligibilityReason}">⚠ Review Req.</span>`;
+
+                tr.innerHTML = `
+                    <td class="excel-row-num">${index + 1}</td>
+                    <td>
+                        <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="job-title-link" title="Click to view advertisement details">
+                            ${job.title}
+                        </a>
+                        <div class="job-subtext">${job.postCount}</div>
+                    </td>
+                    <td>
+                        <span class="org-pill">${job.organization}</span>
+                        <div class="org-advt">${job.advtNo}</div>
+                    </td>
+                    <td class="cell-center">
+                        <span class="${catBadgeClass}">${job.category}</span>
+                    </td>
+                    <td class="cell-center">
+                        ${matchBadgeHtml}
+                    </td>
+                    <td style="font-size: 11px; max-width: 220px;">
+                        ${job.qualification}
+                    </td>
+                    <td style="font-size: 11px; max-width: 170px;">
+                        ${job.experience}
+                    </td>
+                    <td>
+                        <div style="font-weight: 500;">${job.location}</div>
+                    </td>
+                    <td class="salary-text">
+                        ${job.salary}
+                    </td>
+                    <td class="cell-center deadline-text">
+                        ${job.deadlineDisplay}
+                    </td>
+                    <td class="cell-center">
+                        ${eligBadge}
+                    </td>
+                    <td class="action-cell">
+                        <div class="action-group">
+                            <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn-notice" title="Download Official Notification PDF">
+                                Notice
+                            </a>
+                            <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply" title="Apply Online on Portal">
+                                Apply &rarr;
+                            </a>
+                        </div>
+                    </td>
+                `;
+
+                tableBody.appendChild(tr);
+            });
+
+            // Update stats
+            footerHighMatchCount.textContent = highMatchCount;
+            const avg = (totalMatchSum / jobs.length).toFixed(1);
+            footerAvgMatch.textContent = `${avg}%`;
+        }
+
+        // Master Filter and Sort Engine
+        function filterAndSortData() {
+            const query = searchInput.value.toLowerCase().trim();
+            const cat = categoryFilter.value;
+            const loc = locationFilter.value;
+            const matchPref = matchFilter.value;
+            const sortVal = sortSelect.value;
+
+            let filtered = jobData.filter(job => {
+                // 1. Text search across title, org, qualification, skills, location
+                const matchesQuery = 
+                    !query ||
+                    job.title.toLowerCase().includes(query) ||
+                    job.organization.toLowerCase().includes(query) ||
+                    job.orgFullName.toLowerCase().includes(query) ||
+                    job.qualification.toLowerCase().includes(query) ||
+                    job.skillsMatch.toLowerCase().includes(query) ||
+                    job.location.toLowerCase().includes(query) ||
+                    job.advtNo.toLowerCase().includes(query);
+
+                // 2. Global Category filter
+                const matchesCat = cat === 'ALL' || job.category === cat;
+
+                // 3. Global Location filter
+                let matchesLoc = true;
+                if (loc === 'Mumbai') matchesLoc = job.locationCategory === 'Mumbai';
+                else if (loc === 'Delhi') matchesLoc = job.locationCategory === 'Delhi';
+                else if (loc === 'Pan-India') matchesLoc = job.locationCategory === 'Pan-India';
+                else if (loc === 'Other') matchesLoc = job.locationCategory === 'Other';
+
+                // 4. Global Match filter
+                let matchesMatch = true;
+                if (matchPref === 'HIGH') matchesMatch = job.matchScore >= 85;
+                else if (matchPref === 'ELIGIBLE') matchesMatch = job.eligibility === 'Eligible';
+
+                // 5. Excel Column AutoFilters (Multi-column filter support!)
+                let matchesColumnFilters = true;
+                for (const [colKey, selectedValues] of Object.entries(activeColumnFilters)) {
+                    if (selectedValues && selectedValues.size > 0) {
+                        const cellVal = getJobColumnValue(job, colKey);
+                        if (!selectedValues.has(cellVal)) {
+                            matchesColumnFilters = false;
+                            break;
+                        }
+                    }
+                }
+
+                return matchesQuery && matchesCat && matchesLoc && matchesMatch && matchesColumnFilters;
+            });
+
+            // Sorting logic
+            filtered.sort((a, b) => {
+                let res = 0;
+                if (currentSortColumn === 'title') res = a.title.localeCompare(b.title);
+                else if (currentSortColumn === 'org') res = a.organization.localeCompare(b.organization);
+                else if (currentSortColumn === 'category') res = a.category.localeCompare(b.category);
+                else if (currentSortColumn === 'match') res = a.matchScore - b.matchScore;
+                else if (currentSortColumn === 'qualification') res = a.qualification.localeCompare(b.qualification);
+                else if (currentSortColumn === 'experience') res = a.experience.localeCompare(b.experience);
+                else if (currentSortColumn === 'location') res = a.location.localeCompare(b.location);
+                else if (currentSortColumn === 'salary') res = a.salary.localeCompare(b.salary);
+                else if (currentSortColumn === 'deadline') res = new Date(a.deadline) - new Date(b.deadline);
+                else if (currentSortColumn === 'eligibility') res = a.eligibility.localeCompare(b.eligibility);
+
+                return currentSortDirection === 'asc' ? res : -res;
+            });
+
+            currentJobs = filtered;
+            renderTable(currentJobs);
+            updateFilterIndicators();
+        }
+
+        // Update visual filter indicators (highlight filtered headers, show chip bar)
+        function updateFilterIndicators() {
+            // Update table headers
+            document.querySelectorAll('th[data-column]').forEach(th => {
+                const colKey = th.getAttribute('data-column');
+                const triggerBtn = th.querySelector('.excel-filter-trigger');
+                const isFiltered = activeColumnFilters[colKey] && activeColumnFilters[colKey].size > 0;
+
+                if (isFiltered) {
+                    th.classList.add('th-has-filter');
+                    if (triggerBtn) triggerBtn.classList.add('is-filtered');
+                } else {
+                    th.classList.remove('th-has-filter');
+                    if (triggerBtn) triggerBtn.classList.remove('is-filtered');
+                }
+            });
+
+            // Update Active Filter Chips Bar
+            const activeCols = Object.keys(activeColumnFilters).filter(c => activeColumnFilters[c] && activeColumnFilters[c].size > 0);
+            
+            if (activeCols.length > 0) {
+                activeFiltersChipsBar.style.display = 'flex';
+                chipsContainer.innerHTML = '';
+                activeCols.forEach(colKey => {
+                    const colName = columnNames[colKey] || colKey;
+                    const count = activeColumnFilters[colKey].size;
+                    const chip = document.createElement('div');
+                    chip.className = 'filter-chip';
+                    chip.innerHTML = `
+                        <span>${colName}: <strong>${count} selected</strong></span>
+                        <span class="filter-chip-remove" title="Remove filter for ${colName}">&times;</span>
+                    `;
+                    chip.querySelector('.filter-chip-remove').addEventListener('click', () => {
+                        delete activeColumnFilters[colKey];
+                        filterAndSortData();
+                    });
+                    chipsContainer.appendChild(chip);
+                });
+            } else {
+                activeFiltersChipsBar.style.display = 'none';
+            }
+        }
+
+        // Column Header Click Sort
+        function sortByHeaderColumn(col) {
+            if (currentSortColumn === col) {
+                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortColumn = col;
+                currentSortDirection = (col === 'match' || col === 'deadline') ? 'desc' : 'asc';
+            }
+
+            // Sync sort indicators
+            document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '↕');
+            const activeIcon = document.getElementById(`sort-icon-${col}`);
+            if (activeIcon) {
+                activeIcon.textContent = currentSortDirection === 'asc' ? '▲' : '▼';
+            }
+
+            filterAndSortData();
+        }
+
+        // EXCEL AUTOFILTER POPOVER CONTROLLER
+        function openColumnFilterPopover(colKey, triggerBtn) {
+            activeFilterColumn = colKey;
+            const colTitle = columnNames[colKey] || colKey;
+            popoverColName.textContent = `Filter: ${colTitle}`;
+
+            // Adjust sort button labels based on type
+            if (colKey === 'match') {
+                popoverSortAscLabel.textContent = "Sort Smallest to Largest (Asc)";
+                popoverSortDescLabel.textContent = "Sort Largest to Smallest (Desc)";
+            } else if (colKey === 'deadline') {
+                popoverSortAscLabel.textContent = "Sort Earliest to Latest (Asc)";
+                popoverSortDescLabel.textContent = "Sort Latest to Earliest (Desc)";
+            } else {
+                popoverSortAscLabel.textContent = "Sort A to Z (Asc)";
+                popoverSortDescLabel.textContent = "Sort Z to A (Desc)";
+            }
+
+            // Extract unique values and counts from full jobData
+            const valueCounts = {};
+            jobData.forEach(job => {
+                const val = getJobColumnValue(job, colKey);
+                valueCounts[val] = (valueCounts[val] || 0) + 1;
+            });
+
+            // Sort unique values
+            const uniqueValues = Object.keys(valueCounts).sort((a, b) => {
+                if (colKey === 'match') return parseInt(b) - parseInt(a);
+                if (colKey === 'deadline') return new Date(a) - new Date(b);
+                return a.localeCompare(b);
+            });
+
+            // Currently active selection
+            const currentSelection = activeColumnFilters[colKey] || new Set(uniqueValues);
+
+            // Populate Checkbox List
+            popoverSearchInput.value = '';
+            renderPopoverCheckboxes(uniqueValues, valueCounts, currentSelection);
+
+            // Position Popover near the trigger button
+            const btnRect = triggerBtn.getBoundingClientRect();
+            const popoverWidth = 260;
+            let topPos = btnRect.bottom + window.scrollY + 4;
+            let leftPos = btnRect.right + window.scrollX - popoverWidth;
+
+            if (leftPos < 10) leftPos = 10;
+            if (leftPos + popoverWidth > window.innerWidth - 10) {
+                leftPos = window.innerWidth - popoverWidth - 14;
+            }
+
+            excelFilterPopover.style.top = `${topPos}px`;
+            excelFilterPopover.style.left = `${leftPos}px`;
+            excelFilterPopover.style.display = 'flex';
+
+            popoverSearchInput.focus();
+        }
+
+        // Render Checkboxes inside Popover
+        function renderPopoverCheckboxes(uniqueValues, valueCounts, currentSelection, searchQuery = '') {
+            popoverCheckboxList.innerHTML = '';
+            const query = searchQuery.toLowerCase().trim();
+
+            let visibleCount = 0;
+            let allChecked = true;
+
+            uniqueValues.forEach(val => {
+                if (query && !val.toLowerCase().includes(query)) return;
+                visibleCount++;
+
+                const isChecked = currentSelection.has(val);
+                if (!isChecked) allChecked = false;
+
+                const label = document.createElement('label');
+                label.className = 'popover-item-label';
+                label.innerHTML = `
+                    <input type="checkbox" value="${encodeURIComponent(val)}" class="popover-item-checkbox" ${isChecked ? 'checked' : ''}>
+                    <span class="popover-item-text" title="${val}">${val}</span>
+                    <span class="popover-item-count">(${valueCounts[val]})</span>
+                `;
+                popoverCheckboxList.appendChild(label);
+            });
+
+            popoverSelectAllCheckbox.checked = visibleCount > 0 && allChecked;
+        }
+
+        // Filter trigger button clicks
+        document.querySelectorAll('.excel-filter-trigger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const colKey = btn.getAttribute('data-col');
+                if (excelFilterPopover.style.display === 'flex' && activeFilterColumn === colKey) {
+                    closeColumnFilterPopover();
+                } else {
+                    openColumnFilterPopover(colKey, btn);
+                }
+            });
+        });
+
+        // Close popover
+        function closeColumnFilterPopover() {
+            excelFilterPopover.style.display = 'none';
+            activeFilterColumn = null;
+        }
+
+        popoverCloseBtn.addEventListener('click', closeColumnFilterPopover);
+        popoverCancelBtn.addEventListener('click', closeColumnFilterPopover);
+
+        // Sort inside popover
+        popoverSortAsc.addEventListener('click', () => {
+            if (activeFilterColumn) {
+                currentSortColumn = activeFilterColumn;
+                currentSortDirection = 'asc';
+                document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '↕');
+                const activeIcon = document.getElementById(`sort-icon-${activeFilterColumn}`);
+                if (activeIcon) activeIcon.textContent = '▲';
+                filterAndSortData();
+                closeColumnFilterPopover();
+            }
+        });
+
+        popoverSortDesc.addEventListener('click', () => {
+            if (activeFilterColumn) {
+                currentSortColumn = activeFilterColumn;
+                currentSortDirection = 'desc';
+                document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '↕');
+                const activeIcon = document.getElementById(`sort-icon-${activeFilterColumn}`);
+                if (activeIcon) activeIcon.textContent = '▼';
+                filterAndSortData();
+                closeColumnFilterPopover();
+            }
+        });
+
+        // Search within popover values
+        popoverSearchInput.addEventListener('input', () => {
+            if (!activeFilterColumn) return;
+            const query = popoverSearchInput.value;
+            const valueCounts = {};
+            jobData.forEach(job => {
+                const val = getJobColumnValue(job, activeFilterColumn);
+                valueCounts[val] = (valueCounts[val] || 0) + 1;
+            });
+            const uniqueValues = Object.keys(valueCounts);
+            const currentSelection = new Set();
+            popoverCheckboxList.querySelectorAll('.popover-item-checkbox:checked').forEach(cb => {
+                currentSelection.add(decodeURIComponent(cb.value));
+            });
+
+            renderPopoverCheckboxes(uniqueValues, valueCounts, currentSelection, query);
+        });
+
+        // Select All toggle
+        popoverSelectAllCheckbox.addEventListener('change', () => {
+            const checked = popoverSelectAllCheckbox.checked;
+            popoverCheckboxList.querySelectorAll('.popover-item-checkbox').forEach(cb => {
+                cb.checked = checked;
+            });
+        });
+
+        // Clear button inside popover (uncheck all)
+        popoverClearColBtn.addEventListener('click', () => {
+            popoverSelectAllCheckbox.checked = false;
+            popoverCheckboxList.querySelectorAll('.popover-item-checkbox').forEach(cb => {
+                cb.checked = false;
+            });
+        });
+
+        // Apply Button inside popover
+        popoverApplyBtn.addEventListener('click', () => {
+            if (!activeFilterColumn) return;
+            
+            const selectedSet = new Set();
+            popoverCheckboxList.querySelectorAll('.popover-item-checkbox:checked').forEach(cb => {
+                selectedSet.add(decodeURIComponent(cb.value));
+            });
+
+            // Get total distinct values for this column
+            const allDistinct = new Set(jobData.map(j => getJobColumnValue(j, activeFilterColumn)));
+
+            // If user checked all, or nothing was excluded, clear active filter for this column
+            if (selectedSet.size === allDistinct.size) {
+                delete activeColumnFilters[activeFilterColumn];
+            } else {
+                activeColumnFilters[activeFilterColumn] = selectedSet;
+            }
+
+            closeColumnFilterPopover();
+            filterAndSortData();
+        });
+
+        // Clear All Column Filters from chip bar
+        clearAllChipsBtn.addEventListener('click', () => {
+            activeColumnFilters = {};
+            filterAndSortData();
+        });
+
+        // Click outside closes popover
+        document.addEventListener('click', (e) => {
+            if (!excelFilterPopover.contains(e.target) && !e.target.closest('.excel-filter-trigger')) {
+                closeColumnFilterPopover();
+            }
+        });
+
+        // Escape key closes popover or modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeColumnFilterPopover();
+                detailModal.style.display = 'none';
+            }
+        });
+
+        // Global Event Listeners for Filters
+        searchInput.addEventListener('input', filterAndSortData);
+        categoryFilter.addEventListener('change', filterAndSortData);
+        locationFilter.addEventListener('change', filterAndSortData);
+        matchFilter.addEventListener('change', filterAndSortData);
+        sortSelect.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val === 'match_desc') { currentSortColumn = 'match'; currentSortDirection = 'desc'; }
+            else if (val === 'deadline_asc') { currentSortColumn = 'deadline'; currentSortDirection = 'asc'; }
+            else if (val === 'title_asc') { currentSortColumn = 'title'; currentSortDirection = 'asc'; }
+            else if (val === 'org_asc') { currentSortColumn = 'org'; currentSortDirection = 'asc'; }
+            
+            document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '↕');
+            const activeIcon = document.getElementById(`sort-icon-${currentSortColumn}`);
+            if (activeIcon) activeIcon.textContent = currentSortDirection === 'asc' ? '▲' : '▼';
+            
+            filterAndSortData();
+        });
+
+        // Reset All Filters Button
+        resetFiltersBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            categoryFilter.value = 'ALL';
+            locationFilter.value = 'ALL';
+            matchFilter.value = 'ALL';
+            sortSelect.value = 'match_desc';
+            currentSortColumn = 'match';
+            currentSortDirection = 'desc';
+            activeColumnFilters = {};
+            closeColumnFilterPopover();
+            document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '↕');
+            const matchIcon = document.getElementById('sort-icon-match');
+            if (matchIcon) matchIcon.textContent = '▼';
+            filterAndSortData();
+        });
+
+        // Toggle Compact Row Density
+        densityBtn.addEventListener('click', () => {
+            isCompactMode = !isCompactMode;
+            if (isCompactMode) {
+                excelJobTable.classList.add('compact-mode');
+                densityBtnText.textContent = 'Normal Rows';
+            } else {
+                excelJobTable.classList.remove('compact-mode');
+                densityBtnText.textContent = 'Compact Rows';
+            }
+        });
+
+        // Export to CSV Functionality (Standard Excel feature)
+        exportCsvBtn.addEventListener('click', () => {
+            if (currentJobs.length === 0) {
+                alert('No rows available to export.');
+                return;
+            }
+
+            const headers = ["ID", "Job Title", "Organization", "Category", "Match Score %", "Qualification", "Experience", "Location", "Salary", "Deadline", "Eligibility", "Official Notification", "Application URL"];
+            const rows = currentJobs.map(j => [
+                j.id,
+                `"${j.title.replace(/"/g, '""')}"`,
+                `"${j.organization.replace(/"/g, '""')}"`,
+                `"${j.category}"`,
+                j.matchScore,
+                `"${j.qualification.replace(/"/g, '""')}"`,
+                `"${j.experience.replace(/"/g, '""')}"`,
+                `"${j.location.replace(/"/g, '""')}"`,
+                `"${j.salary.replace(/"/g, '""')}"`,
+                j.deadlineDisplay,
+                `"${j.eligibility}"`,
+                `"${j.notificationUrl}"`,
+                `"${j.applyUrl}"`
+            ]);
+
+            const csvContent = [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.setAttribute('href', url);
+            link.setAttribute('download', `job_vacancies_excel_export_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        // Job Inspector Modal logic
+        function openJobModal(job) {
+            modalTitle.textContent = job.title;
+            modalContent.innerHTML = `
+                <div class="detail-row">
+                    <span class="detail-key">Organization:</span>
+                    <span class="detail-val"><strong>${job.orgFullName}</strong> (${job.organization})</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Advertisement No:</span>
+                    <span class="detail-val">${job.advtNo} &bull; ${job.postCount}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Match Alignment:</span>
+                    <span class="detail-val">
+                        <strong style="color: ${job.matchScore >= 85 ? '#15803D' : '#1E40AF'};">${job.matchScore}% Alignment</strong>
+                        &bull; ${job.verifiedBadge}
+                    </span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Qualification:</span>
+                    <span class="detail-val">${job.qualification}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Experience Req:</span>
+                    <span class="detail-val">${job.experience}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Key Skills:</span>
+                    <span class="detail-val">${job.skillsMatch}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Pay Scale / CTC:</span>
+                    <span class="detail-val" style="font-weight: 600;">${job.salary}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Location:</span>
+                    <span class="detail-val">${job.location}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Closing Date:</span>
+                    <span class="detail-val"><strong>${job.deadlineDisplay}</strong></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-key">Eligibility Analysis:</span>
+                    <span class="detail-val">${job.eligibilityReason}</span>
+                </div>
+                <div style="margin-top: 18px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn-notice" style="padding: 6px 14px;">
+                        Official Notification
+                    </a>
+                    <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply" style="padding: 6px 16px;">
+                        Apply Directly on Portal &rarr;
+                    </a>
+                </div>
+            `;
+            detailModal.style.display = 'flex';
+        }
+
+        modalCloseBtn.addEventListener('click', () => {
+            detailModal.style.display = 'none';
+        });
+
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) {
+                detailModal.style.display = 'none';
+            }
+        });
+
+        // Initialize table and metric cards
+        totalRowsCount.textContent = jobData.length;
+        cardTotalJobs.textContent = jobData.length;
+        cardHighMatch.textContent = jobData.filter(j => j.matchScore >= 85).length;
+        cardEligible.textContent = jobData.filter(j => j.eligibility === 'Eligible').length;
+
+        // Initial default sort icon
+        const matchIcon = document.getElementById('sort-icon-match');
+        if (matchIcon) matchIcon.textContent = '▼';
+
+        filterAndSortData();
+    </script>
 </body>
 </html>
