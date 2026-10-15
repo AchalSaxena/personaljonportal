@@ -1,0 +1,13 @@
+{
+  "name": "job-vacancy-portal",
+  "version": "1.0.0",
+  "description": "Job Vacancy Intelligence Dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

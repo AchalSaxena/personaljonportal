@@ -16,7 +16,7 @@ A modern, responsive **Job Vacancy Dashboard** designed in a **Navy Blue, White,
   - Zebra striping (alternating row backgrounds) and active row selection highlight.
   - Compact row height toggle (*Normal* vs *Compact*).
   - Sticky table headers pinned on vertical scroll.
-  - Dedicated row index numbers (`# 1` through `# 23`).
+  - Dedicated row index numbers (`# 1` through `# 68`).
 
 - **Excel AutoFilter Dropdowns on Every Column**:
   - Filter trigger buttons (`▼`) on all column headings (*Job Title*, *Organization*, *Category*, *Match Score*, *Qualification*, *Experience*, *Location*, *Salary*, *Last Date*, *Eligibility*).
