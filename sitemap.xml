@@ -1,31 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap — Job Vacancy Intelligence Portal -->
+<!-- GIGW 3.0 Compliant | Last Updated: 2026-10-25 -->
+<!-- Production Domain: https://personaljonportal.vercel.app -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
     <!-- Primary Portal Homepage -->
     <url>
-        <loc>http://localhost:3000/</loc>
+        <loc>https://personaljonportal.vercel.app/</loc>
         <lastmod>2026-10-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-    </url>
-
-    <!-- Index.html Direct Endpoint -->
-    <url>
-        <loc>http://localhost:3000/index.html</loc>
-        <lastmod>2026-10-25</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://personaljonportal.vercel.app/"/>
+        <xhtml:link rel="alternate" hreflang="hi" href="https://personaljonportal.vercel.app/?lang=hi"/>
     </url>
 
     <!-- Job Vacancies Dedicated View -->
     <url>
-        <loc>http://localhost:3000/job_vacancies.html</loc>
+        <loc>https://personaljonportal.vercel.app/job_vacancies.html</loc>
         <lastmod>2026-10-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
+    </url>
+
+    <!-- Hindi Explainer Video -->
+    <url>
+        <loc>https://personaljonportal.vercel.app/explainer_video_hindi.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- GIGW Mandatory: Legal & Compliance Pages -->
+    <url>
+        <loc>https://personaljonportal.vercel.app/privacy-policy.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <url>
+        <loc>https://personaljonportal.vercel.app/disclaimer.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <url>
+        <loc>https://personaljonportal.vercel.app/accessibility.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://personaljonportal.vercel.app/contact.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://personaljonportal.vercel.app/terms.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <!-- Governance & Quality Policies (GIGW 3.0 Mandatory) -->
+    <url>
+        <loc>https://personaljonportal.vercel.app/content-review-policy.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <url>
+        <loc>https://personaljonportal.vercel.app/content-archival-policy.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+
+    <!-- Human-Readable Sitemap -->
+    <url>
+        <loc>https://personaljonportal.vercel.app/sitemap.html</loc>
+        <lastmod>2026-10-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
     </url>
 
 </urlset>

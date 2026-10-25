@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Statement — Job Vacancy Intelligence Portal</title>
+    <meta name="description" content="Accessibility Statement declaring conformance targets for WCAG 2.1/2.2 Level AA and GIGW 3.0.">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="IN">
+    <meta name="geo.country" content="India">
+    <link rel="canonical" href="https://personaljonportal.vercel.app/accessibility.html">
+
+    <!-- Dublin Core Metadata (GIGW 3.0 Mandatory) -->
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <meta name="DC.Title" content="Accessibility Statement — Job Vacancy Intelligence Portal">
+    <meta name="DC.Creator" content="Achal Saxena">
+    <meta name="DC.Subject" content="Web Accessibility, WCAG 2.1 AA, WCAG 2.2 AA, GIGW 3.0 Conformance, STQC">
+    <meta name="DC.Description" content="Accessibility Statement outlining implemented accessibility features, testing status, and feedback channels.">
+    <meta name="DC.Publisher" content="Achal Saxena">
+    <meta name="DC.Language" scheme="RFC1766" content="en, hi">
+    <meta name="DC.Coverage" content="India">
+    <meta name="DC.Type" content="Text">
+    <meta name="DC.Format" content="text/html">
+    <meta name="DC.date.created" content="2026-10-01">
+    <meta name="DC.date.modified" content="2026-10-25">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/portal-common.css">
+</head>
+<body>
+
+    <!-- Skip Navigation Link (WCAG 2.4.1 / GIGW 3.0) -->
+    <a class="skip-nav-link skip-nav" href="#main-content">Skip to Main Content</a>
+
+    <!-- Live regions for assistive technology -->
+    <div id="sr-status" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="sr-alert" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
+    <!-- Standardized Portal Header -->
+    <header class="app-navbar" role="banner" id="main-nav" aria-label="Portal Header">
+        <a href="/index.html" class="navbar-brand">
+            <span class="brand-badge">INDEPENDENT PORTAL</span>
+            <div class="brand-info">
+                <h1 data-i18n="portalTitle">Job Vacancy Intelligence Portal</h1>
+                <span data-i18n="portalSubtitle">Candidate Recruitment Engine • Independent Platform</span>
+            </div>
+        </a>
+
+        <nav class="navbar-nav" aria-label="Primary Navigation">
+            <a href="/index.html" data-i18n="navHome">Home</a>
+            <a href="/job_vacancies.html" data-i18n="navVacancies">Job Vacancies</a>
+            <a href="/explainer_video_hindi.html" data-i18n="navVideo">Hindi Video</a>
+            <a href="/accessibility.html" class="active" data-i18n="navAccessibility">Accessibility</a>
+            <a href="/contact.html" data-i18n="navContact">Contact</a>
+        </nav>
+
+        <div class="navbar-actions">
+            <!-- Accessibility Display Controls -->
+            <div class="accessibility-controls" role="toolbar" aria-label="Accessibility Display Controls">
+                <button type="button" class="a11y-btn" id="btnFontDecrease" onclick="adjustFontSize(-1)" aria-label="Decrease Font Size" title="Decrease Font Size (A-)">A-</button>
+                <button type="button" class="a11y-btn active" id="btnFontReset" onclick="adjustFontSize(0)" aria-label="Reset Font Size to Standard" title="Normal Font Size (A)">A</button>
+                <button type="button" class="a11y-btn" id="btnFontIncrease" onclick="adjustFontSize(1)" aria-label="Increase Font Size" title="Increase Font Size (A+)">A+</button>
+                <button type="button" class="a11y-btn" id="contrastToggleBtn" onclick="toggleHighContrast()" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode">◐ Contrast</button>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="lang-toggle-group" role="navigation" aria-label="Language Selection">
+                <button class="lang-toggle-btn active" id="langEnBtn" onclick="setLanguage('en')" aria-pressed="true" title="Switch to English" lang="en">EN</button>
+                <button class="lang-toggle-btn" id="langHiBtn" onclick="setLanguage('hi')" aria-pressed="false" title="हिंदी में देखें" lang="hi">हि</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container" id="main-content" role="main">
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+            <a href="/index.html" data-i18n="breadcrumbHome">Home</a> &rsaquo;
+            <span data-en="Accessibility Statement" data-hi="सुगम्यता विवरण">Accessibility Statement</span>
+        </nav>
+
+        <article class="content-card">
+            <h2>
+                <span class="lang-block-en">Accessibility Statement</span>
+                <span class="lang-block-hi" style="display:none;">सुगम्यता विवरण</span>
+            </h2>
+
+            <div class="info-banner">
+                <strong><span data-en="Standard:" data-hi="मानक:">Standard:</span></strong> WCAG 2.1 &amp; 2.2 Level AA &bull; GIGW 3.0 &bull;
+                <strong data-i18n="lastUpdated">Last Updated:</strong> <time datetime="2026-10-25">25 October 2026</time>
+            </div>
+
+            <!-- English Block -->
+            <div class="lang-block-en">
+                <p>The <strong>Job Vacancy Intelligence Portal</strong> is committed to providing an accessible, inclusive, and barrier-free digital experience for all users, including individuals with visual, auditory, cognitive, and motor impairments.</p>
+
+                <h3>Conformance Status &amp; Standards</h3>
+                <p>This portal is engineered to conform with:</p>
+                <p>
+                    <span class="notice-badge">WCAG 2.1 Level AA</span>
+                    <span class="notice-badge">WCAG 2.2 Level AA</span>
+                    <span class="notice-badge">GIGW 3.0 (STQC Requirements)</span>
+                    <span class="notice-badge">ISO/IEC 40500:2012</span>
+                </p>
+                <p style="font-size:12.5px; color:#5A6A7A;"><em>Note on Certification:</em> Internal automated unit and lint audits have verified compliance with Level AA criteria. Formal STQC (Standardisation Testing and Quality Certification) third-party certification is a regulatory process scheduled during official organizational evaluation.</p>
+
+                <h3>Accessibility Features Implemented</h3>
+                <ul>
+                    <li><strong>Skip Navigation Links:</strong> Keyboard users can press Tab upon page load to immediately jump past headers to primary content or navigation.</li>
+                    <li><strong>Display Toolbar (Text Resizing):</strong> A-, A, and A+ buttons allow scalable font sizing without breaking responsive layouts or overflowing table containers.</li>
+                    <li><strong>High Contrast Mode:</strong> Instant yellow-on-black theme conforming to STQC specifications for high-contrast accessibility.</li>
+                    <li><strong>Keyboard Operability:</strong> All table filters, buttons, modal cards, links, and search inputs are fully operable via Tab, Enter, Space, and Escape keys.</li>
+                    <li><strong>Visible Keyboard Focus:</strong> High-contrast orange (<code>#FF6B35</code>) focus indicator with 2px offset ensures unambiguous active control identification.</li>
+                    <li><strong>Screen Reader Live Regions:</strong> Polite and assertive ARIA live regions announce dynamic table counts, filter updates, and status messages to assistive tech (NVDA, JAWS, VoiceOver).</li>
+                    <li><strong>Semantic HTML5 Structure:</strong> Strict landmark hierarchy with <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;footer&gt;</code>.</li>
+                    <li><strong>Target Size Compliance:</strong> Interactive controls satisfy WCAG 2.2 Success Criterion 2.5.8 (minimum target area requirements).</li>
+                    <li><strong>Color Contrast Ratios:</strong> Text elements maintain at least 4.5:1 contrast against their respective backgrounds (large text at least 3:1).</li>
+                    <li><strong>Bilingual English–Hindi Interface:</strong> Native Devanagari font rendering with localized headers, controls, and announcements.</li>
+                </ul>
+
+                <h3>Known Limitations &amp; Alternative Access</h3>
+                <ul>
+                    <li><strong>Third-Party PDFs:</strong> Downloadable external job circulars and notifications are published by respective hiring departments and may vary in accessibility. The candidate's verified CV is provided with verified size <code>[PDF, 110 KB]</code> and accessible text representation.</li>
+                    <li><strong>External Recruitment Portals:</strong> When following external application links (e.g. C-DAC, STPI, SAIL, RITES), users are transitioned to external platforms governed by their respective accessibility standards.</li>
+                </ul>
+
+                <h3>Feedback and Grievance Mechanism</h3>
+                <p>We welcome user feedback on digital accessibility barriers. If you experience difficulty accessing any part of this portal, please submit an issue through:</p>
+                <ul>
+                    <li>The on-page <strong>Feedback form</strong> (available on the main dashboard).</li>
+                    <li>The <a href="/contact.html">Contact Us</a> page addressed to the Accessibility Coordinator.</li>
+                    <li>Statutory resolution timeframe: Response acknowledged within 48 hours and resolved within 5 working days.</li>
+                </ul>
+            </div>
+
+            <!-- Hindi Block -->
+            <div class="lang-block-hi" style="display:none;">
+                <p><strong>रोजगार रिक्ति बुद्धिमत्ता पोर्टल</strong> सभी उपयोगकर्ताओं, विशेष रूप से दिव्यांगजनों के लिए एक समावेशी, सुलभ और बाधा-मुक्त डिजिटल अनुभव प्रदान करने हेतु प्रतिबद्ध है।</p>
+
+                <h3>सुगम्यता अनुपालन स्थिति</h3>
+                <p>यह पोर्टल निम्नलिखित अंतरराष्ट्रीय एवं राष्ट्रीय मानकों के अनुरूप विकसित किया गया है:</p>
+                <p>
+                    <span class="notice-badge">WCAG 2.1 Level AA</span>
+                    <span class="notice-badge">WCAG 2.2 Level AA</span>
+                    <span class="notice-badge">GIGW 3.0 (STQC आवश्यकताएं)</span>
+                </p>
+
+                <h3>मुख्य सुगम्यता सुविधाएं</h3>
+                <ul>
+                    <li><strong>मुख्य सामग्री पर जाएं (Skip Link):</strong> कीबोर्ड से सीधे मुख्य भाग पर जाने की सुविधा।</li>
+                    <li><strong>फॉन्ट आकार नियंत्रण:</strong> A-, A, A+ बटनों द्वारा अक्षरों का आकार छोटा, सामान्य या बड़ा करने की सुविधा।</li>
+                    <li><strong>उच्च कंट्रास्ट मोड:</strong> दृष्टिबाधित उपयोगकर्ताओं हेतु विशेष पीला-काली (Yellow on Black) थीम।</li>
+                    <li><strong>स्क्रीन रीडर अनुकूल:</strong> ARIA लाइव रीजन्स एवं स्पष्ट लेबलिंग।</li>
+                    <li><strong>द्विभाषी इंटरफ़ेस:</strong> संपूर्ण पृष्ठों पर हिंदी एवं अंग्रेजी दोनों भाषाओं का पूर्ण समर्थन।</li>
+                </ul>
+
+                <h3>सुगम्यता संबंधी संपर्क</h3>
+                <p>सुगम्यता संबंधी किसी भी कठिनाई के निवारण हेतु कृपया हमारे <a href="/contact.html">संपर्क पृष्ठ</a> अथवा फीडबैक माध्यम का उपयोग करें।</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Standard GIGW Footer -->
+    <footer class="gigw-footer" role="contentinfo">
+        <div class="gigw-footer-content">
+            <nav class="gigw-footer-links" aria-label="Footer Links">
+                <a href="/index.html" data-i18n="navHome">Home</a>
+                <a href="/job_vacancies.html" data-i18n="navVacancies">Job Vacancies</a>
+                <a href="/privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
+                <a href="/terms.html" data-i18n="navTerms">Terms</a>
+                <a href="/disclaimer.html" data-i18n="navDisclaimer">Disclaimer</a>
+                <a href="/accessibility.html" data-i18n="navAccessibility">Accessibility</a>
+                <a href="/content-review-policy.html" data-en="Content Review Policy" data-hi="सामग्री समीक्षा नीति">Content Review Policy</a>
+                <a href="/content-archival-policy.html" data-en="Content Archival Policy" data-hi="सामग्री पुरालेख नीति">Content Archival Policy</a>
+                <a href="/contact.html" data-i18n="navContact">Contact</a>
+                <a href="/sitemap.html" data-i18n="navSitemap">Sitemap</a>
+            </nav>
+            <p class="gigw-disclaimer-note" data-i18n="independentDisclaimer">Independent platform for Candidate Achal Saxena (Not affiliated with any Government entity).</p>
+            <div class="gigw-footer-bottom">
+                <span data-i18n="rightsReserved">© 2026 Job Vacancy Intelligence Portal • GIGW 3.0 &amp; WCAG 2.1 AA Compliant • IT Act 2000</span>
+                <span><strong>Last Updated:</strong> 25 October 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/portal-common.js"></script>
+</body>
+</html>

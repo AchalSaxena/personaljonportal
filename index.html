@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" xml:lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +10,43 @@
     <meta name="keywords" content="Government IT Jobs, PSU Recruitment, Technical Project Manager, Achal Saxena, M.Tech CSE, B.Tech CSE, eGovernance, Mumbai MMR Jobs, Delhi NCR Jobs, CDAC, STPI, DIC, RITES, SAIL, NABARD, SQLite Vacancy Database">
     <meta name="author" content="Achal Saxena">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <link rel="canonical" href="http://localhost:3000/">
+    <link rel="canonical" href="https://personaljonportal.vercel.app/" id="canonical-url">
+
+    <!-- GIGW 3.0 — Geographic & Language Meta Tags -->
+    <meta name="geo.region" content="IN">
+    <meta name="geo.country" content="India">
+    <meta http-equiv="Content-Language" content="en, hi">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Dublin Core Metadata (GIGW 3.0 Mandatory) -->
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <meta name="DC.Title" content="Job Vacancy Intelligence Dashboard — Government &amp; PSU IT Recruitment">
+    <meta name="DC.Creator" content="Achal Saxena">
+    <meta name="DC.Subject" content="Government IT Jobs, PSU Recruitment, Technical Project Management, e-Governance">
+    <meta name="DC.Description" content="Verified recruitment portal and automated vacancy tracker targeting senior IT roles in India.">
+    <meta name="DC.Publisher" content="Achal Saxena">
+    <meta name="DC.Language" scheme="RFC1766" content="en, hi">
+    <meta name="DC.Coverage" content="India">
+    <meta name="DC.Type" content="InteractiveResource">
+    <meta name="DC.Format" content="text/html">
+    <meta name="DC.date.created" content="2026-10-01">
+    <meta name="DC.date.modified" content="2026-10-25">
+
+    <!-- Mobile & PWA -->
+    <meta name="theme-color" content="#0F2744">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
 
     <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_IN">
-    <meta property="og:url" content="http://localhost:3000/">
+    <meta property="og:url" content="https://personaljonportal.vercel.app/" id="og-url">
     <meta property="og:site_name" content="Job Vacancy Intelligence Dashboard">
     <meta property="og:title" content="Job Vacancy Intelligence Dashboard — Govt & PSU IT Recruitment">
     <meta property="og:description" content="Verified recruitment portal and automated vacancy tracker targeting senior roles (M.Tech/B.E. CSE, 10+ yrs exp, Mumbai & Delhi NCR priorities).">
-    <meta property="og:image" content="http://localhost:3000/favicon.ico">
+    <meta property="og:image" content="https://personaljonportal.vercel.app/favicon.ico" id="og-image">
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -27,27 +54,27 @@
     <meta name="twitter:description" content="Targeted job vacancy tracking, automated search scheduler, and CV matching for Senior Technical Roles in India.">
     
     <!-- JSON-LD Structured Data Schema for Autoindexing & Rich Results -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="jsonld-schema">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "http://localhost:3000/#website",
-          "url": "http://localhost:3000/",
+          "@id": "https://personaljonportal.vercel.app/#website",
+          "url": "https://personaljonportal.vercel.app/",
           "name": "Job Vacancy Intelligence Dashboard",
           "description": "Targeted recruitment intelligence, SQLite database, and automated job search scheduler for Senior IT positions.",
-          "inLanguage": "en-US",
+          "inLanguage": "en-IN",
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "http://localhost:3000/?q={search_term_string}",
+            "target": "https://personaljonportal.vercel.app/?q={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         },
         {
           "@type": "ProfilePage",
-          "@id": "http://localhost:3000/#profile",
-          "url": "http://localhost:3000/",
+          "@id": "https://personaljonportal.vercel.app/#profile",
+          "url": "https://personaljonportal.vercel.app/",
           "name": "Achal Saxena - Candidate Recruitment Profile",
           "about": {
             "@type": "Person",
@@ -70,7 +97,7 @@
         },
         {
           "@type": "ItemList",
-          "@id": "http://localhost:3000/#vacancies",
+          "@id": "https://personaljonportal.vercel.app/#vacancies",
           "name": "Active Verified Job Vacancies",
           "description": "Curated senior IT and government vacancies matching qualification and experience criteria.",
           "numberOfItems": 78
@@ -79,10 +106,37 @@
     }
     </script>
 
-    <!-- Modern Clean Typography -->
+    <!-- Dynamic URL Fixer: auto-updates all meta URLs to match actual deployment origin -->
+    <!-- Works on localhost:3000, personaljonportal.vercel.app, or any custom domain -->
+    <script>
+    (function() {
+        var origin = window.location.origin;
+        var isLocalhost = origin.includes('localhost') || origin.includes('127.0.0.1');
+        // Only update if NOT already on the expected production domain
+        if (!origin.includes('personaljonportal.vercel.app')) {
+            // Update canonical
+            var canonical = document.getElementById('canonical-url');
+            if (canonical) canonical.href = origin + '/';
+            // Update OG URL
+            var ogUrl = document.getElementById('og-url');
+            if (ogUrl) ogUrl.setAttribute('content', origin + '/');
+            // Update OG image
+            var ogImg = document.getElementById('og-image');
+            if (ogImg) ogImg.setAttribute('content', origin + '/favicon.ico');
+            // Update JSON-LD schema
+            var schema = document.getElementById('jsonld-schema');
+            if (schema) {
+                var json = schema.textContent.replace(/https:\/\/personaljonportal\.vercel\.app/g, origin);
+                schema.textContent = json;
+            }
+        }
+    })();
+    </script>
+
+    <!-- Modern Typography + Hindi (Devanagari) Font — GIGW Hindi Support -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Offline & Direct File Load Mirror (Zero-CORS fallback) -->
     <script src="data/vacancies_data.js"></script>
@@ -115,7 +169,7 @@
             /* Text Colors */
             --text-heading: #0F2744;
             --text-body: #1E293B;
-            --text-muted: #64748B;
+            --text-muted: #5A6A7A;
             --text-white: #FFFFFF;
             
             /* Functional Accents */
@@ -134,12 +188,386 @@
             --shadow-card: 0 2px 5px rgba(15, 39, 68, 0.06), 0 1px 2px rgba(15, 39, 68, 0.04);
             --shadow-popover: 0 10px 25px -5px rgba(15, 39, 68, 0.25), 0 8px 10px -6px rgba(15, 39, 68, 0.15);
             --transition-quick: 0.15s ease-in-out;
+            --portal-font-scale: 1;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           GIGW 3.0 + WCAG 2.1 AA — ACCESSIBILITY & COMPLIANCE STYLES
+           ══════════════════════════════════════════════════════════════════════ */
+
+        /* Screen-reader only utility — WCAG 2.4.3 */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Skip Navigation Links — GIGW 3.0 Mandatory */
+        .skip-nav-link, .skip-nav {
+            position: absolute;
+            top: -100%;
+            left: 8px;
+            z-index: 9999;
+            background: #FFDD00;
+            color: #000000;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 0 0 6px 6px;
+            text-decoration: none;
+            border: 2px solid #000;
+            transition: top 0.15s ease;
+        }
+        .skip-nav-link:focus, .skip-nav:focus {
+            top: 0;
+            outline: 3px solid #FF6B35;
+            outline-offset: 2px;
+        }
+
+        /* Global Focus Indicator — WCAG 2.4.7 (Visible Focus) */
+        *:focus-visible {
+            outline: 3px solid #FF6B35 !important;
+            outline-offset: 2px !important;
+            border-radius: 2px;
+        }
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Color contrast fix — WCAG 1.4.3 */
+        .text-muted-accessible {
+            color: #5A6A7A; /* 4.6:1 contrast on white */
+        }
+
+        /* Hindi language font support — GIGW Bilingual Requirement */
+        :lang(hi),
+        [lang="hi"],
+        .lang-hi {
+            font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+        }
+
+        /* Scalable font adjustments */
+        body {
+            font-size: calc(13px * var(--portal-font-scale, 1));
+        }
+        .candidate-card h2 { font-size: calc(16px * var(--portal-font-scale, 1)); }
+        .candidate-meta-grid { font-size: calc(11.5px * var(--portal-font-scale, 1)); }
+        .metric-value { font-size: calc(22px * var(--portal-font-scale, 1)); }
+        .metric-label { font-size: calc(11.5px * var(--portal-font-scale, 1)); }
+        .excel-table-card th { font-size: calc(12px * var(--portal-font-scale, 1)); }
+        .excel-table-card td { font-size: calc(11.5px * var(--portal-font-scale, 1)); }
+        .job-title-link { font-size: calc(12.5px * var(--portal-font-scale, 1)); }
+        .scheduler-title-row h3 { font-size: calc(14.5px * var(--portal-font-scale, 1)); }
+        .toolbar-btn, .scheduler-btn { font-size: calc(12px * var(--portal-font-scale, 1)); }
+
+        /* Accessibility Display Controls Toolbar — GIGW 3.0 Clause 4.2.1 */
+        .accessibility-controls {
+            display: inline-flex;
+            gap: 4px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .a11y-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+            min-height: 28px;
+            min-width: 28px;
+        }
+        .a11y-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+        }
+        .a11y-btn.active {
+            background: var(--teal-primary);
+            border-color: var(--teal-dark);
+            color: #FFFFFF;
+        }
+
+        /* High Contrast Mode — Yellow on Black (STQC / GIGW 3.0 Standard) */
+        body.high-contrast {
+            background: #000000 !important;
+            color: #FFFF00 !important;
+        }
+        body.high-contrast .app-navbar,
+        body.high-contrast .candidate-card,
+        body.high-contrast .scheduler-panel-card,
+        body.high-contrast .filter-ribbon-card,
+        body.high-contrast .excel-table-card,
+        body.high-contrast .excel-toolbar-card,
+        body.high-contrast .metric-card,
+        body.high-contrast .gigw-footer,
+        body.high-contrast .modal-card,
+        body.high-contrast .feedback-modal-card,
+        body.high-contrast .excel-filter-popover {
+            background: #111111 !important;
+            border-color: #FFFF00 !important;
+            color: #FFFFFF !important;
+        }
+        body.high-contrast h1,
+        body.high-contrast h2,
+        body.high-contrast h3,
+        body.high-contrast strong,
+        body.high-contrast .table-header-cell,
+        body.high-contrast .table-header-cell span,
+        body.high-contrast .metric-value,
+        body.high-contrast .ribbon-title span {
+            color: #FFFF00 !important;
+        }
+        body.high-contrast .table-cell,
+        body.high-contrast .candidate-meta-item,
+        body.high-contrast p,
+        body.high-contrast span,
+        body.high-contrast td {
+            color: #FFFFFF !important;
+        }
+        body.high-contrast a,
+        body.high-contrast .btn-notice,
+        body.high-contrast .btn-apply,
+        body.high-contrast .toolbar-btn,
+        body.high-contrast .scheduler-btn,
+        body.high-contrast .a11y-btn,
+        body.high-contrast .lang-toggle-btn {
+            background: #000000 !important;
+            color: #FFFF00 !important;
+            border: 2px solid #FFFF00 !important;
+        }
+        body.high-contrast .table-row:hover,
+        body.high-contrast tr:hover {
+            background: #222222 !important;
+        }
+        body.high-contrast .status-badge,
+        body.high-contrast .category-chip,
+        body.high-contrast .candidate-chip,
+        body.high-contrast .age-badge,
+        body.high-contrast .org-pill,
+        body.high-contrast .category-badge,
+        body.high-contrast .match-badge {
+            background: #000000 !important;
+            color: #FFFF00 !important;
+            border: 1px solid #FFFF00 !important;
+        }
+        body.high-contrast input,
+        body.high-contrast select,
+        body.high-contrast textarea {
+            background: #000000 !important;
+            color: #FFFF00 !important;
+            border: 1px solid #FFFF00 !important;
+        }
+
+        /* Language Toggle Button */
+        .lang-toggle-btn {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+        .lang-toggle-btn:hover {
+            background: rgba(255,255,255,0.22);
+        }
+        .lang-toggle-btn.active {
+            background: var(--teal-primary);
+            border-color: var(--teal-dark);
+        }
+
+        /* Feedback Floating Button — GIGW Mandatory */
+        .feedback-float-btn {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: right center;
+            background: var(--teal-primary);
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 14px;
+            border: none;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            z-index: 1000;
+            letter-spacing: 0.5px;
+            transition: background 0.15s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .feedback-float-btn:hover,
+        .feedback-float-btn:focus-visible {
+            background: var(--teal-dark);
+            outline: 3px solid #FFDD00;
+            outline-offset: 2px;
+        }
+
+        /* Feedback Modal */
+        .feedback-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15,39,68,0.65);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+        }
+        .feedback-modal-overlay.open {
+            display: flex;
+        }
+        .feedback-modal-card {
+            background: #fff;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            padding: 24px;
+            margin: 16px;
+            box-shadow: 0 20px 40px rgba(15,39,68,0.3);
+        }
+        .feedback-modal-card h2 {
+            font-size: 16px;
+            color: var(--navy-primary);
+            margin-bottom: 4px;
+        }
+        .feedback-modal-card p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .feedback-field {
+            margin-bottom: 12px;
+        }
+        .feedback-field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-body);
+            margin-bottom: 4px;
+        }
+        .feedback-field input,
+        .feedback-field select,
+        .feedback-field textarea {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid var(--grid-border);
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: inherit;
+            color: var(--text-body);
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .feedback-field input:focus,
+        .feedback-field select:focus,
+        .feedback-field textarea:focus {
+            border-color: var(--teal-primary);
+            box-shadow: 0 0 0 3px rgba(13,148,136,0.15);
+        }
+
+        /* GIGW Mandatory Footer Links */
+        .gigw-footer {
+            background: var(--navy-dark);
+            color: #94A3B8;
+            padding: 20px 24px;
+            margin-top: auto;
+            border-top: 3px solid var(--teal-primary);
+            flex-shrink: 0;
+        }
+        .gigw-footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 20px;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+        .gigw-footer-links a {
+            color: #94A3B8;
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .gigw-footer-links a:hover,
+        .gigw-footer-links a:focus {
+            color: #2DD4BF;
+            text-decoration: underline;
+        }
+        .gigw-footer-bottom {
+            font-size: 11px;
+            color: #64748B;
+            border-top: 1px solid #1E3A5F;
+            padding-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .gigw-last-updated {
+            font-size: 11px;
+            color: #94A3B8;
+        }
+
+        /* WCAG 1.4.3 — Fix muted text contrast (#64748B on white = 4.4:1, borderline) */
+        .telemetry-label,
+        .ticker-label {
+            color: #5A6A7A; /* 4.6:1 ratio — WCAG AA pass */
+            font-size: 12px !important; /* Min readable size */
+        }
+
+        /* ══════ PRINT STYLESHEET — GIGW Requirement ══════ */
+        @media print {
+            .app-navbar,
+            .scheduler-panel-card,
+            .ribbon-section,
+            .toolbar-wrapper,
+            .feedback-float-btn,
+            .excel-filter-popover,
+            .modal-overlay,
+            .feedback-modal-overlay,
+            .skip-nav-link { display: none !important; }
+
+            body {
+                font-size: 10pt;
+                color: #000 !important;
+                background: #fff !important;
+            }
+            .dashboard-container { max-width: 100%; padding: 0; }
+            .candidate-card { border: 1px solid #999; border-left-width: 4px; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #666; padding: 4pt 6pt; font-size: 9pt; }
+            th { background: #E0E0E0 !important; }
+            a::after { content: " [" attr(href) "]"; font-size: 8pt; color: #555; }
+            .match-badge { background: none !important; border: 1px solid #000; color: #000 !important; }
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        html {
+            height: 100%;
         }
 
         body {
@@ -226,7 +654,7 @@
         }
 
         .dashboard-container {
-            flex: 1;
+            flex: 1 0 auto;
             max-width: 1720px;
             margin: 0 auto;
             width: 100%;
@@ -1307,12 +1735,13 @@
             transform: translateY(12px);
             transition: all 0.25s ease-out;
             pointer-events: none;
-            display: flex;
+            display: none;
             align-items: center;
             gap: 10px;
         }
 
         .toast-notification.show {
+            display: flex;
             opacity: 1;
             transform: translateY(0);
         }
@@ -1612,8 +2041,17 @@
 </head>
 <body>
 
+    <!-- ═══ GIGW 3.0 MANDATORY: Skip Navigation Links (must be first in body) ═══ -->
+    <a class="skip-nav-link" href="#main-content">Skip to Main Content</a>
+    <a class="skip-nav-link" href="#main-nav">Skip to Navigation</a>
+    <a class="skip-nav-link" href="#vacancy-table">Skip to Job Vacancies Table</a>
+
+    <!-- WCAG 2.1 — Screen Reader Live Regions for dynamic announcements -->
+    <div id="sr-status" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="sr-alert" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
     <!-- Top Navy & Teal Navigation Bar -->
-    <header class="app-navbar">
+    <header class="app-navbar" role="banner" id="main-nav" aria-label="Job Vacancy Portal Header">
         <div class="navbar-brand">
             <div class="brand-badge">SQLITE POWERED</div>
             <div class="brand-info">
@@ -1622,17 +2060,30 @@
             </div>
         </div>
         <div class="navbar-actions">
-            <a href="/explainer_video_hindi.html" style="background: rgba(13, 148, 136, 0.25); border: 1px solid var(--teal-primary); color: #2DD4BF; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;" title="Watch Hindi Explainer Video Presentation">
-                <span>🎬 Hindi Explainer Video</span>
+            <!-- GIGW 3.0 / WCAG: Accessibility Display Toolbar (Text Resize & Contrast) -->
+            <div class="accessibility-controls" role="toolbar" aria-label="Accessibility Display Controls">
+                <button type="button" class="a11y-btn" id="btnFontDecrease" onclick="adjustFontSize(-1)" aria-label="Decrease Font Size" title="Decrease Font Size (A-)">A-</button>
+                <button type="button" class="a11y-btn" id="btnFontReset" onclick="adjustFontSize(0)" aria-label="Reset Font Size to Standard" title="Normal Font Size (A)">A</button>
+                <button type="button" class="a11y-btn" id="btnFontIncrease" onclick="adjustFontSize(1)" aria-label="Increase Font Size" title="Increase Font Size (A+)">A+</button>
+                <button type="button" class="a11y-btn" id="contrastToggleBtn" onclick="toggleHighContrast()" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode">◐ Contrast</button>
+            </div>
+
+            <!-- GIGW 3.0: Language Toggle (English / Hindi) -->
+            <div role="navigation" aria-label="Language Selection" style="display:flex;gap:4px;align-items:center;">
+                <button class="lang-toggle-btn active" id="langEnBtn" onclick="setLanguage('en')" aria-pressed="true" title="Switch to English" lang="en">EN</button>
+                <button class="lang-toggle-btn" id="langHiBtn" onclick="setLanguage('hi')" aria-pressed="false" title="हिंदी में देखें" lang="hi">हि</button>
+            </div>
+            <a href="/explainer_video_hindi.html" style="background: rgba(13, 148, 136, 0.25); border: 1px solid var(--teal-primary); color: #2DD4BF; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;" title="Watch Hindi Explainer Video Presentation" aria-label="Hindi Explainer Video Presentation">
+                <span aria-hidden="true">🎬</span> Hindi Explainer Video
             </a>
-            <div class="db-status-pill">
-                <span class="db-status-dot"></span>
+            <div class="db-status-pill" aria-live="polite">
+                <span class="db-status-dot" aria-hidden="true"></span>
                 <span id="navDbStatus">SQLite: data/vacancies.db</span>
             </div>
         </div>
     </header>
 
-    <main class="dashboard-container">
+    <main class="dashboard-container" id="main-content" role="main" aria-label="Job Vacancy Intelligence Dashboard">
 
         <!-- Candidate Profile Summary Card -->
         <section class="candidate-card">
@@ -1656,7 +2107,11 @@
                     <div class="candidate-meta-item">Target Roles: <strong>Senior PM, Program Manager, Solution Architect, CISO, IT Consultant</strong></div>
                 </div>
             </div>
-            <div class="candidate-cta">
+            <div class="candidate-cta" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <a href="/achal-saxena-cv-project-manager.pdf" target="_blank" rel="noopener noreferrer" class="toolbar-btn primary-teal" id="downloadCvBtn" title="Download Verified Candidate CV [PDF, 110 KB] (Opens in new window)" aria-label="Download Candidate CV (PDF format, 110 Kilobytes, opens in new window)">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Download CV [PDF, 110 KB] <span aria-hidden="true">↗</span>
+                </a>
                 <button class="toolbar-btn" id="candidateCvBtn" onclick="alert('Profile active: Target qualifications (M.Tech CSE, B.E. CSE), 10+ years experience, and Mumbai / Delhi NCR priority rankings.')">
                     <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                     Profile Matched Active
@@ -2025,7 +2480,99 @@
 
     </main>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         GIGW 3.0 MANDATORY FOOTER — All links required by Government guidelines
+         ═══════════════════════════════════════════════════════════════════════ -->
+    <footer class="gigw-footer" role="contentinfo" aria-label="Portal Footer">
+        <nav aria-label="Footer Navigation — Mandatory Links">
+            <ul class="gigw-footer-links">
+                <li><a href="/sitemap.html">🗺 Sitemap</a></li>
+                <li><a href="/privacy-policy.html">🔒 Privacy Policy</a></li>
+                <li><a href="/disclaimer.html">⚠ Disclaimer</a></li>
+                <li><a href="/accessibility.html">♿ Accessibility Statement</a></li>
+                <li><a href="/contact.html">✉ Contact Us</a></li>
+                <li><a href="/terms.html">📋 Terms &amp; Conditions</a></li>
+                <li><a href="/content-review-policy.html">📑 Content Review Policy</a></li>
+                <li><a href="/content-archival-policy.html">🗄 Content Archival Policy</a></li>
+                <li><a href="javascript:void(0)" onclick="openFeedbackModal()" aria-label="Submit Feedback">💬 Feedback</a></li>
+                <li><a href="/index.html">🏠 Home</a></li>
+            </ul>
+        </nav>
+        <div class="gigw-footer-bottom">
+            <span>© 2026 Achal Saxena — Job Vacancy Intelligence Portal. All rights reserved.</span>
+            <div style="font-size: 11px; color: #94a3b8; max-width: 820px; margin: 4px auto 8px auto; line-height: 1.5;">
+                <strong>Disclaimer &amp; Independent Operator Notice:</strong> This portal is an independent candidate intelligence and vacancy aggregation platform operated for personal recruitment tracking. It is neither affiliated with nor endorsed by any Government Department, Ministry, or Union Public Service Commission. All vacancy notices are aggregated from public official sources.
+            </div>
+            <span class="gigw-last-updated">
+                Website Last Updated: <time datetime="2026-10-25">25 October 2026</time>
+            </span>
+            <span style="font-size:10px;color:#475569;">
+                Designed per GIGW 3.0 &bull; WCAG 2.1 AA &bull; IT Act 2000 Compliant
+            </span>
+        </div>
+    </footer>
+
+    <!-- GIGW Mandatory: Floating Feedback Button -->
+    <button class="feedback-float-btn" onclick="openFeedbackModal()" aria-label="Open Feedback Form" id="feedbackFloatBtn" title="Share your feedback">
+        <span aria-hidden="true">💬</span> Feedback
+    </button>
+
+    <!-- Feedback Modal — GIGW 3.0 User Feedback Mechanism -->
+    <div class="feedback-modal-overlay" id="feedbackModal" role="dialog" aria-modal="true" aria-labelledby="feedbackModalTitle" aria-describedby="feedbackModalDesc">
+        <div class="feedback-modal-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                <h2 id="feedbackModalTitle">💬 Share Your Feedback</h2>
+                <button onclick="closeFeedbackModal()" aria-label="Close Feedback Modal" style="background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);padding:4px;">×</button>
+            </div>
+            <p id="feedbackModalDesc">Your feedback helps us improve this portal. All fields marked * are required.</p>
+
+            <form id="feedbackForm" onsubmit="submitFeedback(event)" novalidate>
+                <div class="feedback-field">
+                    <label for="fbName">Your Name</label>
+                    <input type="text" id="fbName" name="name" placeholder="Enter your name (optional)" autocomplete="name" maxlength="100">
+                </div>
+                <div class="feedback-field">
+                    <label for="fbEmail">Email Address</label>
+                    <input type="email" id="fbEmail" name="email" placeholder="your@email.com (optional)" autocomplete="email" maxlength="150">
+                </div>
+                <div class="feedback-field">
+                    <label for="fbCategory">Feedback Category *</label>
+                    <select id="fbCategory" name="category" required aria-required="true">
+                        <option value="">— Select Category —</option>
+                        <option value="General">General</option>
+                        <option value="Technical Issue">Technical Issue / Bug</option>
+                        <option value="Content Accuracy">Content Accuracy</option>
+                        <option value="Accessibility">Accessibility</option>
+                        <option value="Feature Request">Feature Request</option>
+                        <option value="Job Vacancy">Job Vacancy Information</option>
+                    </select>
+                </div>
+                <div class="feedback-field">
+                    <label for="fbRating">Overall Rating</label>
+                    <select id="fbRating" name="rating">
+                        <option value="">— Select Rating —</option>
+                        <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ Good</option>
+                        <option value="3">⭐⭐⭐ Average</option>
+                        <option value="2">⭐⭐ Poor</option>
+                        <option value="1">⭐ Very Poor</option>
+                    </select>
+                </div>
+                <div class="feedback-field">
+                    <label for="fbMessage">Your Message *</label>
+                    <textarea id="fbMessage" name="message" rows="4" placeholder="Please share your comments, suggestions, or issues..." maxlength="2000" required aria-required="true"></textarea>
+                </div>
+                <div id="feedbackFormMsg" aria-live="polite" style="font-size:12px;margin-bottom:10px;min-height:20px;"></div>
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                    <button type="button" onclick="closeFeedbackModal()" class="toolbar-btn">Cancel</button>
+                    <button type="submit" class="toolbar-btn primary-teal" id="fbSubmitBtn">Submit Feedback</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- EXCEL AUTOFILTER POPOVER (Interactive Dropdown on [▼]) -->
+
     <div class="excel-filter-popover" id="excelFilterPopover">
         <div class="popover-header">
             <span id="popoverColName">Filter Column</span>
@@ -2429,8 +2976,8 @@
                     </td>
                     <td style="text-align: center;">
                         <div class="action-group">
-                            <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn-notice">Notice</a>
-                            <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply">Apply &rarr;</a>
+                            <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn-notice" title="Official Notification (External site opens in new window)" aria-label="Official Notification for ${job.title} (External link opens in new window)">Notice <span aria-hidden="true">↗</span><span class="sr-only">(External link)</span></a>
+                            <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply" title="Apply Online (External site opens in new window)" aria-label="Apply Online for ${job.title} (External link opens in new window)">Apply <span aria-hidden="true">↗</span><span class="sr-only">(External link)</span></a>
                         </div>
                     </td>
                 `;
@@ -3197,8 +3744,8 @@ Apply: https://sbi.co.in/careers`;
                 <div class="detail-row"><span class="detail-key">Closing Date:</span><span class="detail-val"><strong>${job.deadlineDisplay}</strong></span></div>
                 <div class="detail-row"><span class="detail-key">CV Analysis:</span><span class="detail-val">${job.eligibilityReason}</span></div>
                 <div style="margin-top: 18px; display: flex; gap: 10px; justify-content: flex-end;">
-                    <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn-notice" style="padding: 6px 14px;">Official Notification</a>
-                    <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply" style="padding: 6px 16px;">Apply Online &rarr;</a>
+                    <a href="${job.notificationUrl}" target="_blank" rel="noopener noreferrer" class="btn-notice" style="padding: 6px 14px;" title="Official Notification (External site opens in new window)">Official Notification <span aria-hidden="true">↗</span><span class="sr-only">(External link)</span></a>
+                    <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="btn-apply" style="padding: 6px 16px;" title="Apply Online (External site opens in new window)">Apply Online <span aria-hidden="true">↗</span><span class="sr-only">(External link)</span></a>
                 </div>
             `;
             openModal('detailModal');
@@ -3254,6 +3801,468 @@ Apply: https://sbi.co.in/careers`;
         window.addEventListener('DOMContentLoaded', () => {
             loadVacanciesFromSqlite();
         });
+
+        // ══════════════════════════════════════════════════════════════════════
+        // GIGW 3.0 + WCAG 2.1 — Accessibility & Compliance JavaScript
+        // ══════════════════════════════════════════════════════════════════════
+
+        /** Screen Reader Announcement Helper — WCAG 4.1.3 */
+        function srAnnounce(msg, isAlert = false) {
+            const el = document.getElementById(isAlert ? 'sr-alert' : 'sr-status');
+            if (el) { el.textContent = ''; setTimeout(() => el.textContent = msg, 50); }
+        }
+
+        // ── Language Toggle (EN / HI) — GIGW 3.0 Bilingual Requirement ──────
+        const hiStrings = {
+            siteTitle:   'रोजगार रिक्ति बुद्धिमत्ता डैशबोर्ड',
+            siteSubtitle:'सत्यापित भर्ती एवं उम्मीदवार मिलान इंजन • स्वतंत्र मंच • Antigravity',
+            searchPlaceholder: 'सभी कॉलम में खोजें...',
+            resetBtn:    'फ़िल्टर रीसेट करें',
+            noResults:   'कोई रिक्ति नहीं मिली',
+            rolePill:    'तकनीकी परियोजना प्रबंधक / ई-गवर्नेंस लीड',
+            badge10Yr:   '10+ वर्ष कार्यानुभव',
+            badgeNegd:   'NeGD MeitY प्रमाणित',
+            badgeAi:     'Anthropic AI प्रमाणित',
+            badgeGov:    'भारत सरकार अनुभव',
+            badgeMumbai: 'गृह स्थान: मुंबई',
+            currRoleLabel: 'वर्तमान पद: टेक पीएम (DGFT मुंबई)',
+            primarySkillsLabel: 'प्रमुख कौशल: eGovernance, Full Stack, AI Solutions, SDLC, Cyber Security',
+            targetRolesLabel: 'लक्षित पद: Senior PM, Program Manager, Solution Architect, CISO, IT Consultant',
+            downloadCv:  'बायोडाटा डाउनलोड करें [PDF, 110 KB] ↗',
+            profileMatched: 'सक्रिय प्रोफाइल मिलान',
+            schedulerTitle: 'उन्नत रोजगार खोज शेड्यूलर',
+            schedulerSubtitle: 'केवल कॉन्फ़िगर किए गए भर्ती पोर्टलों पर खोज करता है (job_websites.txt)',
+            btnStartScheduler: 'जॉब सर्च शेड्यूलर प्रारंभ करें',
+            btnStopScheduler: 'शेड्यूलर रोकें',
+            btnWebsites: 'कॉन्फ़िगर की गई वेबसाइटें',
+            btnAuditLog: 'ऑडिट लॉग',
+            metricTotal: 'डेटाबेस में कुल रिक्तियां',
+            metricHigh: 'उच्च मिलान पद (≥85%)',
+            metricEligible: 'पुष्ट पात्र पद',
+            metricPeakPay: 'उच्चतम वेतनमान',
+            ribbonSheet: 'एक्सेल ऑटोफ़िल्टर सक्षम शीट',
+            btnPaste: '+ रिक्ति विवरण जोड़ें',
+            btnSync: '📁 SQLite एवं एक्सेल सिंक',
+            btnExportCsv: 'एक्सेल CSV निर्यात [CSV, 50 KB]',
+            btnClearFilters: 'सभी फ़िल्टर हटाएं',
+            densityCompact: 'संक्षिप्त पंक्तियां',
+            densityNormal: 'सामान्य पंक्तियां',
+            catAll: 'सभी श्रेणियां',
+            catGov: 'सरकारी विभाग / मंत्रालय',
+            catPsu: 'सार्वजनिक उपक्रम (PSU)',
+            catBank: 'बैंकिंग एवं वित्तीय क्षेत्र',
+            catConsult: 'परामर्श / भागीदार',
+            locAll: 'सभी स्थान',
+            locMumbai: 'प्राथमिकता 1: मुंबई MMR',
+            locDelhi: 'प्राथमिकता 2: दिल्ली NCR',
+            locRemote: 'प्राथमिकता 4: रिमोट / हाइब्रिड',
+            locPanIndia: 'प्राथमिकता 3: अखिल भारतीय',
+            matchAll: 'सभी मिलान स्कोर',
+            matchHigh: 'उच्च मिलान (≥85%)',
+            matchGood: 'उत्तम मिलान (≥80%)',
+            matchEligible: 'केवल सभी पात्र रिक्तियां',
+            feedbackBtn: 'प्रतिक्रिया',
+            footerRights: '© 2026 अचल सक्सेना — रोजगार रिक्ति बुद्धिमत्ता डैशबोर्ड • सर्वाधिकार सुरक्षित।'
+        };
+        const enStrings = {
+            siteTitle:   'Job Vacancy Intelligence Dashboard',
+            siteSubtitle:'Verified Recruitment & Candidate Matching Engine • Antigravity',
+            searchPlaceholder: 'Search all columns...',
+            resetBtn:    'Reset Filters',
+            noResults:   'No Job Vacancies Found',
+            rolePill:    'Technical Project Manager / eGovernance Lead',
+            badge10Yr:   '10+ Years Experience',
+            badgeNegd:   'NeGD MeitY Certified',
+            badgeAi:     'Anthropic AI Certified',
+            badgeGov:    'Govt of India Experience',
+            badgeMumbai: 'Home Location: Mumbai',
+            currRoleLabel: 'Current Role: Tech PM (DGFT Mumbai)',
+            primarySkillsLabel: 'Primary Skills: eGovernance, Full Stack, AI Solutions, SDLC, Cyber Security',
+            targetRolesLabel: 'Target Roles: Senior PM, Program Manager, Solution Architect, CISO, IT Consultant',
+            downloadCv:  'Download CV [PDF, 110 KB] ↗',
+            profileMatched: 'Profile Matched Active',
+            schedulerTitle: 'Advanced Job Search Scheduler',
+            schedulerSubtitle: 'Searches exclusively on configured recruitment portals defined in job_websites.txt',
+            btnStartScheduler: 'Start Job Search Scheduler',
+            btnStopScheduler: 'Stop Scheduler',
+            btnWebsites: 'Configured Websites',
+            btnAuditLog: 'Audit Log',
+            metricTotal: 'Total Openings in Database',
+            metricHigh: 'High-Match Roles (≥85%)',
+            metricEligible: 'Confirmed Eligible',
+            metricPeakPay: 'Peak Pay Band',
+            ribbonSheet: 'Excel AutoFilter Enabled Sheet',
+            btnPaste: '+ Paste Vacancy Text',
+            btnSync: '📁 SQLite & Excel Sync',
+            btnExportCsv: 'Export CSV',
+            btnClearFilters: 'Clear All Filters',
+            densityCompact: 'Compact Rows',
+            densityNormal: 'Normal Rows',
+            catAll: 'All Categories',
+            catGov: 'Government / Ministry',
+            catPsu: 'PSU / Public Sector',
+            catBank: 'Banking / Financial Sector',
+            catConsult: 'Consulting / Partner',
+            locAll: 'All Locations',
+            locMumbai: 'Priority 1: Mumbai MMR',
+            locDelhi: 'Priority 2: Delhi NCR',
+            locRemote: 'Priority 4: Remote / Hybrid',
+            locPanIndia: 'Priority 3: Pan-India',
+            matchAll: 'All Match Scores',
+            matchHigh: 'High Alignment (≥85%)',
+            matchGood: 'Good Alignment (≥80%)',
+            matchEligible: 'All Confirmed Eligible Only',
+            feedbackBtn: 'Feedback',
+            footerRights: '© 2026 Achal Saxena — Job Vacancy Intelligence Portal. All rights reserved.'
+        };
+
+        const thBilingualMap = {
+            title:         { en: 'Job Title',           hi: 'पद नाम' },
+            org:           { en: 'Organization',        hi: 'संगठन / विभाग' },
+            category:      { en: 'Category',            hi: 'श्रेणी' },
+            match:         { en: 'Match %',             hi: 'मिलान %' },
+            age:           { en: 'Age Limit',           hi: 'आयु सीमा' },
+            qualification: { en: 'Qualification',       hi: 'शैक्षणिक योग्यता' },
+            experience:    { en: 'Experience',          hi: 'कार्य अनुभव' },
+            location:      { en: 'Location',            hi: 'स्थान' },
+            salary:        { en: 'Salary / Pay Band',   hi: 'वेतनमान' },
+            deadline:      { en: 'Deadline',            hi: 'अंतिम तिथि' },
+            eligibility:   { en: 'Eligibility',         hi: 'पात्रता स्थिति' }
+        };
+
+        function setLanguage(lang) {
+            const isHi = lang === 'hi';
+            document.documentElement.lang = lang;
+            document.documentElement.setAttribute('xml:lang', lang);
+
+            // Toggle button states
+            const enBtn = document.getElementById('langEnBtn');
+            const hiBtn = document.getElementById('langHiBtn');
+            if (enBtn && hiBtn) {
+                enBtn.classList.toggle('active', !isHi);
+                hiBtn.classList.toggle('active', isHi);
+                enBtn.setAttribute('aria-pressed', String(!isHi));
+                hiBtn.setAttribute('aria-pressed', String(isHi));
+            }
+
+            // Update UI text
+            const strings = isHi ? hiStrings : enStrings;
+            const titleEl = document.querySelector('.brand-info h1');
+            const subtitleEl = document.querySelector('.brand-info span');
+            const searchEl = document.getElementById('searchInput');
+            if (titleEl) titleEl.textContent = strings.siteTitle;
+            if (subtitleEl) subtitleEl.textContent = strings.siteSubtitle;
+            if (searchEl) searchEl.placeholder = strings.searchPlaceholder;
+
+            // Candidate card translations
+            const rolePill = document.querySelector('.candidate-role-pill');
+            if (rolePill) rolePill.textContent = strings.rolePill;
+
+            const chips = document.querySelectorAll('.candidate-chip');
+            if (chips.length >= 7) {
+                chips[0].textContent = strings.badge10Yr;
+                chips[3].textContent = strings.badgeNegd;
+                chips[4].textContent = strings.badgeAi;
+                chips[5].textContent = strings.badgeGov;
+                chips[6].textContent = strings.badgeMumbai;
+            }
+
+            const metaItems = document.querySelectorAll('.candidate-meta-item');
+            if (metaItems.length >= 3) {
+                metaItems[0].innerHTML = isHi ? 'वर्तमान पद: <strong>टेक पीएम (DGFT मुंबई)</strong>' : 'Current Role: <strong>Tech PM (DGFT Mumbai)</strong>';
+                metaItems[1].innerHTML = isHi ? 'प्रमुख कौशल: <strong>eGovernance, Full Stack, AI Solutions, SDLC, Cyber Security</strong>' : 'Primary Skills: <strong>eGovernance, Full Stack, AI Solutions, SDLC, Cyber Security</strong>';
+                metaItems[2].innerHTML = isHi ? 'लक्षित पद: <strong>Senior PM, Program Manager, Solution Architect, CISO, IT Consultant</strong>' : 'Target Roles: <strong>Senior PM, Program Manager, Solution Architect, CISO, IT Consultant</strong>';
+            }
+
+            const cvBtn = document.getElementById('downloadCvBtn');
+            if (cvBtn) {
+                cvBtn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg> ${strings.downloadCv}`;
+            }
+
+            const matchedBtn = document.getElementById('candidateCvBtn');
+            if (matchedBtn) {
+                matchedBtn.innerHTML = `<svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> ${strings.profileMatched}`;
+            }
+
+            // Scheduler controls
+            const schedTitle = document.querySelector('.scheduler-title-row h3');
+            if (schedTitle) schedTitle.textContent = strings.schedulerTitle;
+
+            const schedSub = document.querySelector('.scheduler-subtitle');
+            if (schedSub) schedSub.innerHTML = strings.schedulerSubtitle;
+
+            const btnStart = document.getElementById('btnStartScheduler');
+            if (btnStart) {
+                const span = btnStart.querySelector('span');
+                if (span) span.textContent = strings.btnStartScheduler;
+            }
+
+            const btnStop = document.getElementById('btnStopScheduler');
+            if (btnStop) {
+                const span = btnStop.querySelector('span');
+                if (span) span.textContent = strings.btnStopScheduler;
+            }
+
+            const btnWeb = document.getElementById('btnManageWebsites');
+            if (btnWeb) {
+                const count = document.getElementById('websiteBadgeCount')?.textContent || '9';
+                const span = btnWeb.querySelector('span');
+                if (span) span.innerHTML = `${strings.btnWebsites} (<span id="websiteBadgeCount">${count}</span>)`;
+            }
+
+            const btnAudit = document.getElementById('btnViewAuditLog');
+            if (btnAudit) {
+                const span = btnAudit.querySelector('span');
+                if (span) span.textContent = strings.btnAuditLog;
+            }
+
+            // Metrics cards
+            const metricLabels = document.querySelectorAll('.metric-label');
+            if (metricLabels.length >= 4) {
+                metricLabels[0].textContent = strings.metricTotal;
+                metricLabels[1].textContent = strings.metricHigh;
+                metricLabels[2].textContent = strings.metricEligible;
+                metricLabels[3].textContent = strings.metricPeakPay;
+            }
+
+            // Ribbon buttons
+            const ribbonTitle = document.querySelector('.ribbon-title span');
+            if (ribbonTitle) ribbonTitle.textContent = strings.ribbonSheet;
+
+            const pasteBtn = document.getElementById('openPasteModalBtn');
+            if (pasteBtn) {
+                const span = pasteBtn.querySelector('span');
+                if (span) span.textContent = strings.btnPaste;
+            }
+
+            const syncBtn = document.getElementById('openLogModalBtn');
+            if (syncBtn) {
+                const span = syncBtn.querySelector('span');
+                if (span) span.textContent = strings.btnSync;
+            }
+
+            const exportBtn = document.getElementById('exportCsvBtn');
+            if (exportBtn) {
+                const span = exportBtn.querySelector('span');
+                if (span) span.textContent = strings.btnExportCsv;
+            }
+
+            const resetBtn = document.getElementById('resetFiltersBtn');
+            if (resetBtn) {
+                const span = resetBtn.querySelector('span');
+                if (span) span.textContent = strings.btnClearFilters;
+            }
+
+            // Category filter dropdown options
+            const catSelect = document.getElementById('categoryFilter');
+            if (catSelect && catSelect.options.length >= 5) {
+                catSelect.options[0].text = strings.catAll;
+                catSelect.options[1].text = strings.catGov;
+                catSelect.options[2].text = strings.catPsu;
+                catSelect.options[3].text = strings.catBank;
+                catSelect.options[4].text = strings.catConsult;
+            }
+
+            // Location filter dropdown options
+            const locSelect = document.getElementById('locationFilter');
+            if (locSelect && locSelect.options.length >= 5) {
+                locSelect.options[0].text = strings.locAll;
+                locSelect.options[1].text = strings.locMumbai;
+                locSelect.options[2].text = strings.locDelhi;
+                locSelect.options[3].text = strings.locRemote;
+                locSelect.options[4].text = strings.locPanIndia;
+            }
+
+            // Match filter dropdown options
+            const matchSelect = document.getElementById('matchFilter');
+            if (matchSelect && matchSelect.options.length >= 4) {
+                matchSelect.options[0].text = strings.matchAll;
+                matchSelect.options[1].text = strings.matchHigh;
+                matchSelect.options[2].text = strings.matchGood;
+                matchSelect.options[3].text = strings.matchEligible;
+            }
+
+            // Update table headers bilingual — GIGW 3.0 Clause 4.3.1
+            document.querySelectorAll('th[data-column]').forEach(th => {
+                const col = th.getAttribute('data-column');
+                if (thBilingualMap[col]) {
+                    const labelSpan = th.querySelector('.th-label-wrap span:first-child');
+                    if (labelSpan) labelSpan.textContent = isHi ? thBilingualMap[col].hi : thBilingualMap[col].en;
+                }
+            });
+
+            // Update meta language tag
+            const langMeta = document.querySelector('meta[http-equiv="Content-Language"]');
+            if (langMeta) langMeta.content = lang === 'hi' ? 'hi' : 'en, hi';
+
+            // Re-render table if data is loaded to refresh badges
+            if (typeof currentJobs !== 'undefined' && currentJobs && currentJobs.length > 0) {
+                renderTable(currentJobs);
+            }
+
+            srAnnounce(isHi ? 'भाषा हिंदी में बदल गई है' : 'Language switched to English');
+            localStorage.setItem('portal-lang', lang);
+        }
+
+        // ── Text Size & High Contrast Controls — GIGW 3.0 / WCAG 2.1 ─────────
+        let currentFontScale = 1;
+        function adjustFontSize(delta) {
+            if (delta === 0) currentFontScale = 1;
+            else currentFontScale = Math.min(1.3, Math.max(0.85, currentFontScale + delta * 0.1));
+            document.documentElement.style.setProperty('--portal-font-scale', currentFontScale);
+            document.documentElement.style.fontSize = (currentFontScale * 14) + 'px';
+
+            const btnDecrease = document.getElementById('btnFontDecrease');
+            const btnReset = document.getElementById('btnFontReset');
+            const btnIncrease = document.getElementById('btnFontIncrease');
+            if (btnDecrease && btnReset && btnIncrease) {
+                btnDecrease.classList.toggle('active', currentFontScale < 0.95);
+                btnReset.classList.toggle('active', Math.abs(currentFontScale - 1) < 0.05);
+                btnIncrease.classList.toggle('active', currentFontScale > 1.05);
+                btnDecrease.setAttribute('aria-pressed', String(currentFontScale < 0.95));
+                btnReset.setAttribute('aria-pressed', String(Math.abs(currentFontScale - 1) < 0.05));
+                btnIncrease.setAttribute('aria-pressed', String(currentFontScale > 1.05));
+            }
+
+            srAnnounce('Text size adjusted to ' + Math.round(currentFontScale * 100) + ' percent.');
+            localStorage.setItem('portal-font-scale', currentFontScale);
+        }
+
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            const isHc = document.body.classList.contains('high-contrast');
+            const btn = document.getElementById('contrastToggleBtn');
+            if (btn) {
+                btn.classList.toggle('active', isHc);
+                btn.setAttribute('aria-pressed', String(isHc));
+            }
+            srAnnounce(isHc ? 'High contrast mode enabled' : 'High contrast mode disabled');
+            localStorage.setItem('portal-high-contrast', isHc ? 'true' : 'false');
+        }
+
+        // Restore last selected language and accessibility preferences on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('portal-lang');
+            if (savedLang && savedLang !== 'en') setLanguage(savedLang);
+
+            const savedFontScale = localStorage.getItem('portal-font-scale');
+            if (savedFontScale) {
+                currentFontScale = parseFloat(savedFontScale);
+                document.documentElement.style.setProperty('--portal-font-scale', currentFontScale);
+                document.documentElement.style.fontSize = (currentFontScale * 14) + 'px';
+                adjustFontSize(0);
+            }
+
+            const savedHc = localStorage.getItem('portal-high-contrast');
+            if (savedHc === 'true') {
+                document.body.classList.add('high-contrast');
+                const btn = document.getElementById('contrastToggleBtn');
+                if (btn) {
+                    btn.classList.add('active');
+                    btn.setAttribute('aria-pressed', 'true');
+                }
+            }
+        });
+
+        // ── Feedback Modal — GIGW 3.0 Mandatory Feedback Mechanism ──────────
+        function openFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            if (modal) {
+                modal.classList.add('open');
+                modal.style.display = 'flex';
+                // Focus first interactive element
+                setTimeout(() => {
+                    const firstInput = modal.querySelector('input, select, textarea');
+                    if (firstInput) firstInput.focus();
+                }, 100);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            if (modal) {
+                modal.classList.remove('open');
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+                // Return focus to feedback button
+                const fbBtn = document.getElementById('feedbackFloatBtn');
+                if (fbBtn) fbBtn.focus();
+                // Clear message
+                const msgEl = document.getElementById('feedbackFormMsg');
+                if (msgEl) msgEl.textContent = '';
+            }
+        }
+
+        async function submitFeedback(e) {
+            e.preventDefault();
+            const msgEl = document.getElementById('feedbackFormMsg');
+            const submitBtn = document.getElementById('fbSubmitBtn');
+            const category = document.getElementById('fbCategory').value;
+            const message = document.getElementById('fbMessage').value.trim();
+
+            if (!category) {
+                msgEl.style.color = '#DC2626';
+                msgEl.textContent = '⚠ Please select a feedback category.';
+                document.getElementById('fbCategory').focus();
+                return;
+            }
+            if (!message || message.length < 5) {
+                msgEl.style.color = '#DC2626';
+                msgEl.textContent = '⚠ Please enter a message (minimum 5 characters).';
+                document.getElementById('fbMessage').focus();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            msgEl.style.color = 'var(--text-muted)';
+            msgEl.textContent = 'Sending your feedback...';
+
+            try {
+                const res = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name:     document.getElementById('fbName').value.trim(),
+                        email:    document.getElementById('fbEmail').value.trim(),
+                        category: category,
+                        rating:   document.getElementById('fbRating').value,
+                        message:  message,
+                        page:     window.location.pathname
+                    })
+                });
+                const json = await res.json();
+                if (json.success) {
+                    msgEl.style.color = '#15803D';
+                    msgEl.textContent = '✅ Thank you! Your feedback has been submitted successfully.';
+                    document.getElementById('feedbackForm').reset();
+                    srAnnounce('Feedback submitted successfully. Thank you!');
+                    setTimeout(closeFeedbackModal, 2500);
+                } else {
+                    throw new Error(json.error || 'Submission failed');
+                }
+            } catch (err) {
+                msgEl.style.color = '#DC2626';
+                msgEl.textContent = '❌ Could not submit feedback. Please try again later.';
+                srAnnounce('Feedback submission failed. Please try again.', true);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Feedback';
+            }
+        }
+
+        // Close feedback modal on Escape key or backdrop click — WCAG 2.1
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('feedbackModal');
+                if (modal && modal.classList.contains('open')) closeFeedbackModal();
+            }
+        });
+        document.getElementById('feedbackModal')?.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('feedbackModal')) closeFeedbackModal();
+        });
+
     </script>
 </body>
 </html>

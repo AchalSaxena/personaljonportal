@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
@@ -216,7 +217,7 @@ function extractVacanciesFromHtml(html, sourceUrl) {
 
   // Clean HTML
   const cleanHtml = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-                        .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
+    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
 
   // Senior technical role targeting keywords
   const targetKeywords = [
@@ -250,7 +251,7 @@ function extractVacanciesFromHtml(html, sourceUrl) {
       if (aMatch) {
         let linkHref = aMatch[1].trim();
         if (!linkHref.startsWith('http')) {
-          try { linkHref = new URL(linkHref, sourceUrl).href; } catch(e){}
+          try { linkHref = new URL(linkHref, sourceUrl).href; } catch (e) { }
         }
         href = linkHref;
         const linkText = aMatch[2].replace(/<[^>]+>/g, '').trim();
@@ -345,7 +346,7 @@ function extractVacanciesFromHtml(html, sourceUrl) {
 
       if (matchesTargetRole(anchorText)) {
         if (!href.startsWith('http')) {
-          try { href = new URL(href, sourceUrl).href; } catch(e){ continue; }
+          try { href = new URL(href, sourceUrl).href; } catch (e) { continue; }
         }
 
         let org = 'Central / State Govt Department';

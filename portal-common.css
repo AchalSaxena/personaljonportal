@@ -1,0 +1,479 @@
+/* ══════════════════════════════════════════════════════════════════════
+   PORTAL-COMMON.CSS — GIGW 3.0 & WCAG 2.1/2.2 AA DESIGN SYSTEM
+   Job Vacancy Intelligence Portal & Candidate Recruitment Engine
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --navy-primary: #0F2744;
+    --navy-secondary: #1B365D;
+    --navy-dark: #0A192F;
+    --teal-primary: #0D9488;
+    --teal-dark: #0F766E;
+    --teal-light: #CCFBF1;
+    --teal-border: #99F6E4;
+    --bg-page: #F4F6F9;
+    --bg-card: #FFFFFF;
+    --card-border: #CBD5E1;
+    --grid-border: #CBD5E1;
+    --text-heading: #0F2744;
+    --text-body: #1E293B;
+    --text-muted: #5A6A7A; /* 4.6:1 WCAG AA compliant */
+    --text-white: #FFFFFF;
+    --portal-font-scale: 1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-body);
+    line-height: 1.65;
+    font-size: calc(14px * var(--portal-font-scale, 1));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hindi Devanagari font support — GIGW Bilingual Requirement */
+:lang(hi), [lang="hi"], .lang-hi {
+    font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+}
+
+/* Screen reader only utility — WCAG 2.4.3 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip Navigation Links — GIGW 3.0 Mandatory (WCAG 2.4.1) */
+.skip-nav-link,
+.skip-nav {
+    position: absolute;
+    top: -100%;
+    left: 8px;
+    z-index: 9999;
+    background: #FFDD00;
+    color: #000000;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 0 0 6px 6px;
+    text-decoration: none;
+    border: 2px solid #000000;
+    transition: top 0.15s ease;
+}
+.skip-nav-link:focus,
+.skip-nav:focus {
+    top: 0;
+    outline: 3px solid #FF6B35;
+    outline-offset: 2px;
+}
+
+/* Global Visible Focus Indicator — WCAG 2.4.7 */
+*:focus-visible {
+    outline: 3px solid #FF6B35 !important;
+    outline-offset: 2px !important;
+}
+
+/* Top App Header & Navbar */
+.app-navbar {
+    background-color: var(--navy-primary);
+    color: var(--text-white);
+    border-bottom: 3px solid var(--teal-primary);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(15, 39, 68, 0.18);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.brand-badge {
+    background-color: var(--teal-primary);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.brand-info h1 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+    color: #FFFFFF;
+}
+
+.brand-info span {
+    font-size: 11px;
+    color: #94A3B8;
+    display: block;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    list-style: none;
+}
+
+.navbar-nav a {
+    color: #E2E8F0;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+.navbar-nav a:hover,
+.navbar-nav a:focus-visible {
+    background: rgba(255, 255, 255, 0.12);
+    color: #2DD4BF;
+}
+.navbar-nav a.active {
+    background: var(--teal-primary);
+    color: #FFFFFF;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Accessibility Display Controls Toolbar */
+.accessibility-controls {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.a11y-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #FFFFFF;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 28px;
+    min-width: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.a11y-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+.a11y-btn.active {
+    background: var(--teal-primary);
+    border-color: var(--teal-dark);
+}
+
+/* Language Switch Buttons */
+.lang-toggle-group {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.lang-toggle-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 28px;
+}
+.lang-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+.lang-toggle-btn.active {
+    background: var(--teal-primary);
+    border-color: var(--teal-dark);
+}
+
+/* Main Layout Container */
+.page-container {
+    max-width: 1040px;
+    margin: 28px auto 0 auto;
+    padding: 0 24px 60px;
+    width: 100%;
+    flex: 1 0 auto;
+}
+
+.breadcrumb {
+    font-size: 12.5px;
+    margin-bottom: 18px;
+    color: var(--text-muted);
+}
+.breadcrumb a {
+    color: var(--teal-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.content-card {
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    padding: 36px 40px;
+    box-shadow: 0 2px 10px rgba(15, 39, 68, 0.06);
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy-primary);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E2E8F0;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy-secondary);
+    margin: 22px 0 10px;
+}
+
+p {
+    margin-bottom: 14px;
+}
+
+ul, ol {
+    margin: 10px 0 16px 24px;
+}
+li {
+    margin-bottom: 7px;
+}
+
+.info-banner {
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
+    border-left: 4px solid #16A34A;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+    color: #15803D;
+    margin-bottom: 20px;
+}
+
+.warn-banner {
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    border-left: 4px solid #D97706;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+    color: #92400E;
+    margin-bottom: 20px;
+}
+
+.notice-badge {
+    display: inline-block;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1D4ED8;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+}
+
+/* External Link Indicator */
+a.external-link::after {
+    content: " ↗";
+    font-size: 11px;
+    display: inline-block;
+}
+
+/* Download file indicator */
+.file-meta-pill {
+    font-size: 11px;
+    color: #64748B;
+    background: #F1F5F9;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid #CBD5E1;
+    font-weight: 600;
+}
+
+/* Standardized GIGW 3.0 Footer */
+.gigw-footer {
+    background: var(--navy-dark);
+    color: #94A3B8;
+    padding: 24px;
+    margin-top: auto;
+    border-top: 3px solid var(--teal-primary);
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.gigw-footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gigw-footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 18px;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 14px;
+}
+
+.gigw-footer-links a {
+    color: #94A3B8;
+    text-decoration: none;
+    transition: color 0.15s;
+}
+.gigw-footer-links a:hover,
+.gigw-footer-links a:focus-visible {
+    color: #2DD4BF;
+    text-decoration: underline;
+}
+
+.gigw-disclaimer-note {
+    font-size: 11.5px;
+    color: #64748B;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.gigw-footer-bottom {
+    font-size: 11px;
+    color: #64748B;
+    border-top: 1px solid #1E3A5F;
+    padding-top: 12px;
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* High Contrast Mode — STQC & GIGW 3.0 Conforming Yellow on Black */
+body.high-contrast {
+    background: #000000 !important;
+    color: #FFFF00 !important;
+}
+body.high-contrast .app-navbar,
+body.high-contrast .content-card,
+body.high-contrast .gigw-footer,
+body.high-contrast .modal-card,
+body.high-contrast .feedback-modal-card {
+    background: #111111 !important;
+    border-color: #FFFF00 !important;
+    color: #FFFFFF !important;
+}
+body.high-contrast h1,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast strong {
+    color: #FFFF00 !important;
+}
+body.high-contrast p,
+body.high-contrast li,
+body.high-contrast span {
+    color: #FFFFFF !important;
+}
+body.high-contrast a,
+body.high-contrast .a11y-btn,
+body.high-contrast .lang-toggle-btn {
+    background: #000000 !important;
+    color: #FFFF00 !important;
+    border: 2px solid #FFFF00 !important;
+}
+body.high-contrast .info-banner,
+body.high-contrast .warn-banner {
+    background: #000000 !important;
+    border-color: #FFFF00 !important;
+    color: #FFFF00 !important;
+}
+
+/* Print Stylesheet */
+@media print {
+    .app-navbar, .accessibility-controls, .lang-toggle-group, .skip-nav-link, .skip-nav {
+        display: none !important;
+    }
+    body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        font-size: 11pt;
+    }
+    .page-container {
+        max-width: 100%;
+        padding: 0;
+    }
+    .content-card {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .app-navbar {
+        padding: 10px 14px;
+    }
+    .content-card {
+        padding: 22px 18px;
+    }
+    .gigw-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}

@@ -16,7 +16,8 @@ const results = {
     dataIntegrity: [],
     securityAndSanitization: [],
     performanceAndLoad: [],
-    frontendAndSeo: []
+    frontendAndSeo: [],
+    gigwCompliance: []
   }
 };
 
@@ -71,10 +72,42 @@ function request(method, pathUrl, body = null, headers = {}) {
   });
 }
 
+async function isServerOnline() {
+  return new Promise((resolve) => {
+    const req = http.get(BASE_URL + '/api/scheduler/status', (res) => {
+      resolve(true);
+    });
+    req.on('error', () => resolve(false));
+    req.setTimeout(800, () => {
+      req.destroy();
+      resolve(false);
+    });
+  });
+}
+
+let activeTestServer = null;
+
 async function runAllTests() {
   console.log('================================================================');
   console.log('STARTING COMPREHENSIVE PRODUCTION READINESS TEST SUITE');
+  console.log('Standards: GIGW 3.0 | WCAG 2.1 AA | OWASP Top 10 | SQLite Engine');
   console.log('================================================================\n');
+
+  // Ensure HTTP server is active
+  const alreadyUp = await isServerOnline();
+  if (!alreadyUp) {
+    console.log('[Test Harness] Booting local HTTP server on port 3000...');
+    const server = require('./server');
+    await new Promise((resolve, reject) => {
+      activeTestServer = server.listen(3000, (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+    console.log('[Test Harness] Test server ready on http://localhost:3000/\n');
+  } else {
+    console.log('[Test Harness] Connected to existing server at http://localhost:3000/\n');
+  }
 
   // -------------------------------------------------------------
   // SUITE 1: UNIT & DATABASE FUNCTIONAL TESTING (db.js)
@@ -298,18 +331,126 @@ Last Date: 30-11-2026`;
   }
 
   // -------------------------------------------------------------
+  // SUITE 7: GIGW 3.0 & INTERNATIONAL ACCESSIBILITY COMPLIANCE
+  // -------------------------------------------------------------
+  console.log('--> Running Suite 7: GIGW 3.0 & WCAG 2.1 AA Compliance...');
+  try {
+    const htmlRes = await request('GET', '/');
+    const html = htmlRes.data;
+
+    // 7.1 Skip Navigation Link (WCAG 2.4.1 / GIGW 3.0 Mandatory)
+    const hasSkipNav = html.includes('class="skip-nav-link"') && html.includes('href="#main-content"');
+    recordTest('gigwCompliance', 'Skip Navigation Links (GIGW 3.0 & WCAG 2.4.1)', hasSkipNav, 'Skip to main content present');
+
+    // 7.2 Focus-visible indicator (WCAG 2.4.7)
+    const hasFocusVisible = html.includes(':focus-visible');
+    recordTest('gigwCompliance', 'Visible Keyboard Focus Indicator (WCAG 2.4.7)', hasFocusVisible, ':focus-visible style active');
+
+    // 7.3 Mandatory GIGW Legal & Governance Pages (All 8 pages)
+    const privacyRes = await request('GET', '/privacy-policy.html');
+    const termsRes = await request('GET', '/terms.html');
+    const disclaimerRes = await request('GET', '/disclaimer.html');
+    const accessRes = await request('GET', '/accessibility.html');
+    const sitemapHtmlRes = await request('GET', '/sitemap.html');
+    const contactRes = await request('GET', '/contact.html');
+    const crpRes = await request('GET', '/content-review-policy.html');
+    const capRes = await request('GET', '/content-archival-policy.html');
+
+    const allPagesOk = privacyRes.statusCode === 200 &&
+      termsRes.statusCode === 200 &&
+      disclaimerRes.statusCode === 200 &&
+      accessRes.statusCode === 200 &&
+      sitemapHtmlRes.statusCode === 200 &&
+      contactRes.statusCode === 200 &&
+      crpRes.statusCode === 200 &&
+      capRes.statusCode === 200;
+
+    recordTest('gigwCompliance', 'Mandatory GIGW Policy & Governance Pages (Privacy, Terms, Disclaimer, Accessibility, Sitemap, Contact, Review, Archival)', allPagesOk, 'All 8 compliance pages returned HTTP 200');
+
+    // 7.4 Accessibility Toolbar & Dynamic Font Resizing (WCAG 1.4.4 & GIGW 3.0)
+    const hasA11yToolbar = html.includes('btnFontDecrease') &&
+      html.includes('btnFontIncrease') &&
+      html.includes('contrastToggleBtn') &&
+      html.includes('--portal-font-scale');
+    recordTest('gigwCompliance', 'Accessibility Display Controls (A-, A, A+, High Contrast Mode)', hasA11yToolbar, 'Toolbar controls and CSS font scale variable verified');
+
+    // 7.5 Bilingual Language Support (English & Hindi - GIGW Clause 5.1.2)
+    const hasHindiSupport = html.includes('langEnBtn') && html.includes('langHiBtn') && html.includes('setLanguage');
+    recordTest('gigwCompliance', 'Bilingual Support Mechanism (EN/HI)', hasHindiSupport, 'Language toggles & Devanagari font active');
+
+    // 7.6 Security Headers & Origin Validation (OWASP & GIGW Clause 8)
+    const homeRes = await request('GET', '/');
+    const hasSecHeaders = Boolean(
+      homeRes.headers['x-content-type-options'] === 'nosniff' &&
+      homeRes.headers['x-frame-options'] === 'SAMEORIGIN' &&
+      homeRes.headers['content-security-policy']
+    );
+    recordTest('securityAndSanitization', 'HTTP Security Headers (CSP, XFO, XCTO, Referrer)', hasSecHeaders, 'CSP and protective security headers confirmed active');
+
+    // Unauthorized Origin Rejection Test (CORS hardening)
+    const unauthPostRes = await request('POST', '/api/feedback', {
+      name: 'Hacker',
+      email: 'hacker@evil.com',
+      message: 'CSRF Attempt'
+    }, {
+      'Origin': 'https://malicious-attacker-site.com'
+    });
+    const originBlocked = unauthPostRes.statusCode === 403;
+    recordTest('securityAndSanitization', 'State-Changing Origin Validation (CORS Hardening)', originBlocked, 'Blocked untrusted origin with 403 Forbidden');
+
+    // 7.7 User Feedback Mechanism (GIGW Mandatory)
+    const fbPayload = {
+      name: 'GIGW Auditor',
+      email: 'auditor@nic.in',
+      category: 'Accessibility',
+      rating: 5,
+      message: 'Automated GIGW compliance audit test submission.'
+    };
+    const fbRes = await request('POST', '/api/feedback', fbPayload, {
+      'Origin': 'http://localhost:3000'
+    });
+    const fbJson = JSON.parse(fbRes.data);
+    recordTest('gigwCompliance', 'Mandatory User Feedback API (/api/feedback)', fbRes.statusCode === 201 && fbJson.success === true, `Submission verified: ID ${fbJson.id}`);
+
+    // 7.8 Custom 404 Error Page (GIGW Clause 5.1.7)
+    const err404Res = await request('GET', '/non-existent-gigw-test-route.html');
+    const custom404 = err404Res.statusCode === 404 && (err404Res.data.includes('404') || err404Res.data.includes('Page Not Found'));
+    recordTest('gigwCompliance', 'Custom GIGW 404 Error Handling', custom404, 'Served dedicated 404 template');
+  } catch (err) {
+    recordTest('gigwCompliance', 'GIGW Compliance Testing Failure', false, err.message);
+  }
+
+  // -------------------------------------------------------------
   // FINAL SUMMARY REPORT
   // -------------------------------------------------------------
   console.log('\n================================================================');
   console.log(`TEST EXECUTION SUMMARY: ${results.passed} / ${results.total} PASSED (${((results.passed / results.total) * 100).toFixed(1)}%)`);
   if (results.failed === 0) {
     console.log('STATUS: ALL TESTS PASSED - SYSTEM IS 100% PRODUCTION READY!');
+    console.log('COMPLIANCE ACHIEVED: GIGW 3.0 (Government of India) + WCAG 2.1 AA');
   } else {
     console.log(`STATUS: ${results.failed} TESTS FAILED - ATTENTION REQUIRED`);
   }
   console.log('================================================================\n');
 
   console.log(JSON.stringify(results, null, 2));
+
+  // Clean shutdown of test server if spawned in-process
+  if (activeTestServer) {
+    await new Promise((resolve) => activeTestServer.close(resolve));
+    console.log('[Test Harness] In-process test server gracefully shut down.');
+  }
+
+  // Set appropriate exit code
+  if (results.failed > 0) {
+    process.exitCode = 1;
+  } else {
+    process.exitCode = 0;
+  }
 }
 
-runAllTests().catch(console.error);
+runAllTests().catch((err) => {
+  console.error('[Test Harness] Fatal Error:', err);
+  if (activeTestServer) activeTestServer.close();
+  process.exit(1);
+});

@@ -233,9 +233,98 @@ function parseJobTextAndMatchCV(rawText) {
   };
 }
 
+// Configured allowed origins for state-changing requests (GIGW & OWASP Compliance)
+const ALLOWED_ORIGINS = new Set([
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'https://personaljonportal.vercel.app'
+]);
+
+function isOriginAllowed(origin, req) {
+  if (!origin) return true; // Direct/same-origin navigation or internal server requests
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  try {
+    const parsed = new URL(origin);
+    const host = req.headers.host;
+    if (parsed.host === host) return true;
+    if (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1') return true;
+  } catch (e) {}
+  return false;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// In-memory rate limiter for feedback submission
+const feedbackRateMap = new Map();
+function isFeedbackRateLimited(ip) {
+  const now = Date.now();
+  const windowMs = 60 * 1000;
+  const maxRequests = 10;
+  const entry = feedbackRateMap.get(ip) || { count: 0, resetTime: now + windowMs };
+  if (now > entry.resetTime) {
+    entry.count = 1;
+    entry.resetTime = now + windowMs;
+    feedbackRateMap.set(ip, entry);
+    return false;
+  }
+  entry.count++;
+  feedbackRateMap.set(ip, entry);
+  return entry.count > maxRequests;
+}
+
 // HTTP Server
 const server = http.createServer(async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // ── GIGW 3.0 + OWASP Security Headers ──────────────────────────────────────
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');  
+  res.setHeader('Content-Security-Policy',
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline'; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com data:; " +
+    "img-src 'self' data: https:; " +
+    "connect-src 'self'; " +
+    "frame-ancestors 'self'; " +
+    "base-uri 'self'; " +
+    "form-action 'self';"
+  );
+  
+  const isHttps = req.headers['x-forwarded-proto'] === 'https' || req.socket.encrypted;
+  if (isHttps || process.env.NODE_ENV === 'production') {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  }
+
+  const reqOrigin = req.headers.origin;
+  const isStateChanging = ['POST', 'PUT', 'DELETE', 'PATCH'].includes(req.method);
+
+  if (isStateChanging && reqOrigin) {
+    if (!isOriginAllowed(reqOrigin, req)) {
+      res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: 'Forbidden: Cross-origin request not permitted.' }));
+      return;
+    }
+    res.setHeader('Access-Control-Allow-Origin', reqOrigin);
+    res.setHeader('Vary', 'Origin');
+  } else {
+    if (reqOrigin && isOriginAllowed(reqOrigin, req)) {
+      res.setHeader('Access-Control-Allow-Origin', reqOrigin);
+      res.setHeader('Vary', 'Origin');
+    } else {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+  }
+
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
 
@@ -345,6 +434,23 @@ const server = http.createServer(async (req, res) => {
     try {
       const body = await parseJsonBody(req);
       const content = body.content || (Array.isArray(body.urls) ? body.urls.join('\n') : '');
+      
+      // Strict validation: verify all non-comment lines are valid HTTP/HTTPS URLs
+      const lines = content.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      for (const line of lines) {
+        if (line.startsWith('#')) continue;
+        try {
+          const parsed = new URL(line);
+          if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+            throw new Error(`Invalid URL protocol: ${line}`);
+          }
+        } catch (e) {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ success: false, error: `Invalid URL detected: ${line}` }));
+          return;
+        }
+      }
+
       const updatedUrls = scheduler.writeConfiguredWebsites(content);
       res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({
@@ -383,6 +489,80 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // API: POST /api/feedback  (GIGW Mandatory — User Feedback)
+  if (req.method === 'POST' && urlPath === '/api/feedback') {
+    try {
+      const remoteIp = req.socket.remoteAddress || '127.0.0.1';
+      if (isFeedbackRateLimited(remoteIp)) {
+        res.writeHead(429, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false, error: 'Too many feedback requests. Please wait a minute before submitting again.' }));
+        return;
+      }
+
+      const payload = await parseJsonBody(req);
+      const category = (payload.category || '').trim();
+      const message = (payload.message || '').trim();
+
+      if (!category) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false, error: 'Category is required.' }));
+        return;
+      }
+
+      if (!message || message.length < 5) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: false, error: 'Message must be at least 5 characters.' }));
+        return;
+      }
+
+      const feedbackEntry = {
+        id: Date.now(),
+        timestamp: new Date().toISOString(),
+        name: escapeHtml((payload.name || 'Anonymous').substring(0, 100)),
+        email: escapeHtml((payload.email || '').substring(0, 150)),
+        category: escapeHtml(category.substring(0, 50)),
+        message: escapeHtml(message.substring(0, 2000)),
+        page: escapeHtml((payload.page || '/').substring(0, 200)),
+        rating: parseInt(payload.rating) || null
+      };
+
+      // Save to feedback log file
+      const feedbackFile = path.join(DATA_DIR, 'feedback_log.json');
+      let existing = [];
+      if (fs.existsSync(feedbackFile)) {
+        try { existing = JSON.parse(fs.readFileSync(feedbackFile, 'utf8')); } catch(e) {}
+      }
+      existing.push(feedbackEntry);
+      fs.writeFileSync(feedbackFile, JSON.stringify(existing, null, 2), 'utf8');
+      console.log(`[Feedback] Received from: ${feedbackEntry.name} | Category: ${feedbackEntry.category}`);
+      res.writeHead(201, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: true, message: 'Feedback submitted successfully. Thank you!', id: feedbackEntry.id }));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: 'Could not process feedback. Please try again.' }));
+    }
+    return;
+  }
+
+  // API: GET /api/feedback (Admin read — only from localhost)
+  if (req.method === 'GET' && urlPath === '/api/feedback') {
+    const remoteAddr = req.socket.remoteAddress || '';
+    const isLocal = remoteAddr === '127.0.0.1' || remoteAddr === '::1' || remoteAddr === '::ffff:127.0.0.1';
+    if (!isLocal) {
+      res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ success: false, error: 'Forbidden' }));
+      return;
+    }
+    const feedbackFile = path.join(DATA_DIR, 'feedback_log.json');
+    let entries = [];
+    if (fs.existsSync(feedbackFile)) {
+      try { entries = JSON.parse(fs.readFileSync(feedbackFile, 'utf8')); } catch(e) {}
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ success: true, count: entries.length, data: entries }));
+    return;
+  }
+
   // API: GET /api/vacancies/csv (Download CSV)
   if (req.method === 'GET' && (urlPath === '/api/vacancies/csv' || urlPath === '/data/vacancies_log.csv')) {
     if (fs.existsSync(CSV_LOG_FILE)) {
@@ -398,36 +578,111 @@ const server = http.createServer(async (req, res) => {
   }
 
   // STATIC FILE SERVING
-  let safePath = path.normalize(decodeURIComponent(urlPath)).replace(/^(\.\.[\/\\])+/, '');
-  if (safePath === '/' || safePath === '\\') {
-    safePath = '/index.html';
+  let cleanUrl = urlPath;
+  try {
+    cleanUrl = decodeURIComponent(urlPath);
+  } catch (e) {
+    cleanUrl = urlPath;
   }
 
-  const filePath = path.join(__dirname, safePath);
+  // Prevent directory traversal attacks (GIGW & OWASP Compliance)
+  if (cleanUrl.includes('..') || cleanUrl.includes('\\..') || cleanUrl.includes('/..')) {
+    const notFoundPage = path.join(__dirname, '404.html');
+    if (fs.existsSync(notFoundPage)) {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      fs.createReadStream(notFoundPage).pipe(res);
+    } else {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end('404 Not Found');
+    }
+    return;
+  }
+
+  let safePath = path.normalize(cleanUrl).replace(/^[/\\]+/, '');
+  if (!safePath || safePath === '.' || safePath === '/' || safePath === '\\') {
+    safePath = 'index.html';
+  }
+
+  const filePath = path.resolve(__dirname, safePath);
+
+  // Strictly verify filePath is within __dirname
+  if (!filePath.startsWith(__dirname)) {
+    const notFoundPage = path.join(__dirname, '404.html');
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    fs.createReadStream(notFoundPage).pipe(res);
+    return;
+  }
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-      res.end('404 Not Found');
+      // Serve custom 404.html (GIGW mandatory requirement)
+      const notFoundPage = path.join(__dirname, '404.html');
+      if (fs.existsSync(notFoundPage)) {
+        res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+        fs.createReadStream(notFoundPage).pipe(res);
+      } else {
+        res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end('<html lang="en"><head><title>404 — Page Not Found</title></head><body><h1>404 — Page Not Found</h1><p><a href="/">Return to Home</a></p></body></html>');
+      }
       return;
     }
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
+    // HTML/XML/TXT: no-cache | Assets: 1 day cache
+    const cacheControl = ['.html', '.xml', '.txt'].includes(ext)
+      ? 'no-cache, must-revalidate'
+      : 'public, max-age=86400';
+
     res.writeHead(200, {
       'Content-Type': contentType,
       'Content-Length': stats.size,
-      'Cache-Control': 'no-cache'
+      'Cache-Control': cacheControl,
+      'Last-Modified': stats.mtime.toUTCString()
     });
 
     const stream = fs.createReadStream(filePath);
+    stream.on('error', () => {
+      const errPage = path.join(__dirname, '500.html');
+      if (fs.existsSync(errPage)) {
+        res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
+        fs.createReadStream(errPage).pipe(res);
+      } else {
+        res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end('500 Internal Server Error');
+      }
+    });
     stream.pipe(res);
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
-  console.log(`SQLite Database active at: ${db.DB_PATH}`);
-  console.log(`Configured Websites file: ${path.join(__dirname, 'job_websites.txt')}`);
-});
+// Graceful Shutdown Handlers (Production Reliability)
+function gracefulShutdown(signal) {
+  console.log(`\n[Server] Received ${signal}. Shutting down gracefully...`);
+  server.close(() => {
+    console.log('[Server] HTTP listener closed.');
+    process.exit(0);
+  });
+  setTimeout(() => process.exit(0), 3000).unref();
+}
+
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+
+// Auto-start listener when run directly
+if (require.main === module) {
+  server.listen(PORT, () => {
+    console.log(`================================================================`);
+    console.log(`Job Vacancy Intelligence Dashboard — PRODUCTION LOCALHOST SERVER`);
+    console.log(`================================================================`);
+    console.log(`Status: ONLINE (Production Ready)`);
+    console.log(`Access URL: http://localhost:${PORT}/`);
+    console.log(`Standards: GIGW 3.0 | WCAG 2.1 AA | OWASP Top 10`);
+    console.log(`Database: SQLite active at ${db.DB_PATH}`);
+    console.log(`Websites Config: ${path.join(__dirname, 'job_websites.txt')}`);
+    console.log(`================================================================\n`);
+  });
+}
+
+module.exports = server;

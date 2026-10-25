@@ -1,19 +1,33 @@
-# Robots.txt for Job Vacancy Intelligence Dashboard & Scheduler
-# Generated for Search Engine Crawlers & Autoindexing
+# Robots.txt — Job Vacancy Intelligence Portal
+# GIGW 3.0 Compliant | Last Updated: 2026-10-25
+# Production Domain: https://personaljonportal.vercel.app
 
 User-agent: *
 Allow: /
 Allow: /index.html
 Allow: /job_vacancies.html
+Allow: /privacy-policy.html
+Allow: /disclaimer.html
+Allow: /accessibility.html
+Allow: /contact.html
+Allow: /terms.html
+Allow: /content-review-policy.html
+Allow: /content-archival-policy.html
+Allow: /sitemap.html
+Allow: /404.html
+Allow: /portal-common.css
+Allow: /portal-common.js
 Allow: /data/vacancies_data.js
 
-# Prevent indexing internal database files and raw API endpoints
+# Prevent indexing internal database files and API endpoints
 Disallow: /api/
 Disallow: /data/*.db
 Disallow: /data/*.sqlite
+Disallow: /data/feedback_log.json
+Disallow: /500.html
 
-# Crawl Delay to avoid hammering server
-Crawl-delay: 1
+# Crawl delay to respect server resources
+Crawl-delay: 5
 
-# XML Sitemap reference for Googlebot, Bingbot, Yandex, DuckDuckGo
-Sitemap: http://localhost:3000/sitemap.xml
+# XML Sitemap — Update URL to production domain before go-live
+Sitemap: https://personaljonportal.vercel.app/sitemap.xml

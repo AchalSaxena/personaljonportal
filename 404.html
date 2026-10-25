@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | Job Vacancy Intelligence Portal</title>
+    <meta name="description" content="The requested page could not be located on the Job Vacancy Intelligence Portal.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="geo.region" content="IN">
+    <meta name="geo.country" content="India">
+
+    <!-- Dublin Core Metadata (GIGW 3.0 Mandatory) -->
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <meta name="DC.Title" content="404 — Page Not Found | Job Vacancy Intelligence Portal">
+    <meta name="DC.Creator" content="Achal Saxena">
+    <meta name="DC.Language" scheme="RFC1766" content="en, hi">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/portal-common.css">
+    <style>
+        .error-wrapper {
+            text-align: center;
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px 24px;
+            background: #FFFFFF;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 14px rgba(15, 39, 68, 0.08);
+        }
+        .error-code {
+            font-size: 80px;
+            font-weight: 800;
+            color: var(--teal-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .error-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--navy-primary);
+            margin-bottom: 12px;
+        }
+        .error-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .btn-action-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .btn-primary-action {
+            background: var(--teal-primary);
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary-action:hover {
+            background: var(--teal-dark);
+        }
+        .btn-secondary-action {
+            background: #F1F5F9;
+            color: var(--navy-primary);
+            border: 1px solid var(--card-border);
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13.5px;
+        }
+        .btn-secondary-action:hover {
+            background: #E2E8F0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip Navigation Link -->
+    <a class="skip-nav-link skip-nav" href="#main-content">Skip to Main Content</a>
+
+    <!-- Live regions for screen readers -->
+    <div id="sr-status" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="sr-alert" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
+    <header class="app-navbar" role="banner" id="main-nav" aria-label="Portal Header">
+        <a href="/index.html" class="navbar-brand">
+            <span class="brand-badge">INDEPENDENT PORTAL</span>
+            <div class="brand-info">
+                <h1>Job Vacancy Intelligence Portal</h1>
+                <span>Candidate Recruitment Engine • Independent Platform</span>
+            </div>
+        </a>
+        <div class="navbar-actions">
+            <div class="accessibility-controls" role="toolbar" aria-label="Accessibility Display Controls">
+                <button type="button" class="a11y-btn" id="btnFontDecrease" onclick="adjustFontSize(-1)" aria-label="Decrease Font Size" title="Decrease Font Size (A-)">A-</button>
+                <button type="button" class="a11y-btn active" id="btnFontReset" onclick="adjustFontSize(0)" aria-label="Reset Font Size to Standard" title="Normal Font Size (A)">A</button>
+                <button type="button" class="a11y-btn" id="btnFontIncrease" onclick="adjustFontSize(1)" aria-label="Increase Font Size" title="Increase Font Size (A+)">A+</button>
+                <button type="button" class="a11y-btn" id="contrastToggleBtn" onclick="toggleHighContrast()" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode">◐ Contrast</button>
+            </div>
+            <div class="lang-toggle-group" role="navigation" aria-label="Language Selection">
+                <button class="lang-toggle-btn active" id="langEnBtn" onclick="setLanguage('en')" aria-pressed="true" title="Switch to English" lang="en">EN</button>
+                <button class="lang-toggle-btn" id="langHiBtn" onclick="setLanguage('hi')" aria-pressed="false" title="हिंदी में देखें" lang="hi">हि</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container" id="main-content" role="main">
+        <div class="error-wrapper">
+            <div class="error-code" aria-hidden="true">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-desc">The requested resource could not be found. It may have been moved, archived, or the entered URL may contain a typographical error.</p>
+            <div class="btn-action-group">
+                <a href="/index.html" class="btn-primary-action">&#127968; Return to Home Dashboard</a>
+                <a href="/job_vacancies.html" class="btn-secondary-action">&#128203; View All Job Vacancies</a>
+                <a href="/sitemap.html" class="btn-secondary-action">&#128506; View Sitemap</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Standard GIGW Footer -->
+    <footer class="gigw-footer" role="contentinfo">
+        <div class="gigw-footer-content">
+            <nav class="gigw-footer-links" aria-label="Footer Links">
+                <a href="/index.html">Home</a>
+                <a href="/job_vacancies.html">Job Vacancies</a>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/disclaimer.html">Disclaimer</a>
+                <a href="/accessibility.html">Accessibility</a>
+                <a href="/content-review-policy.html">Content Review Policy</a>
+                <a href="/content-archival-policy.html">Content Archival Policy</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/sitemap.html">Sitemap</a>
+            </nav>
+            <p class="gigw-disclaimer-note">Independent platform for Candidate Achal Saxena (Not affiliated with any Government entity).</p>
+            <div class="gigw-footer-bottom">
+                <span>© 2026 Job Vacancy Intelligence Portal • GIGW 3.0 &amp; WCAG 2.1 AA Compliant • IT Act 2000</span>
+                <span><strong>Last Updated:</strong> 25 October 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/portal-common.js"></script>
+</body>
+</html>

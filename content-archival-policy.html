@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Archival Policy (CAP) — Job Vacancy Intelligence Portal</title>
+    <meta name="description" content="Content Archival Policy (CAP) conforming to GIGW 3.0 requirements for the Job Vacancy Intelligence Portal.">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="IN">
+    <meta name="geo.country" content="India">
+    <link rel="canonical" href="https://personaljonportal.vercel.app/content-archival-policy.html">
+
+    <!-- Dublin Core Metadata (GIGW 3.0 Mandatory) -->
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <meta name="DC.Title" content="Content Archival Policy (CAP) — Job Vacancy Intelligence Portal">
+    <meta name="DC.Creator" content="Achal Saxena">
+    <meta name="DC.Subject" content="Content Archival Policy, GIGW 3.0, Data Retention, Historical Records">
+    <meta name="DC.Description" content="Structured Content Archival Policy establishing retention schedules, archival tiers, and secure deletion protocols.">
+    <meta name="DC.Publisher" content="Achal Saxena">
+    <meta name="DC.Language" scheme="RFC1766" content="en, hi">
+    <meta name="DC.Coverage" content="India">
+    <meta name="DC.Type" content="Text">
+    <meta name="DC.Format" content="text/html">
+    <meta name="DC.date.created" content="2026-10-01">
+    <meta name="DC.date.modified" content="2026-10-25">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/portal-common.css">
+</head>
+<body>
+
+    <!-- Skip Navigation Link (WCAG 2.4.1 / GIGW 3.0) -->
+    <a class="skip-nav-link skip-nav" href="#main-content">Skip to Main Content</a>
+
+    <!-- Live regions for assistive technology -->
+    <div id="sr-status" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="sr-alert" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
+    <!-- Standardized Portal Header -->
+    <header class="app-navbar" role="banner" id="main-nav" aria-label="Portal Header">
+        <a href="/index.html" class="navbar-brand">
+            <span class="brand-badge">INDEPENDENT PORTAL</span>
+            <div class="brand-info">
+                <h1 data-i18n="portalTitle">Job Vacancy Intelligence Portal</h1>
+                <span data-i18n="portalSubtitle">Candidate Recruitment Engine • Independent Platform</span>
+            </div>
+        </a>
+
+        <nav class="navbar-nav" aria-label="Primary Navigation">
+            <a href="/index.html" data-i18n="navHome">Home</a>
+            <a href="/job_vacancies.html" data-i18n="navVacancies">Job Vacancies</a>
+            <a href="/explainer_video_hindi.html" data-i18n="navVideo">Hindi Video</a>
+            <a href="/accessibility.html" data-i18n="navAccessibility">Accessibility</a>
+            <a href="/contact.html" data-i18n="navContact">Contact</a>
+        </nav>
+
+        <div class="navbar-actions">
+            <!-- Accessibility Display Controls -->
+            <div class="accessibility-controls" role="toolbar" aria-label="Accessibility Display Controls">
+                <button type="button" class="a11y-btn" id="btnFontDecrease" onclick="adjustFontSize(-1)" aria-label="Decrease Font Size" title="Decrease Font Size (A-)">A-</button>
+                <button type="button" class="a11y-btn active" id="btnFontReset" onclick="adjustFontSize(0)" aria-label="Reset Font Size to Standard" title="Normal Font Size (A)">A</button>
+                <button type="button" class="a11y-btn" id="btnFontIncrease" onclick="adjustFontSize(1)" aria-label="Increase Font Size" title="Increase Font Size (A+)">A+</button>
+                <button type="button" class="a11y-btn" id="contrastToggleBtn" onclick="toggleHighContrast()" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode">◐ Contrast</button>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="lang-toggle-group" role="navigation" aria-label="Language Selection">
+                <button class="lang-toggle-btn active" id="langEnBtn" onclick="setLanguage('en')" aria-pressed="true" title="Switch to English" lang="en">EN</button>
+                <button class="lang-toggle-btn" id="langHiBtn" onclick="setLanguage('hi')" aria-pressed="false" title="हिंदी में देखें" lang="hi">हि</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container" id="main-content" role="main">
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+            <a href="/index.html" data-i18n="breadcrumbHome">Home</a> &rsaquo;
+            <span data-en="Content Archival Policy" data-hi="सामग्री पुरालेख नीति">Content Archival Policy</span>
+        </nav>
+
+        <article class="content-card">
+            <h2>
+                <span class="lang-block-en">Content Archival Policy (CAP)</span>
+                <span class="lang-block-hi" style="display:none;">सामग्री पुरालेख नीति (CAP)</span>
+            </h2>
+            <div class="info-banner">
+                <strong><span data-en="Compliance Standard:" data-hi="अनुपालन मानक:">Compliance Standard:</span></strong>
+                GIGW 3.0 Clause 5.3 (Content Archival Policy) &bull;
+                <strong data-i18n="lastUpdated">Last Updated:</strong> <time datetime="2026-10-25">25 October 2026</time>
+            </div>
+
+            <!-- English Content Block -->
+            <div class="lang-block-en">
+                <p>The <strong>Content Archival Policy (CAP)</strong> defines the lifecycle, retention duration, and archival protocols for recruitment vacancy listings, audit records, and user feedback in accordance with <strong>GIGW 3.0</strong> and Indian statutory requirements.</p>
+
+                <h3>1. Archival Objectives</h3>
+                <ul>
+                    <li>Prevent outdated recruitment notices from cluttering live search and filter interfaces.</li>
+                    <li>Preserve audit trails for compliance verification, grievance handling, and historical performance tracking.</li>
+                    <li>Ensure timely, secure erasure of personal feedback data per the <strong>Digital Personal Data Protection Act, 2023 (DPDP Act)</strong>.</li>
+                </ul>
+
+                <h3>2. Retention &amp; Archival Schedule</h3>
+                <table style="width:100%; border-collapse:collapse; margin:16px 0; font-size:13px;" border="1" cellpadding="8" bordercolor="#CBD5E1">
+                    <thead>
+                        <tr style="background:#0F2744; color:#FFFFFF;">
+                            <th scope="col" style="text-align:left; padding:8px;">Data / Content Type</th>
+                            <th scope="col" style="text-align:left; padding:8px;">Active Duration</th>
+                            <th scope="col" style="text-align:left; padding:8px;">Archival Tier</th>
+                            <th scope="col" style="text-align:left; padding:8px;">Final Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Active Vacancies</strong></td>
+                            <td>Until Application Deadline</td>
+                            <td>Live SQLite Table (<code>vacancies</code>)</td>
+                            <td>Flagged as Expired upon deadline.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Expired Vacancies</strong></td>
+                            <td>90 Days post-deadline</td>
+                            <td>Archived in Historical DB Mirror</td>
+                            <td>Purged from primary search indices.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scheduler Execution Logs</strong></td>
+                            <td>90 Days rolling window</td>
+                            <td>SQLite Table (<code>scheduler_logs</code>)</td>
+                            <td>Rolling deletion of records older than 90 days.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>User Feedback &amp; Grievance Log</strong></td>
+                            <td>24 Months</td>
+                            <td>Encrypted File Mirror (<code>feedback_log.json</code>)</td>
+                            <td>Permanently deleted after 24 months per GIGW audit guidelines.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Policy Document Revisions</strong></td>
+                            <td>Permanent Version History</td>
+                            <td>Versioned Git Repository</td>
+                            <td>Preserved with explicit date-stamps and change summaries.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3. Archival Methodology</h3>
+                <p>Content earmarked for archival is automatically tagged with its expiration date. Once archived, vacancy records remain inaccessible from the active recruitment ribbon but are retained in the immutable SQLite mirror for historical audit verification.</p>
+
+                <h3>4. Requests for Archived Information</h3>
+                <p>Researchers, recruiters, or candidates seeking historical vacancy archives or audit summaries may submit a request through the <a href="/contact.html">Contact Us</a> page.</p>
+            </div>
+
+            <!-- Hindi Content Block -->
+            <div class="lang-block-hi" style="display:none;">
+                <p><strong>सामग्री पुरालेख नीति (Content Archival Policy)</strong> यह निर्धारित करती है कि पोर्टल पर पुरानी भर्तियों, लॉग फ़ाइलों और उपयोगकर्ता फीडबैक को कितने समय तक संग्रहीत किया जाएगा और उन्हें सुरक्षित रूप से कब हटाया जाएगा।</p>
+
+                <h3>1. पुरालेख अनुसूची (Retention Schedule)</h3>
+                <ul>
+                    <li><strong>सक्रिय भर्तियां:</strong> आवेदन की अंतिम तिथि तक लाइव टेबल में प्रदर्शित।</li>
+                    <li><strong>समाप्त भर्तियां:</strong> अंतिम तिथि के 90 दिनों बाद प्राथमिक खोज से हटाकर पुरालेख (Archive) में स्थानांतरित।</li>
+                    <li><strong>शेड्यूलर निष्पादन लॉग:</strong> 90 दिनों की रोलिंग अवधि के बाद स्वतः विलोपन।</li>
+                    <li><strong>उपयोगकर्ता फीडबैक एवं शिकायतें:</strong> GIGW 3.0 ऑडिट आवश्यकताओं हेतु 24 महीने तक सुरक्षित भंडारण, तत्पश्चात स्थायी विलोपन।</li>
+                </ul>
+
+                <h3>2. पुरालेख से जानकारी प्राप्त करना</h3>
+                <p>पुरालेख संबंधी पूछताछ हेतु कृपया <a href="/contact.html">संपर्क पृष्ठ</a> पर संपर्क करें।</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- Standard GIGW Footer -->
+    <footer class="gigw-footer" role="contentinfo">
+        <div class="gigw-footer-content">
+            <nav class="gigw-footer-links" aria-label="Footer Links">
+                <a href="/index.html" data-i18n="navHome">Home</a>
+                <a href="/job_vacancies.html" data-i18n="navVacancies">Job Vacancies</a>
+                <a href="/privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
+                <a href="/terms.html" data-i18n="navTerms">Terms</a>
+                <a href="/disclaimer.html" data-i18n="navDisclaimer">Disclaimer</a>
+                <a href="/accessibility.html" data-i18n="navAccessibility">Accessibility</a>
+                <a href="/content-review-policy.html" data-en="Content Review Policy" data-hi="सामग्री समीक्षा नीति">Content Review Policy</a>
+                <a href="/content-archival-policy.html" data-en="Content Archival Policy" data-hi="सामग्री पुरालेख नीति">Content Archival Policy</a>
+                <a href="/contact.html" data-i18n="navContact">Contact</a>
+                <a href="/sitemap.html" data-i18n="navSitemap">Sitemap</a>
+            </nav>
+            <p class="gigw-disclaimer-note" data-i18n="independentDisclaimer">Independent platform for Candidate Achal Saxena (Not affiliated with any Government entity).</p>
+            <div class="gigw-footer-bottom">
+                <span data-i18n="rightsReserved">© 2026 Job Vacancy Intelligence Portal • GIGW 3.0 &amp; WCAG 2.1 AA Compliant • IT Act 2000</span>
+                <span><strong>Last Updated:</strong> 25 October 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/portal-common.js"></script>
+</body>
+</html>

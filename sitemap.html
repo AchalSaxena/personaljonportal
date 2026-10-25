@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xml:lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap — Job Vacancy Intelligence Portal</title>
+    <meta name="description" content="Comprehensive human-readable sitemap for the Job Vacancy Intelligence Portal compliant with GIGW 3.0.">
+    <meta name="robots" content="index, follow">
+    <meta name="geo.region" content="IN">
+    <meta name="geo.country" content="India">
+    <link rel="canonical" href="https://personaljonportal.vercel.app/sitemap.html">
+
+    <!-- Dublin Core Metadata (GIGW 3.0 Mandatory) -->
+    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+    <meta name="DC.Title" content="Sitemap — Job Vacancy Intelligence Portal">
+    <meta name="DC.Creator" content="Achal Saxena">
+    <meta name="DC.Subject" content="Sitemap, Portal Navigation, Web Structure, GIGW 3.0 Conformance">
+    <meta name="DC.Description" content="Hierarchical human-readable map of all published sections, policies, and interactive tools.">
+    <meta name="DC.Publisher" content="Achal Saxena">
+    <meta name="DC.Language" scheme="RFC1766" content="en, hi">
+    <meta name="DC.Coverage" content="India">
+    <meta name="DC.Type" content="Text">
+    <meta name="DC.Format" content="text/html">
+    <meta name="DC.date.created" content="2026-10-01">
+    <meta name="DC.date.modified" content="2026-10-25">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/portal-common.css">
+    <style>
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .sitemap-section {
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            padding: 16px 20px;
+        }
+        .sitemap-section h3 {
+            font-size: 13.5px;
+            color: var(--navy-primary);
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--teal-primary);
+            padding-bottom: 6px;
+        }
+        .sitemap-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sitemap-section li {
+            border-bottom: 1px solid #E2E8F0;
+            margin-bottom: 0;
+        }
+        .sitemap-section li:last-child {
+            border-bottom: none;
+        }
+        .sitemap-section li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            color: var(--navy-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.15s ease;
+        }
+        .sitemap-section li a:hover,
+        .sitemap-section li a:focus-visible {
+            color: var(--teal-primary);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip Navigation Link (WCAG 2.4.1 / GIGW 3.0) -->
+    <a class="skip-nav-link skip-nav" href="#main-content">Skip to Main Content</a>
+
+    <!-- Live regions for assistive technology -->
+    <div id="sr-status" role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="sr-alert" role="alert" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
+    <!-- Standardized Portal Header -->
+    <header class="app-navbar" role="banner" id="main-nav" aria-label="Portal Header">
+        <a href="/index.html" class="navbar-brand">
+            <span class="brand-badge">INDEPENDENT PORTAL</span>
+            <div class="brand-info">
+                <h1 data-i18n="portalTitle">Job Vacancy Intelligence Portal</h1>
+                <span data-i18n="portalSubtitle">Candidate Recruitment Engine • Independent Platform</span>
+            </div>
+        </a>
+
+        <nav class="navbar-nav" aria-label="Primary Navigation">
+            <a href="/index.html" data-i18n="navHome">Home</a>
+            <a href="/job_vacancies.html" data-i18n="navVacancies">Job Vacancies</a>
+            <a href="/explainer_video_hindi.html" data-i18n="navVideo">Hindi Video</a>
+            <a href="/accessibility.html" data-i18n="navAccessibility">Accessibility</a>
+            <a href="/contact.html" data-i18n="navContact">Contact</a>
+        </nav>
+
+        <div class="navbar-actions">
+            <!-- Accessibility Display Controls -->
+            <div class="accessibility-controls" role="toolbar" aria-label="Accessibility Display Controls">
+                <button type="button" class="a11y-btn" id="btnFontDecrease" onclick="adjustFontSize(-1)" aria-label="Decrease Font Size" title="Decrease Font Size (A-)">A-</button>
+                <button type="button" class="a11y-btn active" id="btnFontReset" onclick="adjustFontSize(0)" aria-label="Reset Font Size to Standard" title="Normal Font Size (A)">A</button>
+                <button type="button" class="a11y-btn" id="btnFontIncrease" onclick="adjustFontSize(1)" aria-label="Increase Font Size" title="Increase Font Size (A+)">A+</button>
+                <button type="button" class="a11y-btn" id="contrastToggleBtn" onclick="toggleHighContrast()" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode">◐ Contrast</button>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="lang-toggle-group" role="navigation" aria-label="Language Selection">
+                <button class="lang-toggle-btn active" id="langEnBtn" onclick="setLanguage('en')" aria-pressed="true" title="Switch to English" lang="en">EN</button>
+                <button class="lang-toggle-btn" id="langHiBtn" onclick="setLanguage('hi')" aria-pressed="false" title="हिंदी में देखें" lang="hi">हि</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container" id="main-content" role="main">
+        <nav aria-label="Breadcrumb" class="breadcrumb">
+            <a href="/index.html" data-i18n="breadcrumbHome">Home</a> &rsaquo;
+            <span data-en="Sitemap" data-hi="साइटमैप">Sitemap</span>
+        </nav>
+
+        <article class="content-card">
+            <h2>
+                <span class="lang-block-en">Human-Readable Sitemap</span>
+                <span class="lang-block-hi" style="display:none;">मानव-पठनीय साइटमैप</span>
+            </h2>
+
+            <p style="font-size:13px; color:#5A6A7A;">
+                <span data-en="A comprehensive directory of all accessible pages, policies, and tools across the Job Vacancy Intelligence Portal. Automated crawlers can access the"
+                      data-hi="रोजगार रिक्ति बुद्धिमत्ता पोर्टल पर उपलब्ध सभी पृष्ठों, नीतियों एवं उपकरणों की संपूर्ण सूची। स्वचालित क्रॉलर्स हेतु उपलब्ध:">
+                    A comprehensive directory of all accessible pages, policies, and tools across the Job Vacancy Intelligence Portal. Automated crawlers can access the
+                </span>
+                <a href="/sitemap.xml">XML Sitemap</a>.
+            </p>
+
+            <div class="sitemap-grid">
+                <!-- Section 1: Core Portal Views -->
+                <div class="sitemap-section">
+                    <h3>&#127968; <span data-en="Core Portal Pages" data-hi="मुख्य पृष्ठ">Core Portal Pages</span></h3>
+                    <ul>
+                        <li><a href="/index.html">&#128269; <span data-en="Home Dashboard &amp; Search" data-hi="मुख्य डैशबोर्ड एवं खोज">Home Dashboard &amp; Search</span></a></li>
+                        <li><a href="/job_vacancies.html">&#128203; <span data-en="Job Vacancies Mirror View" data-hi="रोजगार रिक्तियां तालिका">Job Vacancies Mirror View</span></a></li>
+                        <li><a href="/explainer_video_hindi.html">&#127916; <span data-en="Hindi Customer Explainer Video" data-hi="हिंदी व्याख्यात्मक वीडियो">Hindi Customer Explainer Video</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Section 2: Statutory Governance & Policies -->
+                <div class="sitemap-section">
+                    <h3>&#9878; <span data-en="GIGW 3.0 Legal Policies" data-hi="कानूनी एवं नीतिगत पृष्ठ">GIGW 3.0 Legal Policies</span></h3>
+                    <ul>
+                        <li><a href="/privacy-policy.html">&#128274; <span data-en="Privacy Policy (DPDP / IT Act)" data-hi="गोपनीयता नीति (DPDP/आईटी एक्ट)">Privacy Policy (DPDP / IT Act)</span></a></li>
+                        <li><a href="/terms.html">&#128203; <span data-en="Terms and Conditions" data-hi="नियम एवं शर्तें">Terms and Conditions</span></a></li>
+                        <li><a href="/disclaimer.html">&#9888; <span data-en="Disclaimer &amp; External Links" data-hi="अस्वीकरण एवं बाहरी लिंक नीति">Disclaimer &amp; External Links</span></a></li>
+                        <li><a href="/accessibility.html">&#9855; <span data-en="Accessibility Statement (WCAG AA)" data-hi="सुगम्यता विवरण (WCAG AA)">Accessibility Statement (WCAG AA)</span></a></li>
+                        <li><a href="/content-review-policy.html">&#128260; <span data-en="Content Review Policy (CRP)" data-hi="सामग्री समीक्षा नीति (CRP)">Content Review Policy (CRP)</span></a></li>
+                        <li><a href="/content-archival-policy.html">&#128451; <span data-en="Content Archival Policy (CAP)" data-hi="सामग्री पुरालेख नीति (CAP)">Content Archival Policy (CAP)</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Section 3: Inquiries & Support -->
+                <div class="sitemap-section">
+                    <h3>&#9993; <span data-en="Support &amp; Feedback" data-hi="संपर्क एवं सहायता">Support &amp; Feedback</span></h3>
+                    <ul>
+                        <li><a href="/contact.html">&#9993; <span data-en="Contact Us &amp; Grievance Officer" data-hi="संपर्क एवं शिकायत अधिकारी">Contact Us &amp; Grievance Officer</span></a></li>
+                        <li><a href="/sitemap.html">&#128506; <span data-en="HTML Sitemap (This Page)" data-hi="एचटीएमएल साइटमैप">HTML Sitemap (This Page)</span></a></li>
+                        <li><a href="/sitemap.xml">&#128196; <span data-en="Machine-Readable XML Sitemap" data-hi="मशीन-पठनीय XML साइटमैप">Machine-Readable XML Sitemap</span></a></li>
+                        <li><a href="/robots.txt">&#129302; <span data-en="Robots.txt Crawler Directives" data-hi="Robots.txt निर्देश">Robots.txt Crawler Directives</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Section 4: System Error Handlers -->
+                <div class="sitemap-section">
+                    <h3>&#9881; <span data-en="Error Handlers" data-hi="त्रुटि पृष्ठ">Error Handlers</span></h3>
+                    <ul>
+                        <li><a href="/404.html">&#10060; <span data-en="404 — Page Not Found Template" data-hi="404 — पृष्ठ नहीं मिला">404 — Page Not Found Template</span></a></li>
+                        <li><a href="/500.html">&#9888; <span data-en="500 — Server Error Template" data-hi="500 — सर्वर त्रुटि">500 — Server Error Template</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- Standard GIGW Footer -->
+    <footer class="gigw-footer" role="contentinfo">
+        <div class="gigw-footer-content">
+            <nav class="gigw-footer-links" aria-label="Footer Links">
+                <a href="/index.html" data-i18n="navHome">Home</a>
+                <a href="/job_vacancies.html" data-i18n="navVacancies">Job Vacancies</a>
+                <a href="/privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
+                <a href="/terms.html" data-i18n="navTerms">Terms</a>
+                <a href="/disclaimer.html" data-i18n="navDisclaimer">Disclaimer</a>
+                <a href="/accessibility.html" data-i18n="navAccessibility">Accessibility</a>
+                <a href="/content-review-policy.html" data-en="Content Review Policy" data-hi="सामग्री समीक्षा नीति">Content Review Policy</a>
+                <a href="/content-archival-policy.html" data-en="Content Archival Policy" data-hi="सामग्री पुरालेख नीति">Content Archival Policy</a>
+                <a href="/contact.html" data-i18n="navContact">Contact</a>
+                <a href="/sitemap.html" class="active" data-i18n="navSitemap">Sitemap</a>
+            </nav>
+            <p class="gigw-disclaimer-note" data-i18n="independentDisclaimer">Independent platform for Candidate Achal Saxena (Not affiliated with any Government entity).</p>
+            <div class="gigw-footer-bottom">
+                <span data-i18n="rightsReserved">© 2026 Job Vacancy Intelligence Portal • GIGW 3.0 &amp; WCAG 2.1 AA Compliant • IT Act 2000</span>
+                <span><strong>Last Updated:</strong> 25 October 2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/portal-common.js"></script>
+</body>
+</html>
