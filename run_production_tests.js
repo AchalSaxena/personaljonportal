@@ -153,8 +153,8 @@ Last Date: 30-11-2026`;
       salary: '25 LPA',
       deadline: '2026-12-31',
       deadlineDisplay: '31-Dec-2026',
-      notificationUrl: 'https://example.com/test-notification',
-      applyUrl: 'https://example.com/test-apply',
+      notificationUrl: 'https://example.com/test-notification-' + Date.now(),
+      applyUrl: 'https://example.com/test-apply-' + Date.now(),
       matchScore: 92,
       eligibility: 'Eligible'
     };
