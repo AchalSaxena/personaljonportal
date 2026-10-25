@@ -1,0 +1,19 @@
+# Robots.txt for Job Vacancy Intelligence Dashboard & Scheduler
+# Generated for Search Engine Crawlers & Autoindexing
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /job_vacancies.html
+Allow: /data/vacancies_data.js
+
+# Prevent indexing internal database files and raw API endpoints
+Disallow: /api/
+Disallow: /data/*.db
+Disallow: /data/*.sqlite
+
+# Crawl Delay to avoid hammering server
+Crawl-delay: 1
+
+# XML Sitemap reference for Googlebot, Bingbot, Yandex, DuckDuckGo
+Sitemap: http://localhost:3000/sitemap.xml

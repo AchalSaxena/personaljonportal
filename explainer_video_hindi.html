@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Explainer Video (Hindi) — Job Vacancy Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0A192F;
+            --navy-card: #0F2744;
+            --navy-light: #1E3A8A;
+            --teal-accent: #0D9488;
+            --teal-bright: #14B8A6;
+            --gold-accent: #F59E0B;
+            --text-white: #FFFFFF;
+            --text-muted: #94A3B8;
+            --card-border: #1E293B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #071322 0%, #0A192F 50%, #0d213a 100%);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .video-container-card {
+            width: 100%;
+            max-width: 1100px;
+            background: rgba(15, 39, 68, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(13, 148, 136, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header */
+        .video-top-bar {
+            padding: 12px 20px;
+            background: rgba(10, 25, 47, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .video-title-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-live-rec {
+            background: #EF4444;
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: 0.5px;
+            animation: pulseRec 1.2s infinite;
+        }
+
+        @keyframes pulseRec {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .rec-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #FFFFFF;
+        }
+
+        .video-title-text h1 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.2px;
+        }
+
+        .video-title-text span {
+            font-size: 11px;
+            color: var(--teal-bright);
+        }
+
+        .video-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #F1F5F9;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 11.5px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link-btn:hover {
+            background: rgba(13, 148, 136, 0.3);
+            border-color: var(--teal-accent);
+            color: #FFFFFF;
+        }
+
+        /* Screen Stage (Video Display Frame) */
+        .video-stage-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #06111E;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animated Scenes */
+        .scene-container {
+            position: absolute;
+            inset: 0;
+            padding: 28px 36px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+        }
+
+        .scene-container.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Scene Components */
+        .scene-header-tag {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .scene-badge {
+            background: rgba(13, 148, 136, 0.2);
+            border: 1px solid var(--teal-bright);
+            color: var(--teal-bright);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .scene-time-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .scene-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 14px 0;
+        }
+
+        .scene-title-hindi {
+            font-size: 26px;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .scene-subtitle {
+            font-size: 14px;
+            color: #94A3B8;
+            margin-bottom: 16px;
+        }
+
+        /* Live Visual Mockup Card */
+        .mockup-display-card {
+            background: rgba(15, 39, 68, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Subtitle Bar at Bottom of Video */
+        .video-subtitles-bar {
+            background: rgba(0, 0, 0, 0.85);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 24px;
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .subtitle-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #FEF08A;
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+
+        /* Video Timeline & Controls Bar */
+        .video-controls-bar {
+            background: rgba(10, 25, 47, 0.98);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .timeline-track-wrap {
+            position: relative;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .timeline-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0D9488, #2563EB, #F59E0B);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.25s linear;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .controls-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ctrl-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #FFFFFF;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .ctrl-btn:hover {
+            background: var(--teal-accent);
+            border-color: var(--teal-bright);
+            transform: scale(1.06);
+        }
+
+        .ctrl-btn.btn-play-pause {
+            background: #2563EB;
+            width: 42px;
+            height: 42px;
+            border-color: #3B82F6;
+        }
+
+        .ctrl-btn.btn-play-pause:hover {
+            background: #1D4ED8;
+        }
+
+        .timer-display {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            color: #E2E8F0;
+        }
+
+        .scene-selector-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .scene-chip {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #CBD5E1;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .scene-chip.active {
+            background: var(--teal-accent);
+            border-color: var(--teal-bright);
+            color: #FFFFFF;
+        }
+
+        .voice-toggle-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #F8FAFC;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .voice-toggle-btn.voice-active {
+            background: rgba(22, 163, 74, 0.25);
+            border-color: #22C55E;
+            color: #4ADE80;
+        }
+
+        /* Mockup Visual Elements */
+        .grid-stats-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 10px 14px;
+        }
+        .stat-box .val {
+            font-size: 20px;
+            font-weight: 800;
+            color: #38BDF8;
+        }
+        .stat-box .lbl {
+            font-size: 11px;
+            color: #94A3B8;
+        }
+
+        .table-preview {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            margin-top: 8px;
+        }
+        .table-preview th {
+            background: #1E293B;
+            color: #E2E8F0;
+            padding: 6px 10px;
+            text-align: left;
+            border: 1px solid #334155;
+        }
+        .table-preview td {
+            padding: 6px 10px;
+            border: 1px solid #334155;
+            color: #F8FAFC;
+            background: #0F172A;
+        }
+        .badge-age {
+            background: #334155;
+            color: #F1F5F9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+            font-size: 10.5px;
+        }
+        .badge-match {
+            background: rgba(22, 163, 74, 0.3);
+            color: #4ADE80;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+            font-size: 10.5px;
+        }
+
+        @media (max-width: 768px) {
+            .scene-title-hindi { font-size: 19px; }
+            .scene-subtitle { font-size: 12px; }
+            .subtitle-text { font-size: 13px; }
+            .grid-stats-3 { grid-template-columns: 1fr; }
+            .video-stage-frame { aspect-ratio: auto; min-height: 380px; }
+            .controls-row { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container-card">
+        <!-- Top Toolbar -->
+        <header class="video-top-bar">
+            <div class="video-title-group">
+                <div class="badge-live-rec">
+                    <span class="rec-dot"></span>
+                    <span>EXPLAINER VIDEO</span>
+                </div>
+                <div class="video-title-text">
+                    <h1>Job Vacancy Intelligence Dashboard — Customer Video</h1>
+                    <span>Hindi Voiceover &bull; Interactive Animated Product Walkthrough</span>
+                </div>
+            </div>
+            <div class="video-top-actions">
+                <button class="voice-toggle-btn voice-active" id="voiceToggleBtn" onclick="toggleVoice()">
+                    <span id="voiceIcon">🔊</span>
+                    <span id="voiceStatusText">Hindi Voice: ON</span>
+                </button>
+                <a href="/" class="nav-link-btn" title="Open Live Dashboard">
+                    <span>🚀 Live Dashboard</span>
+                </a>
+                <a href="customer_explainer_script_hindi.md" target="_blank" class="nav-link-btn" title="View Full Written Script">
+                    <span>📜 View Script</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Video Stage Frame -->
+        <div class="video-stage-frame" id="stageFrame">
+
+            <!-- SCENE 1: Introduction & Candidate Profile -->
+            <div class="scene-container active" id="scene1" data-duration="24">
+                <div class="scene-header-tag">
+                    <span class="scene-badge">Scene 1 / 5 &bull; Executive Overview</span>
+                    <span class="scene-time-pill">00:00 - 00:45</span>
+                </div>
+                <div class="scene-body">
+                    <h2 class="scene-title-hindi">स्वागत है! Job Vacancy Intelligence Dashboard</h2>
+                    <p class="scene-subtitle">Automated recruitment intelligence tailored for Senior Technology Leadership &amp; e-Governance Roles.</p>
+                    <div class="mockup-display-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div>
+                                <h3 style="color: #38BDF8; font-size: 16px;">Achal Saxena</h3>
+                                <p style="font-size: 12px; color: #94A3B8;">Technical Project Manager &bull; eGovernance Lead &bull; NeGD MeitY Certified</p>
+                            </div>
+                            <span style="background: rgba(13, 148, 136, 0.3); color: #2DD4BF; border: 1px solid #0D9488; padding: 3px 9px; border-radius: 4px; font-size: 11px; font-weight: 700;">SQLite Powered</span>
+                        </div>
+                        <div class="grid-stats-3">
+                            <div class="stat-box">
+                                <div class="val">10+ Years</div>
+                                <div class="lbl">Senior Tech Experience</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="val">M.Tech (CSE)</div>
+                                <div class="lbl">Degree Qualification</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="val">Mumbai / Delhi</div>
+                                <div class="lbl">Priority Job Locations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCENE 2: Interactive Excel AutoFilters & Age Limit -->
+            <div class="scene-container" id="scene2" data-duration="26">
+                <div class="scene-header-tag">
+                    <span class="scene-badge">Scene 2 / 5 &bull; Excel AutoFilters &amp; Age Limit</span>
+                    <span class="scene-time-pill">00:45 - 01:30</span>
+                </div>
+                <div class="scene-body">
+                    <h2 class="scene-title-hindi">Excel-Like Interactive AutoFilters (▼) &amp; Age Limit</h2>
+                    <p class="scene-subtitle">Filter any of the 12 columns instantly with search, distinct value selection, and live counts.</p>
+                    <div class="mockup-display-card">
+                        <table class="table-preview">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Job Title &amp; Role ↕ [▼]</th>
+                                    <th>Organization ↕ [▼]</th>
+                                    <th>Match % [▼]</th>
+                                    <th style="background: #1B365D; border-color: #3B82F6;">Age Limit ↕ [▼]</th>
+                                    <th>Location ↕ [▼]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Senior Technical Lead</strong></td>
+                                    <td>CDAC Innovation Centre</td>
+                                    <td><span class="badge-match">★ 98% High</span></td>
+                                    <td><span class="badge-age">Max 45 Years</span></td>
+                                    <td>Mumbai MMR</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Technical Project Manager</strong></td>
+                                    <td>Digital India Corp (DIC)</td>
+                                    <td><span class="badge-match">★ 95% High</span></td>
+                                    <td><span class="badge-age">Up to 55 Years</span></td>
+                                    <td>Delhi NCR</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>Solution Architect</strong></td>
+                                    <td>STPI Cyber Security</td>
+                                    <td><span class="badge-match">★ 92% Good</span></td>
+                                    <td><span class="badge-age">Max 40 Years</span></td>
+                                    <td>Pan-India</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-top: 10px; display: flex; gap: 8px; font-size: 11px;">
+                            <span style="background: rgba(37, 99, 235, 0.2); border: 1px solid #3B82F6; color: #93C5FD; padding: 2px 8px; border-radius: 12px;">Filtered: Age Limit (Max 45 Years) &times;</span>
+                            <span style="background: rgba(37, 99, 235, 0.2); border: 1px solid #3B82F6; color: #93C5FD; padding: 2px 8px; border-radius: 12px;">Location: Mumbai &times;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCENE 3: Targeted Search Scheduler -->
+            <div class="scene-container" id="scene3" data-duration="24">
+                <div class="scene-header-tag">
+                    <span class="scene-badge">Scene 3 / 5 &bull; Targeted Scheduler Engine</span>
+                    <span class="scene-time-pill">01:30 - 02:15</span>
+                </div>
+                <div class="scene-body">
+                    <h2 class="scene-title-hindi">Targeted Scheduler &amp; Strict Deduplication</h2>
+                    <p class="scene-subtitle">Searches exclusively on user-configured websites in job_websites.txt (CDAC, STPI, DIC, RITES, etc.).</p>
+                    <div class="mockup-display-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="font-weight: 700; color: #4ADE80; font-size: 12px;">● Live Telemetry Activity</span>
+                            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #F59E0B;">Elapsed: 00:14</span>
+                        </div>
+                        <div style="background: #1E293B; height: 5px; border-radius: 3px; overflow: hidden; margin-bottom: 12px;">
+                            <div style="background: linear-gradient(90deg, #0D9488, #2563EB); height: 100%; width: 68%;"></div>
+                        </div>
+                        <div class="grid-stats-3">
+                            <div class="stat-box">
+                                <div class="val" style="color: #60A5FA;">9 URLs</div>
+                                <div class="lbl">Configured Websites</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="val" style="color: #4ADE80;">+3 Appended</div>
+                                <div class="lbl">New Verified Opportunities</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="val" style="color: #FBBF24;">78 Skipped</div>
+                                <div class="lbl">Duplicates Safely Preserved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCENE 4: Smart Vacancy Parsing & CV Matching -->
+            <div class="scene-container" id="scene4" data-duration="24">
+                <div class="scene-header-tag">
+                    <span class="scene-badge">Scene 4 / 5 &bull; Instant Vacancy Parser</span>
+                    <span class="scene-time-pill">02:15 - 03:00</span>
+                </div>
+                <div class="scene-body">
+                    <h2 class="scene-title-hindi">Smart Text Parsing &amp; Automated CV Alignment</h2>
+                    <p class="scene-subtitle">Paste raw circular text &mdash; algorithm automatically extracts fields and calculates Match %.</p>
+                    <div class="mockup-display-card">
+                        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 14px;">
+                            <div style="background: #09131F; border: 1px dashed #334155; padding: 10px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #94A3B8;">
+                                <span style="color: #38BDF8;">// Raw Advertisement Input</span><br>
+                                Post: Director (IT / Architecture)<br>
+                                Org: MeitY Partner Organization<br>
+                                Qual: M.Tech in CSE / IT<br>
+                                Age: Upper age limit 50 Years<br>
+                                Exp: 10+ Years in eGov Solutions
+                            </div>
+                            <div style="background: rgba(13, 148, 136, 0.15); border: 1px solid #0D9488; padding: 10px; border-radius: 6px;">
+                                <div style="font-size: 11px; color: #2DD4BF; font-weight: 700; text-transform: uppercase;">Automated Match Result</div>
+                                <div style="font-size: 28px; font-weight: 800; color: #4ADE80; margin: 4px 0;">★ 99%</div>
+                                <div style="font-size: 11.5px; color: #F1F5F9;">Confirmed Eligible &bull; Age &amp; M.Tech Verified</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCENE 5: Architecture, Triple Sync & QA Certified -->
+            <div class="scene-container" id="scene5" data-duration="24">
+                <div class="scene-header-tag">
+                    <span class="scene-badge">Scene 5 / 5 &bull; Enterprise Architecture</span>
+                    <span class="scene-time-pill">03:00 - 03:45</span>
+                </div>
+                <div class="scene-body">
+                    <h2 class="scene-title-hindi">100% Production Ready &amp; Enterprise Architecture</h2>
+                    <p class="scene-subtitle">SQLite + CSV/JSON triple-sync, Google SEO auto-indexing, and 28/28 passed automated tests.</p>
+                    <div class="mockup-display-card">
+                        <div class="grid-stats-3">
+                            <div class="stat-box">
+                                <div class="val" style="color: #4ADE80;">28 / 28</div>
+                                <div class="lbl">Automated Tests Passed (100%)</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="val" style="color: #38BDF8;">2.84 ms</div>
+                                <div class="lbl">Sub-3ms API Response Latency</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="val" style="color: #F59E0B;">98 / 100</div>
+                                <div class="lbl">Google SEO &amp; Sitemap Score</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px; font-size: 11.5px; color: #CBD5E1; text-align: center;">
+                            SQLite Engine &bull; CSV Export Sync &bull; robots.txt &bull; sitemap.xml &bull; JSON-LD Schema.org
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Synchronized Hindi Subtitles -->
+        <div class="video-subtitles-bar">
+            <p class="subtitle-text" id="subtitleText">
+                "नमस्ते! Job Vacancy Intelligence Dashboard और Advanced Search Scheduler में आपका स्वागत है।"
+            </p>
+        </div>
+
+        <!-- Video Player Controls Bar -->
+        <footer class="video-controls-bar">
+            <div class="timeline-track-wrap" id="timelineTrack" onclick="seekTimeline(event)">
+                <div class="timeline-fill" id="timelineFill"></div>
+            </div>
+
+            <div class="controls-row">
+                <div class="controls-left">
+                    <button class="ctrl-btn btn-play-pause" id="playPauseBtn" onclick="togglePlayPause()" title="Play / Pause">
+                        <span id="playIcon">▶</span>
+                    </button>
+                    <button class="ctrl-btn" onclick="restartVideo()" title="Restart from Beginning">
+                        <span>↺</span>
+                    </button>
+                    <span class="timer-display" id="timeDisplay">00:00 / 02:02</span>
+                </div>
+
+                <div class="scene-selector-chips">
+                    <button class="scene-chip active" id="chip0" onclick="goToScene(0)">1. Overview</button>
+                    <button class="scene-chip" id="chip1" onclick="goToScene(1)">2. Excel Filters</button>
+                    <button class="scene-chip" id="chip2" onclick="goToScene(2)">3. Scheduler</button>
+                    <button class="scene-chip" id="chip3" onclick="goToScene(3)">4. CV Matcher</button>
+                    <button class="scene-chip" id="chip4" onclick="goToScene(4)">5. Architecture</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Hindi Voiceover & Subtitles Script
+        const scenes = [
+            {
+                id: 'scene1',
+                title: "Executive Overview",
+                duration: 24,
+                subtitles: [
+                    "नमस्ते! आज हम पेश कर रहे हैं हमारा Job Vacancy Intelligence Dashboard और Search Scheduler।",
+                    "यह प्लेटफ़ॉर्म Senior Technology Roles — जैसे Tech Project Manager और e-Governance लीड्स के लिए बना है।",
+                    "इसका सबसे बड़ा फ़ायदा यह है कि यह बिना किसी एक्सटर्नल डेटाबेस के अल्ट्रा-फ़ास्ट SQLite पर चलता है।"
+                ],
+                voiceText: "नमस्ते! आज हम पेश कर रहे हैं हमारा जॉब वैकेंसी इंटेलिजेंस डैशबोर्ड और सर्च शेड्यूलर। यह प्लेटफ़ॉर्म सीनियर टेक्नोलॉजी रोल्स जैसे टेक्निकल प्रोजेक्ट मैनेजर और ई-गवर्नेंस लीड्स के लिए डिज़ाइन किया गया है। यह अल्ट्रा फ़ास्ट एसक्यूलाइट डेटाबेस पर चलता है।"
+            },
+            {
+                id: 'scene2',
+                title: "Excel Filters & Age Limit",
+                duration: 26,
+                subtitles: [
+                    "टेबल के सभी 12 कॉलम्स पर आपको बिल्कुल Microsoft Excel जैसा इंटरैक्टिव AutoFilter बटन मिलता है।",
+                    "कस्टमर की मांग पर हमने इसमें नया 'Age Limit' कॉलम जोड़ा है।",
+                    "ड्रॉपडाउन क्लिक करके आप Age Limit, Location और Match % पर एक साथ मल्टी-कॉलम फ़िल्टर लगा सकते हैं।"
+                ],
+                voiceText: "टेबल के सभी बारह कॉलम्स पर आपको बिल्कुल माइक्रोसॉफ्ट एक्सेल जैसा ऑटोफ़िल्टर बटन मिलता है। कस्टमर की मांग पर इसमें नया एज लिमिट कॉलम जोड़ा गया है। आप मल्टी कॉलम फ़िल्टरिंग आसानी से कर सकते हैं।"
+            },
+            {
+                id: 'scene3',
+                title: "Targeted Scheduler",
+                duration: 24,
+                subtitles: [
+                    "हमारा शेड्यूलर केवल आपकी कॉन्फ़िगर की गई वेबसाइट्स — job_websites.txt को सर्च करता है।",
+                    "यहाँ CDAC, STPI, DIC, RITES, SAIL और NABARD जैसे 9 प्रमुख पोर्टल्स कॉन्फ़िगर हैं।",
+                    "स्ट्रिक्ट डुप्लीकेशन इंजन के कारण existing डेटा सुरक्षित रहता है और केवल नई वेकेंसियाँ जुड़ती हैं।"
+                ],
+                voiceText: "हमारा शेड्यूलर सिर्फ़ आपकी कॉन्फ़िगर की गई वेबसाइट्स टेक्स्ट फ़ाइल को स्कैन करता है। इसमें सीडैक, एसटीपीआई और राइट्स जैसे नौ सरकारी पोर्टल्स हैं। डुप्लीकेशन इंजन पुराने डेटा को सुरक्षित रखता है।"
+            },
+            {
+                id: 'scene4',
+                title: "Smart Vacancy Parser",
+                duration: 24,
+                subtitles: [
+                    "किसी भी सर्कुलर या PDF का रॉ टेक्स्ट '+ Paste Vacancy Text' में पेस्ट करें।",
+                    "अल्गोरिदम तुरंत जॉब टाइटल, डिपार्टमेंट, एक्सपीरियंस और एज लिमिट एक्सट्रैक्ट कर लेता है।",
+                    "और अचल सक्सेना के प्रोफाइल — M.Tech CSE व 10+ साल अनुभव के आधार पर रियल-टाइम मैच % कैलकुलेट करता है।"
+                ],
+                voiceText: "किसी भी विज्ञापन का टेक्स्ट पेस्ट करें। अल्गोरिदम तुरंत टाइटल, एजुकेशन और एज लिमिट निकाल लेता है, और अचल सक्सेना के प्रोफ़ाइल के अनुसार मैच परसेंटेज कैलकुलेट कर लेता है।"
+            },
+            {
+                id: 'scene5',
+                title: "Architecture & Production Ready",
+                duration: 24,
+                subtitles: [
+                    "यह सिस्टम एंटरप्राइज-ग्रेड और 100% प्रोडक्शन रेडी है।",
+                    "SQLite का पूरा डेटा अपने आप CSV और JSON में सिंक होता है जिसे आप Excel में खोल सकते हैं।",
+                    "Google SEO साइटमैप रेडी है और हमारी ऑटोमेटेड टेस्ट सूट में सभी 28 टेस्ट पूरी तरह पास हो चुके हैं।"
+                ],
+                voiceText: "यह सिस्टम 100% प्रोडक्शन रेडी है। डेटा अपने आप सीएसवी और जेसन में सिंक होता है। गूगल सर्च इंजन साइटमैप तैयार है और हमारे सभी अठ्ठाइस ऑटोमेटेड टेस्ट्स पास हो चुके हैं। धन्यवाद!"
+            }
+        ];
+
+        let currentSceneIndex = 0;
+        let isPlaying = false;
+        let elapsedSeconds = 0;
+        let sceneTimer = null;
+        let totalDuration = scenes.reduce((sum, s) => sum + s.duration, 0);
+        let voiceEnabled = true;
+
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = document.getElementById('playIcon');
+        const subtitleText = document.getElementById('subtitleText');
+        const timelineFill = document.getElementById('timelineFill');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const voiceToggleBtn = document.getElementById('voiceToggleBtn');
+        const voiceIcon = document.getElementById('voiceIcon');
+        const voiceStatusText = document.getElementById('voiceStatusText');
+
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = Math.floor(sec % 60);
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function updateSceneDisplay() {
+            // Update scenes visibility
+            for (let i = 0; i < scenes.length; i++) {
+                const el = document.getElementById(scenes[i].id);
+                const chip = document.getElementById(`chip${i}`);
+                if (i === currentSceneIndex) {
+                    el.classList.add('active');
+                    chip.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                    chip.classList.remove('active');
+                }
+            }
+
+            // Subtitle rotation based on scene progress
+            const cur = scenes[currentSceneIndex];
+            subtitleText.textContent = `"${cur.subtitles[0]}"`;
+
+            // Speak Hindi voiceover if enabled
+            if (voiceEnabled && isPlaying) {
+                speakHindi(cur.voiceText);
+            }
+        }
+
+        function speakHindi(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'hi-IN';
+            utterance.rate = 0.95; // Natural conversational tempo
+            utterance.pitch = 1.0;
+
+            const voices = window.speechSynthesis.getVoices();
+            const hiVoice = voices.find(v => v.lang.includes('hi') || v.lang.includes('IN'));
+            if (hiVoice) utterance.voice = hiVoice;
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function toggleVoice() {
+            voiceEnabled = !voiceEnabled;
+            if (!voiceEnabled) {
+                window.speechSynthesis.cancel();
+                voiceToggleBtn.classList.remove('voice-active');
+                voiceIcon.textContent = '🔇';
+                voiceStatusText.textContent = 'Hindi Voice: OFF';
+            } else {
+                voiceToggleBtn.classList.add('voice-active');
+                voiceIcon.textContent = '🔊';
+                voiceStatusText.textContent = 'Hindi Voice: ON';
+                if (isPlaying) speakHindi(scenes[currentSceneIndex].voiceText);
+            }
+        }
+
+        function togglePlayPause() {
+            if (isPlaying) {
+                pauseVideo();
+            } else {
+                playVideo();
+            }
+        }
+
+        function playVideo() {
+            isPlaying = true;
+            playIcon.textContent = '❚❚';
+            updateSceneDisplay();
+
+            if (sceneTimer) clearInterval(sceneTimer);
+            sceneTimer = setInterval(() => {
+                elapsedSeconds += 1;
+                timelineFill.style.width = `${(elapsedSeconds / totalDuration) * 100}%`;
+                timeDisplay.textContent = `${formatTime(elapsedSeconds)} / ${formatTime(totalDuration)}`;
+
+                // Calculate which scene we should be in
+                let accumulated = 0;
+                for (let i = 0; i < scenes.length; i++) {
+                    accumulated += scenes[i].duration;
+                    if (elapsedSeconds <= accumulated) {
+                        if (currentSceneIndex !== i) {
+                            currentSceneIndex = i;
+                            updateSceneDisplay();
+                        }
+                        // Rotate subtitle within scene
+                        const sceneStart = accumulated - scenes[i].duration;
+                        const sceneElapsed = elapsedSeconds - sceneStart;
+                        const subIndex = Math.min(
+                            scenes[i].subtitles.length - 1,
+                            Math.floor((sceneElapsed / scenes[i].duration) * scenes[i].subtitles.length)
+                        );
+                        subtitleText.textContent = `"${scenes[i].subtitles[subIndex]}"`;
+                        break;
+                    }
+                }
+
+                if (elapsedSeconds >= totalDuration) {
+                    pauseVideo();
+                    elapsedSeconds = totalDuration;
+                    timelineFill.style.width = '100%';
+                    subtitleText.textContent = '"धन्यवाद! अधिक जानकारी या लाइव डेमो के लिए हमसे संपर्क करें।"';
+                }
+            }, 1000);
+        }
+
+        function pauseVideo() {
+            isPlaying = false;
+            playIcon.textContent = '▶';
+            if (sceneTimer) clearInterval(sceneTimer);
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
+        function restartVideo() {
+            pauseVideo();
+            elapsedSeconds = 0;
+            currentSceneIndex = 0;
+            timelineFill.style.width = '0%';
+            timeDisplay.textContent = `00:00 / ${formatTime(totalDuration)}`;
+            updateSceneDisplay();
+            playVideo();
+        }
+
+        function goToScene(index) {
+            pauseVideo();
+            currentSceneIndex = index;
+            let startSec = 0;
+            for (let i = 0; i < index; i++) startSec += scenes[i].duration;
+            elapsedSeconds = startSec;
+            timelineFill.style.width = `${(elapsedSeconds / totalDuration) * 100}%`;
+            timeDisplay.textContent = `${formatTime(elapsedSeconds)} / ${formatTime(totalDuration)}`;
+            updateSceneDisplay();
+            playVideo();
+        }
+
+        function seekTimeline(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const fraction = Math.max(0, Math.min(1, clickX / rect.width));
+            elapsedSeconds = Math.floor(fraction * totalDuration);
+
+            let accumulated = 0;
+            for (let i = 0; i < scenes.length; i++) {
+                accumulated += scenes[i].duration;
+                if (elapsedSeconds <= accumulated) {
+                    currentSceneIndex = i;
+                    break;
+                }
+            }
+
+            timelineFill.style.width = `${fraction * 100}%`;
+            timeDisplay.textContent = `${formatTime(elapsedSeconds)} / ${formatTime(totalDuration)}`;
+            updateSceneDisplay();
+        }
+
+        // Initialize display
+        timeDisplay.textContent = `00:00 / ${formatTime(totalDuration)}`;
+        updateSceneDisplay();
+    </script>
+</body>
+</html>
